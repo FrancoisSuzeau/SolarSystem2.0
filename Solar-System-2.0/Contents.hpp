@@ -1,0 +1,4 @@
+namespace Contents
+{
+	namespace Sounds {};
+};

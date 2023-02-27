@@ -127,7 +127,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\AIEngine.cpp" />
+    <ClCompile Include="Engine\DiscreteSimulation.cpp" />
+    <ClCompile Include="Engine\PhysicsEngine.cpp" />
     <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Engine\AIEngine.hpp" />
+    <ClInclude Include="Engine\DiscreteSimulation.hpp" />
+    <ClInclude Include="Engine\PhysicsEngine.hpp" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Solar-System-2.0.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Pictures\1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
