@@ -128,12 +128,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine\AIEngine.cpp" />
+    <ClCompile Include="Engine\DataManagementLayer\Sounds\AmbiantSounds.cpp" />
+    <ClCompile Include="Engine\DataManagementLayer\Sounds\Musics.cpp" />
     <ClCompile Include="Engine\DiscreteSimulation.cpp" />
     <ClCompile Include="Engine\PhysicsEngine.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\AIEngine.hpp" />
+    <ClInclude Include="Engine\DataManagementLayer\Sounds\AmbiantSounds.hpp" />
+    <ClInclude Include="Engine\DataManagementLayer\Sounds\Musics.hpp" />
     <ClInclude Include="Engine\DiscreteSimulation.hpp" />
     <ClInclude Include="Engine\PhysicsEngine.hpp" />
     <ClInclude Include="resource.h" />
