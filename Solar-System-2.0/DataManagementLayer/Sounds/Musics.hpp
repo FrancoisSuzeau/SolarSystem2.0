@@ -21,7 +21,7 @@ PURPOSE : header of the Musics class
 
 /********************************************************************* class definition *********************************************************************/
 
-	namespace Contents {
+	namespace DataManagementLayer {
 
 		namespace Sounds {
 
