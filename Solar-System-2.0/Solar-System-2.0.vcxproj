@@ -104,10 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>include;DataManagementLayer\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;glew32d.lib;glew32sd.lib;SDL2_mixer.lib;SDL2_image.lib;assimp-vc143-mtd.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -118,28 +121,51 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>include;DataManagementLayer\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;glew32d.lib;glew32sd.lib;SDL2_mixer.lib;SDL2_image.lib;assimp-vc143-mtd.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DataManagementLayer\imgui\imgui.cpp" />
+    <ClCompile Include="DataManagementLayer\imgui\imgui_demo.cpp" />
+    <ClCompile Include="DataManagementLayer\imgui\imgui_draw.cpp" />
+    <ClCompile Include="DataManagementLayer\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="DataManagementLayer\imgui\imgui_impl_sdl.cpp" />
+    <ClCompile Include="DataManagementLayer\imgui\imgui_tables.cpp" />
+    <ClCompile Include="DataManagementLayer\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="DataManagementLayer\Sounds\AmbiantSounds.cpp" />
+    <ClCompile Include="DataManagementLayer\Sounds\Musics.cpp" />
     <ClCompile Include="Engine\AIEngine.cpp" />
-    <ClCompile Include="Engine\DataManagementLayer\Sounds\AmbiantSounds.cpp" />
-    <ClCompile Include="Engine\DataManagementLayer\Sounds\Musics.cpp" />
     <ClCompile Include="Engine\DiscreteSimulation.cpp" />
     <ClCompile Include="Engine\PhysicsEngine.cpp" />
+    <ClCompile Include="InitializeManagement\ContextManager.cpp" />
+    <ClCompile Include="InitializeManagement\ErrorHandler.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DataManagementLayer\imgui\imconfig.h" />
+    <ClInclude Include="DataManagementLayer\imgui\imgui.h" />
+    <ClInclude Include="DataManagementLayer\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="DataManagementLayer\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="DataManagementLayer\imgui\imgui_impl_sdl.h" />
+    <ClInclude Include="DataManagementLayer\imgui\imgui_internal.h" />
+    <ClInclude Include="DataManagementLayer\imgui\imstb_rectpack.h" />
+    <ClInclude Include="DataManagementLayer\imgui\imstb_textedit.h" />
+    <ClInclude Include="DataManagementLayer\imgui\imstb_truetype.h" />
+    <ClInclude Include="DataManagementLayer\Sounds\AmbiantSounds.hpp" />
+    <ClInclude Include="DataManagementLayer\Sounds\Musics.hpp" />
     <ClInclude Include="Engine\AIEngine.hpp" />
-    <ClInclude Include="Engine\DataManagementLayer\Sounds\AmbiantSounds.hpp" />
-    <ClInclude Include="Engine\DataManagementLayer\Sounds\Musics.hpp" />
     <ClInclude Include="Engine\DiscreteSimulation.hpp" />
     <ClInclude Include="Engine\PhysicsEngine.hpp" />
+    <ClInclude Include="InitializeManagement\ContextManager.hpp" />
+    <ClInclude Include="InitializeManagement\ErrorHandler.hpp" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

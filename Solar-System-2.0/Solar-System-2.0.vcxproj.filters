@@ -43,17 +43,35 @@
     <Filter Include="Fichiers d%27en-tête\Engine\State\GUI">
       <UniqueIdentifier>{a8c96a19-5822-40f7-bc3e-7fbebbd68e7c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\Engine\DataManagementLayer">
-      <UniqueIdentifier>{e1d9577e-b101-47fd-a999-b5cb78e324f5}</UniqueIdentifier>
+    <Filter Include="Fichiers sources\Engine\State\RenderingEngine">
+      <UniqueIdentifier>{772d8310-3ed3-4b15-941f-ff0b21cecf34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\Engine\DataManagementLayer">
+    <Filter Include="Fichiers d%27en-tête\Engine\State\RenderingEngine">
+      <UniqueIdentifier>{6ed3807b-034d-4ff8-bb3f-1246ec768dac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\DataManagementLayer">
       <UniqueIdentifier>{8cf0d168-5595-4cdd-a2a5-fce23fd5c123}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\Engine\DataManagementLayer\Sounds">
+    <Filter Include="Fichiers sources\DataManagementLayer\Sounds">
+      <UniqueIdentifier>{624781ff-8060-4a7c-97c2-0a4244b0c49f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\DataManagementLayer\imgui">
+      <UniqueIdentifier>{0b6e2507-a3fe-4c0a-af5c-95c254ffc673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\DataManagementLayer">
+      <UniqueIdentifier>{e1d9577e-b101-47fd-a999-b5cb78e324f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\DataManagementLayer\Sounds">
       <UniqueIdentifier>{cd48336a-6311-4f5b-b9c0-601f46f32719}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\Engine\DataManagementLayer\Sounds">
-      <UniqueIdentifier>{624781ff-8060-4a7c-97c2-0a4244b0c49f}</UniqueIdentifier>
+    <Filter Include="Fichiers d%27en-tête\DataManagementLayer\imgui">
+      <UniqueIdentifier>{9dca0a77-f195-4665-8da1-6c3192f928db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\InitializeManagement">
+      <UniqueIdentifier>{6c1d7051-f1d9-4292-913b-03cf66dc2082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\InitializeManagement">
+      <UniqueIdentifier>{2e8d369c-959c-489d-aedb-eb6f57c08ca7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,11 +87,38 @@
     <ClCompile Include="Engine\PhysicsEngine.cpp">
       <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DataManagementLayer\Sounds\AmbiantSounds.cpp">
-      <Filter>Fichiers sources\Engine\DataManagementLayer\Sounds</Filter>
+    <ClCompile Include="DataManagementLayer\Sounds\AmbiantSounds.cpp">
+      <Filter>Fichiers sources\DataManagementLayer\Sounds</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DataManagementLayer\Sounds\Musics.cpp">
-      <Filter>Fichiers sources\Engine\DataManagementLayer\Sounds</Filter>
+    <ClCompile Include="DataManagementLayer\Sounds\Musics.cpp">
+      <Filter>Fichiers sources\DataManagementLayer\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManagementLayer\imgui\imgui.cpp">
+      <Filter>Fichiers sources\DataManagementLayer\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManagementLayer\imgui\imgui_demo.cpp">
+      <Filter>Fichiers sources\DataManagementLayer\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManagementLayer\imgui\imgui_draw.cpp">
+      <Filter>Fichiers sources\DataManagementLayer\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManagementLayer\imgui\imgui_impl_opengl3.cpp">
+      <Filter>Fichiers sources\DataManagementLayer\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManagementLayer\imgui\imgui_impl_sdl.cpp">
+      <Filter>Fichiers sources\DataManagementLayer\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManagementLayer\imgui\imgui_tables.cpp">
+      <Filter>Fichiers sources\DataManagementLayer\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManagementLayer\imgui\imgui_widgets.cpp">
+      <Filter>Fichiers sources\DataManagementLayer\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="InitializeManagement\ContextManager.cpp">
+      <Filter>Fichiers sources\InitializeManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="InitializeManagement\ErrorHandler.cpp">
+      <Filter>Fichiers sources\InitializeManagement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,11 +134,44 @@
     <ClInclude Include="Engine\PhysicsEngine.hpp">
       <Filter>Fichiers d%27en-tête\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\DataManagementLayer\Sounds\AmbiantSounds.hpp">
-      <Filter>Fichiers d%27en-tête\Engine\DataManagementLayer\Sounds</Filter>
+    <ClInclude Include="DataManagementLayer\Sounds\AmbiantSounds.hpp">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer\Sounds</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\DataManagementLayer\Sounds\Musics.hpp">
-      <Filter>Fichiers d%27en-tête\Engine\DataManagementLayer\Sounds</Filter>
+    <ClInclude Include="DataManagementLayer\Sounds\Musics.hpp">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManagementLayer\imgui\imconfig.h">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManagementLayer\imgui\imgui.h">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManagementLayer\imgui\imgui_impl_opengl3.h">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManagementLayer\imgui\imgui_impl_opengl3_loader.h">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManagementLayer\imgui\imgui_impl_sdl.h">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManagementLayer\imgui\imgui_internal.h">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManagementLayer\imgui\imstb_rectpack.h">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManagementLayer\imgui\imstb_textedit.h">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManagementLayer\imgui\imstb_truetype.h">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="InitializeManagement\ContextManager.hpp">
+      <Filter>Fichiers d%27en-tête\InitializeManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="InitializeManagement\ErrorHandler.hpp">
+      <Filter>Fichiers d%27en-tête\InitializeManagement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
