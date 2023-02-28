@@ -1,4 +1,0 @@
-namespace Contents
-{
-	namespace Sounds {};
-};
