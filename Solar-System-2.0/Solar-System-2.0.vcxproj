@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="DataManagementLayer\DataManager.cpp" />
     <ClCompile Include="DataManagementLayer\imgui\imgui.cpp" />
     <ClCompile Include="DataManagementLayer\imgui\imgui_demo.cpp" />
     <ClCompile Include="DataManagementLayer\imgui\imgui_draw.cpp" />
@@ -142,14 +144,16 @@
     <ClCompile Include="DataManagementLayer\imgui\imgui_widgets.cpp" />
     <ClCompile Include="DataManagementLayer\Sounds\AmbiantSounds.cpp" />
     <ClCompile Include="DataManagementLayer\Sounds\Musics.cpp" />
-    <ClCompile Include="Engine\AIEngine.cpp" />
     <ClCompile Include="Engine\DiscreteSimulation.cpp" />
     <ClCompile Include="Engine\PhysicsEngine.cpp" />
+    <ClCompile Include="Engine\State\State.cpp" />
     <ClCompile Include="InitializeManagement\ContextManager.cpp" />
     <ClCompile Include="InitializeManagement\ErrorHandler.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application.hpp" />
+    <ClInclude Include="DataManagementLayer\DataManager.hpp" />
     <ClInclude Include="DataManagementLayer\imgui\imconfig.h" />
     <ClInclude Include="DataManagementLayer\imgui\imgui.h" />
     <ClInclude Include="DataManagementLayer\imgui\imgui_impl_opengl3.h" />
@@ -161,9 +165,9 @@
     <ClInclude Include="DataManagementLayer\imgui\imstb_truetype.h" />
     <ClInclude Include="DataManagementLayer\Sounds\AmbiantSounds.hpp" />
     <ClInclude Include="DataManagementLayer\Sounds\Musics.hpp" />
-    <ClInclude Include="Engine\AIEngine.hpp" />
     <ClInclude Include="Engine\DiscreteSimulation.hpp" />
     <ClInclude Include="Engine\PhysicsEngine.hpp" />
+    <ClInclude Include="Engine\State\State.hpp" />
     <ClInclude Include="InitializeManagement\ContextManager.hpp" />
     <ClInclude Include="InitializeManagement\ErrorHandler.hpp" />
     <ClInclude Include="resource.h" />

@@ -35,39 +35,39 @@ namespace Engine {
 
     namespace State {
 
-        typedef struct shader_datas {
+        //typedef struct shader_datas {
 
-            std::string v_shader_path;
-            std::string f_shader_path;
-            std::string g_shader_path;
-            std::string key;
+        //    std::string v_shader_path;
+        //    std::string f_shader_path;
+        //    std::string g_shader_path;
+        //    std::string key;
 
-        }shader_datas;
+        //}shader_datas;
 
-        typedef struct body_data {
+        //typedef struct body_data {
 
-            float                           size;
-            std::string                     type;
-            int                             shininess;
-            float                           oppacity;
-            glm::vec3                       initial_pos;
-            std::string                     name;
-            float                           inclinaison_angle;
-            float                           light_strength;
-            // std::vector<std::string> nom_disp_path;
-            // std::string name;
-            // float   speed_rotation;
+        //    float                           size;
+        //    std::string                     type;
+        //    int                             shininess;
+        //    float                           oppacity;
+        //    glm::vec3                       initial_pos;
+        //    std::string                     name;
+        //    float                           inclinaison_angle;
+        //    float                           light_strength;
+        //    // std::vector<std::string> nom_disp_path;
+        //    // std::string name;
+        //    // float   speed_rotation;
 
-        } body_data;
+        //} body_data;
 
         class State
         {
 
             private:
 
-                /*static int             m_width;
+                static int             m_width;
                 static int             m_height;
-                bool            m_terminate;
+                /*bool            m_terminate;
                 unsigned int    m_fps;
                 int             m_volume;
                 bool            m_pause_music;

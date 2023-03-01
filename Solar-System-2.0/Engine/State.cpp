@@ -15,8 +15,8 @@ PURPOSE :   - Manage data transfert between all module of the application progra
 using namespace Engine::State;
 
 //std::vector<body_data> State::m_bodys_data;
-//int State::m_width;
-//int State::m_height;
+int State::m_width;
+int State::m_height;
 
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
@@ -27,10 +27,10 @@ State::State(int width, int height, double angle) //:
 //far_plane(1000.f), near_plane(0.1f), hilight_sun(true), render_shadow(true)
 {
     /*proj_mat = glm::perspective(glm::radians(angle), (double)width / height, (double)near_plane, (double)far_plane);
-    view_mat = glm::mat4(1.0f);
+    view_mat = glm::mat4(1.0f);*/
 
     m_width = width;
-    m_height = height; */
+    m_height = height;
 }
 
 State::~State()

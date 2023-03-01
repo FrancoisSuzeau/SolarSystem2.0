@@ -78,9 +78,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\AIEngine.cpp">
-      <Filter>Fichiers sources\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\DiscreteSimulation.cpp">
       <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
@@ -120,13 +117,19 @@
     <ClCompile Include="InitializeManagement\ErrorHandler.cpp">
       <Filter>Fichiers sources\InitializeManagement</Filter>
     </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManagementLayer\DataManager.cpp">
+      <Filter>Fichiers sources\DataManagementLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\State\State.cpp">
+      <Filter>Fichiers sources\Engine\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\AIEngine.hpp">
-      <Filter>Fichiers d%27en-tête\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine\DiscreteSimulation.hpp">
       <Filter>Fichiers d%27en-tête\Engine</Filter>
@@ -172,6 +175,15 @@
     </ClInclude>
     <ClInclude Include="InitializeManagement\ErrorHandler.hpp">
       <Filter>Fichiers d%27en-tête\InitializeManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManagementLayer\DataManager.hpp">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\State\State.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

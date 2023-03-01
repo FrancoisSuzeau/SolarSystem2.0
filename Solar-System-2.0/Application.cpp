@@ -17,7 +17,7 @@ PURPOSE :   - creating OpenGL Context
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Application::Application(int width, int height, SDL_Window *window)//: m_data_manager(width, height, 45.0),
+Application::Application(int width, int height, SDL_Window *window): m_state(width, height, 45.0)//,
 //m_window(window), 
 //m_setting(), m_overlay(), m_audio(nullptr), m_input(nullptr), camera(nullptr), m_skybox(nullptr), ship(nullptr), m_framebuffer(nullptr)
 {

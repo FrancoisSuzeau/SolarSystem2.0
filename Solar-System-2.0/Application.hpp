@@ -20,6 +20,8 @@ PURPOSE : header of the Application class
 
         #include <iostream>
         #include <cassert>
+
+        #include "Engine/State.hpp"
         
         
        /* #include "DataManager.hpp"
@@ -51,6 +53,8 @@ PURPOSE : header of the Application class
     {
 
         private:
+
+            Engine::State::State m_state;
 
             //DataManager             m_data_manager;
 
