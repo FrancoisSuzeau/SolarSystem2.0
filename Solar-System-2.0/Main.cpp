@@ -11,6 +11,7 @@ PURPOSE :
 #include <iostream>
 #include <cassert>
 #include "InitializeManagement/ContextManager.hpp"
+#include "Application.hpp"
 
 int main(int argc, char** argv)
 {
@@ -28,7 +29,7 @@ int main(int argc, char** argv)
     assert(status);
     InitializeManagement::ContextManager::Init(opengl_context, sdl_manager.window, io);
 
-
+    Application MyApp(sdl_manager.win_width, sdl_manager.win_height, sdl_manager.window);
 
     InitializeManagement::ContextManager::DeInit();
     InitializeManagement::ContextManager::DeInit(opengl_context);
