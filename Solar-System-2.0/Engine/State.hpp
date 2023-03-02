@@ -22,8 +22,7 @@ PURPOSE : header of the State class
 
         #include "InputDevices/InputDevices.hpp"
 
-        /*#include "../Shader/Shader.hpp"
-        #include "../Loader/Loader.hpp"*/
+        /*#include "../Shader/Shader.hpp"*/
         
         /*#include <SDL2/SDL_ttf.h>*/
 

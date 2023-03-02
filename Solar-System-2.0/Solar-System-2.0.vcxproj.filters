@@ -123,6 +123,9 @@
     <ClCompile Include="Engine\InputDevices\MouseInput.cpp">
       <Filter>Fichiers sources\Engine\InputDevices</Filter>
     </ClCompile>
+    <ClCompile Include="DataManagementLayer\Loader.cpp">
+      <Filter>Fichiers sources\DataManagementLayer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="Engine\InputDevices\InputDevices.hpp">
       <Filter>Fichiers d%27en-tête\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManagementLayer\Loader.hpp">
+      <Filter>Fichiers d%27en-tête\DataManagementLayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -30,6 +30,7 @@ int main(int argc, char** argv)
     InitializeManagement::ContextManager::Init(opengl_context, sdl_manager.window, io);
 
     Application MyApp(sdl_manager.win_width, sdl_manager.win_height, sdl_manager.window);
+    MyApp.loadConfig();
 
     MyApp.mainLoop();
 

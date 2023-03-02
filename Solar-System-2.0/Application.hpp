@@ -23,6 +23,7 @@ PURPOSE : header of the Application class
         #include <cassert>
 
         #include "Engine/State.hpp"
+        #include "DataManagementLayer/DataManager.hpp"
         
         
        /* #include "DataManager.hpp
@@ -60,7 +61,7 @@ PURPOSE : header of the Application class
             void    inputProcess();
             void    fpsCalculation(int moment);
 
-            //DataManager             m_data_manager;
+            DataManagementLayer::DataManager             m_data_manager;
 
             // Framebuffer     *m_framebuffer;
 
@@ -101,11 +102,12 @@ PURPOSE : header of the Application class
             Application(int width, int height, SDL_Window* window);
             ~Application();
 
+            void            loadConfig();
             void            mainLoop();
             void            cleanAll();
 
-            /*void            loadFrameBuffer();
-            void            loadConfig();
+            /*void          loadFrameBuffer();
+            
             void            loadAssets();
             
            */

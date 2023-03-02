@@ -17,7 +17,7 @@ PURPOSE :   - creating OpenGL Context
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Application::Application(int width, int height, SDL_Window *window): m_state(width, height, 45.0), m_window(window)//, 
+Application::Application(int width, int height, SDL_Window *window): m_state(width, height, 45.0), m_window(window), m_data_manager()
 //m_setting(), m_overlay(), m_audio(nullptr), camera(nullptr), m_skybox(nullptr), ship(nullptr), m_framebuffer(nullptr)
 {
     /*render_menu = false;
@@ -103,24 +103,16 @@ void Application::cleanAll()
 ///***********************************************************************************************************************************************************************/
 ///*************************************************************************************** loadConfig ********************************************************************/
 ///***********************************************************************************************************************************************************************/
-//void Application::loadConfig()
-//{
-//    m_data_manager.setFps(60);
-//    m_data_manager.setPause(false);
-//    m_data_manager.setVolume(64);
-//    m_data_manager.setTrack(0);
-//    m_data_manager.setShader();
-//
-//    frame_rate = 1000 / m_data_manager.getFps();
-//    start_loop = 0;
-//    end_loop = 0;
-//    time_past = 0;
-//
-//    ImGuiStyle& style = ImGui::GetStyle();
-//    style.WindowTitleAlign = ImVec2(0.5f, 0.5f);
-//    style.WindowMenuButtonPosition = ImGuiDir_None;
-//}
-//
+void Application::loadConfig()
+{
+
+    m_data_manager.setConfigs(m_state);
+
+    /*ImGuiStyle& style = ImGui::GetStyle();
+    style.WindowTitleAlign = ImVec2(0.5f, 0.5f);
+    style.WindowMenuButtonPosition = ImGuiDir_None;*/
+}
+
 ///***********************************************************************************************************************************************************************/
 ///*************************************************************************************** startLoop *********************************************************************/
 ///***********************************************************************************************************************************************************************/

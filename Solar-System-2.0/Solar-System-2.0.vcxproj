@@ -142,6 +142,7 @@
     <ClCompile Include="DataManagementLayer\imgui\imgui_impl_sdl.cpp" />
     <ClCompile Include="DataManagementLayer\imgui\imgui_tables.cpp" />
     <ClCompile Include="DataManagementLayer\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="DataManagementLayer\Loader.cpp" />
     <ClCompile Include="DataManagementLayer\Sounds\AmbiantSounds.cpp" />
     <ClCompile Include="DataManagementLayer\Sounds\Musics.cpp" />
     <ClCompile Include="Engine\DiscreteSimulation.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="DataManagementLayer\imgui\imstb_rectpack.h" />
     <ClInclude Include="DataManagementLayer\imgui\imstb_textedit.h" />
     <ClInclude Include="DataManagementLayer\imgui\imstb_truetype.h" />
+    <ClInclude Include="DataManagementLayer\Loader.hpp" />
     <ClInclude Include="DataManagementLayer\Sounds\AmbiantSounds.hpp" />
     <ClInclude Include="DataManagementLayer\Sounds\Musics.hpp" />
     <ClInclude Include="Engine\DiscreteSimulation.hpp" />
