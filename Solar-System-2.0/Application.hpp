@@ -17,6 +17,7 @@ PURPOSE : header of the Application class
 /********************************************************************* preprocessing *********************************************************************/
         
         #include <SDL2/SDL.h>
+        #include <GL/glew.h>
 
         #include <iostream>
         #include <cassert>
@@ -24,8 +25,7 @@ PURPOSE : header of the Application class
         #include "Engine/State.hpp"
         
         
-       /* #include "DataManager.hpp"
-        #include "../InOut/Input/Input.hpp"
+       /* #include "DataManager.hpp
         #include "../InOut/Audio/Audio.hpp"
         #include "Settings/Settings.hpp"
         #include "Overlay/Overlay.hpp"
@@ -54,7 +54,11 @@ PURPOSE : header of the Application class
 
         private:
 
-            Engine::State::State m_state;
+            Engine::State m_state;
+            SDL_Window* m_window;
+
+            void    inputProcess();
+            void    fpsCalculation(int moment);
 
             //DataManager             m_data_manager;
 
@@ -70,10 +74,9 @@ PURPOSE : header of the Application class
 
             //SystemCreator* m_solar_system = nullptr;
 
-            
-            //Input* m_input;
+
             //Settings                m_setting;
-            //SDL_Window* m_window;
+            
             //Audio* m_audio;
             //Overlay                 m_overlay;
             //Skybox* m_skybox;
@@ -82,11 +85,8 @@ PURPOSE : header of the Application class
 
             //bool                    menu_app_key_pressed;
             //bool                    render_menu;
-            //unsigned int            frame_rate;
-            //Uint32                  start_loop, end_loop, time_past;
 
-            //void    inputProcess();
-            //void    fpsCalculation(int moment);
+
             //void    renderAudio();
             //void    renderSettings();
             //void    renderOverlay();
@@ -101,11 +101,14 @@ PURPOSE : header of the Application class
             Application(int width, int height, SDL_Window* window);
             ~Application();
 
+            void            mainLoop();
+            void            cleanAll();
+
             /*void            loadFrameBuffer();
             void            loadConfig();
             void            loadAssets();
-            void            mainLoop();
-            void            cleanAll();*/
+            
+           */
 
 
 

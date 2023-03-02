@@ -16,38 +16,11 @@
     <Filter Include="Fichiers d%27en-tête\Engine">
       <UniqueIdentifier>{ef7d7bbb-b70e-49ed-a7d3-7a0d404b5451}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\Engine\InputDevices">
-      <UniqueIdentifier>{e839e5d2-79f5-4dbe-806d-d5df588d4941}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers sources\Engine">
       <UniqueIdentifier>{5461db00-9de8-46c3-a0d9-6363ed1ec308}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers sources\Engine\InputDevices">
       <UniqueIdentifier>{2c986832-6f28-4f43-bd9d-dc55a5dca270}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Engine\State">
-      <UniqueIdentifier>{f2c300a9-480e-479b-8490-5905725f174d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Engine\State">
-      <UniqueIdentifier>{e3b2856f-0472-4a08-972e-be9af43ce18e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Engine\State\AudioEngine">
-      <UniqueIdentifier>{21c34750-c321-435c-9144-83ed539f1fe2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Engine\State\AudioEngine">
-      <UniqueIdentifier>{020f903b-3f2f-4750-ac7f-8995648ff64c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Engine\State\GUI">
-      <UniqueIdentifier>{a02f55ef-1fd0-4a0d-8126-82d9e508da3f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Engine\State\GUI">
-      <UniqueIdentifier>{a8c96a19-5822-40f7-bc3e-7fbebbd68e7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Engine\State\RenderingEngine">
-      <UniqueIdentifier>{772d8310-3ed3-4b15-941f-ff0b21cecf34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Engine\State\RenderingEngine">
-      <UniqueIdentifier>{6ed3807b-034d-4ff8-bb3f-1246ec768dac}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers sources\DataManagementLayer">
       <UniqueIdentifier>{8cf0d168-5595-4cdd-a2a5-fce23fd5c123}</UniqueIdentifier>
@@ -72,6 +45,24 @@
     </Filter>
     <Filter Include="Fichiers sources\InitializeManagement">
       <UniqueIdentifier>{2e8d369c-959c-489d-aedb-eb6f57c08ca7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine\AudioEngine">
+      <UniqueIdentifier>{21c34750-c321-435c-9144-83ed539f1fe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine\GUI">
+      <UniqueIdentifier>{a8c96a19-5822-40f7-bc3e-7fbebbd68e7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine\RenderingEngine">
+      <UniqueIdentifier>{6ed3807b-034d-4ff8-bb3f-1246ec768dac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine\AudioEngine">
+      <UniqueIdentifier>{020f903b-3f2f-4750-ac7f-8995648ff64c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine\GUI">
+      <UniqueIdentifier>{a02f55ef-1fd0-4a0d-8126-82d9e508da3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine\RenderingEngine">
+      <UniqueIdentifier>{772d8310-3ed3-4b15-941f-ff0b21cecf34}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -123,8 +114,14 @@
     <ClCompile Include="DataManagementLayer\DataManager.cpp">
       <Filter>Fichiers sources\DataManagementLayer</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\State\State.cpp">
-      <Filter>Fichiers sources\Engine\State</Filter>
+    <ClCompile Include="Engine\State.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\InputDevices\KeyInput.cpp">
+      <Filter>Fichiers sources\Engine\InputDevices</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\InputDevices\MouseInput.cpp">
+      <Filter>Fichiers sources\Engine\InputDevices</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,8 +179,11 @@
     <ClInclude Include="DataManagementLayer\DataManager.hpp">
       <Filter>Fichiers d%27en-tête\DataManagementLayer</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\State\State.hpp">
-      <Filter>Fichiers d%27en-tête\Engine\State</Filter>
+    <ClInclude Include="Engine\State.hpp">
+      <Filter>Fichiers d%27en-tête\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\InputDevices\InputDevices.hpp">
+      <Filter>Fichiers d%27en-tête\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

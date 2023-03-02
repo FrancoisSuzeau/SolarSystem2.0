@@ -35,8 +35,11 @@ ContextManager::~ContextManager()
 bool ContextManager::Init(Sdl_manage &sdl_manager)
 {
     sdl_manager.title = "Solar System Simulator";
-    sdl_manager.win_width = GetSystemMetrics(SM_CXSCREEN);
-    sdl_manager.win_height = GetSystemMetrics(SM_CYSCREEN);
+    /*sdl_manager.win_width = GetSystemMetrics(SM_CXSCREEN);
+    sdl_manager.win_height = GetSystemMetrics(SM_CYSCREEN);*/
+
+    sdl_manager.win_width = 1000;
+    sdl_manager.win_height = 800;
 
     /************************************************* initialize SDL ********************************************************/
     if(SDL_Init(SDL_INIT_VIDEO) < 0)

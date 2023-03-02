@@ -12,7 +12,7 @@ PURPOSE :   - Manage data transfert between all module of the application progra
 */
 
 #include "State.hpp"
-using namespace Engine::State;
+using namespace Engine;
 
 //std::vector<body_data> State::m_bodys_data;
 int State::m_width;
@@ -21,8 +21,8 @@ int State::m_height;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-State::State(int width, int height, double angle) //:
-//bloom(true), bloom_strenght(10), render_normal(true), asteroid_count(100), m_fps(60),
+State::State(int width, int height, double angle) : m_terminate(false), m_event(nullptr), m_key_input(nullptr), m_mouse_input(nullptr), m_fps(60)
+//bloom(true), bloom_strenght(10), render_normal(true), asteroid_count(100), ,
 //render_overlay(true), render_name(true), render_info(false), distance_from_ship(3.f), index_ship(0), change_skin(true), //for loading the skin at program launch
 //far_plane(1000.f), near_plane(0.1f), hilight_sun(true), render_shadow(true)
 {
@@ -31,6 +31,24 @@ State::State(int width, int height, double angle) //:
 
     m_width = width;
     m_height = height;
+
+    if (m_event == nullptr)
+    {
+        m_event = new SDL_Event();
+        assert(m_event);
+    }
+
+    if (m_key_input == nullptr)
+    {
+        m_key_input = new Engine::InputDevices::KeyInput(m_event);
+        assert(m_key_input);
+    }
+
+    if (m_mouse_input == nullptr)
+    {
+        m_mouse_input = new Engine::InputDevices::MouseInput(m_event);
+        assert(m_mouse_input);
+    }
 }
 
 State::~State()
@@ -41,32 +59,66 @@ State::~State()
 /***********************************************************************************************************************************************************************/
 /********************************************************************************* clean *******************************************************************************/
 /***********************************************************************************************************************************************************************/
-//void State::clean()
-//{
-//    for(std::map<std::string, Shader*>::iterator it = map_shader.begin(); it != map_shader.end(); ++it)
-//    {
-//        if(it->second != nullptr)
-//        {
-//            it->second->clean();
-//            delete it->second;
-//            it->second = nullptr;
-//        }
-//    }
-//}
-//
+void State::clean()
+{
+    if (m_key_input != nullptr)
+    {
+        delete m_key_input;
+        m_key_input = nullptr;
+    }
+
+    if (m_mouse_input != nullptr)
+    {
+        delete m_mouse_input;
+        m_mouse_input = nullptr;
+    }
+
+    if (m_event != nullptr)
+    {
+        delete m_event;
+        m_event = nullptr;
+    }
+}
+
+/***********************************************************************************************************************************************************************/
+/**************************************************************************** updateAllEvents **************************************************************************/
+/***********************************************************************************************************************************************************************/
+void State::updateAllEvents()
+{
+    bool key_pressed = false;
+    if (m_key_input != nullptr)
+    {
+        m_key_input->updateEvents();
+        if ((m_key_input->getKey(SDL_SCANCODE_ESCAPE)) && (!key_pressed))
+        {
+            this->setTerminate(true);
+            key_pressed = true;
+        }
+        if ((m_key_input->getKey(SDL_SCANCODE_ESCAPE)) == false)
+        {
+            key_pressed = false;
+        }
+    }
+
+    if (m_mouse_input != nullptr)
+    {
+        m_mouse_input->updateEvents();
+    }
+}
+
 ///***********************************************************************************************************************************************************************/
 ///********************************************************************************* getters/setters *********************************************************************/
 ///***********************************************************************************************************************************************************************/
-//void State::setTerminate(bool const terminate)
-//{
-//    m_terminate = terminate;
-//}
-//
-//bool State::getTerminate() const
-//{
-//    return m_terminate;
-//}
-//
+void State::setTerminate(bool const terminate)
+{
+    m_terminate = terminate;
+}
+
+bool State::getTerminate() const
+{
+    return m_terminate;
+}
+
 //int State::getWidth()
 //{
 //    return m_width;
@@ -77,16 +129,16 @@ State::~State()
 //    return m_height;
 //}
 //
-//void State::setFps(unsigned int const fps)
-//{
-//    m_fps = fps;
-//}
-//
-//unsigned int State::getFps() const
-//{
-//    return m_fps;
-//}
-//
+void State::setFps(unsigned int const fps)
+{
+    m_fps = fps;
+}
+
+unsigned int State::getFps() const
+{
+    return m_fps;
+}
+
 //void State::setVolume(int const volume)
 //{
 //    m_volume = volume;

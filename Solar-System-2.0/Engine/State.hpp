@@ -20,6 +20,8 @@ PURPOSE : header of the State class
         #include <vector>
         #include <glm/glm.hpp>
 
+        #include "InputDevices/InputDevices.hpp"
+
         /*#include "../Shader/Shader.hpp"
         #include "../Loader/Loader.hpp"*/
         
@@ -32,8 +34,6 @@ PURPOSE : header of the State class
 /********************************************************************* class definition *********************************************************************/
 
 namespace Engine {
-
-    namespace State {
 
         //typedef struct shader_datas {
 
@@ -67,8 +67,15 @@ namespace Engine {
 
                 static int             m_width;
                 static int             m_height;
-                /*bool            m_terminate;
-                unsigned int    m_fps;
+                bool                   m_terminate;
+                unsigned int            m_fps;
+
+                InputDevices::KeyInput* m_key_input;
+                InputDevices::MouseInput* m_mouse_input;
+                SDL_Event* m_event;
+
+
+                /*
                 int             m_volume;
                 bool            m_pause_music;
                 int             m_track;
@@ -104,16 +111,20 @@ namespace Engine {
                 State(int width, int height, double angle);
                 ~State();
 
-                /*void clean();
-
-                static std::vector<body_data>          m_bodys_data;
-
-                void            setTerminate(bool const terminate);
-                static int             getWidth();
-                static int             getHeight();
                 bool            getTerminate() const;
+                void            setTerminate(bool const terminate);
+                void            updateAllEvents();
                 void            setFps(unsigned int const fps);
                 unsigned int    getFps() const;
+                void            clean();
+
+                /*static std::vector<body_data>          m_bodys_data;
+
+                
+                static int             getWidth();
+                static int             getHeight();
+                
+                
                 void            setVolume(int const volume);
                 int             getVolume() const;
                 void            setPause(bool const pause);
@@ -174,8 +185,6 @@ namespace Engine {
 
 
             };
-
-    }
 
     
 }

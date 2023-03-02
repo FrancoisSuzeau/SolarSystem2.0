@@ -17,18 +17,11 @@ PURPOSE :   - creating OpenGL Context
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Application::Application(int width, int height, SDL_Window *window): m_state(width, height, 45.0)//,
-//m_window(window), 
-//m_setting(), m_overlay(), m_audio(nullptr), m_input(nullptr), camera(nullptr), m_skybox(nullptr), ship(nullptr), m_framebuffer(nullptr)
+Application::Application(int width, int height, SDL_Window *window): m_state(width, height, 45.0), m_window(window)//, 
+//m_setting(), m_overlay(), m_audio(nullptr), camera(nullptr), m_skybox(nullptr), ship(nullptr), m_framebuffer(nullptr)
 {
     /*render_menu = false;
     menu_app_key_pressed = false;
-
-    if(m_input == nullptr)
-    {
-        m_input = new Input();
-        assert(m_input);
-    }
 
     if(m_audio == nullptr)
     {
@@ -51,57 +44,54 @@ Application::~Application()
 /***********************************************************************************************************************************************************************/
 /*************************************************************************************** cleanAll **********************************************************************/
 /***********************************************************************************************************************************************************************/
-//void Application::cleanAll()
-//{
-//    if(m_skybox != nullptr)
-//    {
-//        m_skybox->clean();
-//        delete m_skybox;
-//        m_skybox = nullptr;
-//    }
-//    if(camera != nullptr)
-//    {
-//        delete camera;
-//        camera = nullptr;
-//    }
-//    if(ship != nullptr)
-//    {
-//        ship->clean();
-//        delete ship;
-//        ship = nullptr;
-//    }
-//    if(m_input != nullptr)
-//    {
-//        delete m_input;
-//        m_input = nullptr;
-//    }
-//    if(m_audio != nullptr)
-//    {
-//        m_audio->clean();
-//        delete m_audio;
-//        m_audio = nullptr;
-//    }
-//
-//    if(m_framebuffer != nullptr)
-//    {
-//        m_framebuffer->clean();
-//        delete m_framebuffer;
-//        m_framebuffer = nullptr;
-//    }
-//
-//    m_setting.clean();
-//    m_overlay.clean();
-//
-//    if(m_solar_system != nullptr)
-//    {
-//        m_solar_system->cleanSystem();
-//        delete m_solar_system;
-//        m_solar_system = nullptr;
-//    }
-//
-//    m_data_manager.clean();
-//}
-//
+void Application::cleanAll()
+{
+    
+    /*if(m_skybox != nullptr)
+    {
+        m_skybox->clean();
+        delete m_skybox;
+        m_skybox = nullptr;
+    }
+    if(camera != nullptr)
+    {
+        delete camera;
+        camera = nullptr;
+    }
+    if(ship != nullptr)
+    {
+        ship->clean();
+        delete ship;
+        ship = nullptr;
+    }
+    
+    if(m_audio != nullptr)
+    {
+        m_audio->clean();
+        delete m_audio;
+        m_audio = nullptr;
+    }
+
+    if(m_framebuffer != nullptr)
+    {
+        m_framebuffer->clean();
+        delete m_framebuffer;
+        m_framebuffer = nullptr;
+    }
+
+    m_setting.clean();
+    m_overlay.clean();
+
+    if(m_solar_system != nullptr)
+    {
+        m_solar_system->cleanSystem();
+        delete m_solar_system;
+        m_solar_system = nullptr;
+    }*/
+
+    m_state.clean();
+}
+
 ///***********************************************************************************************************************************************************************/
 ///********************************************************************************* loadFrameBuffer *********************************************************************/
 ///***********************************************************************************************************************************************************************/
@@ -117,7 +107,6 @@ Application::~Application()
 //{
 //    m_data_manager.setFps(60);
 //    m_data_manager.setPause(false);
-//    m_data_manager.setTerminate(false);
 //    m_data_manager.setVolume(64);
 //    m_data_manager.setTrack(0);
 //    m_data_manager.setShader();
@@ -220,14 +209,14 @@ Application::~Application()
 ///***********************************************************************************************************************************************************************/
 ///*************************************************************************************** mainLoop **********************************************************************/
 ///***********************************************************************************************************************************************************************/
-//void Application::mainLoop()
-//{
-//    while(!m_data_manager.getTerminate())
-//    {
-//            this->fpsCalculation(BEGIN);
+void Application::mainLoop()
+{
+    while(!m_state.getTerminate())
+    {
+            this->fpsCalculation(BEGIN);
 //
 //        /******************************************************************* MANAGING EVENTS ******************************************************************/
-//            this->inputProcess();
+            this->inputProcess();
 //        //=====================================================================================================================================================
 //
 //        /******************************************************************* MANAGING CHANGES *****************************************************************/
@@ -245,10 +234,10 @@ Application::~Application()
 //        //======================================================================================================================================================
 //
 //        /******************************************************************* DEPTH MAP CALCULATION *************************************************************/
-//            glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-//            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//            glEnable(GL_BLEND);
-//            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 //            
 //            m_data_manager.setPass(DEPTH_FBO);
 //            this->renderIntoFramebuffer(DEPTH_FBO);
@@ -281,13 +270,13 @@ Application::~Application()
 //        /******************************************************************* SWAPPING WINDOWS *******************************************************************/
 //            ImGui::Render();
 //            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-//            SDL_GL_SwapWindow(m_window);
+            SDL_GL_SwapWindow(m_window);
 //        //=======================================================================================================================================================
 //
-//            this->fpsCalculation(END);
-//    }
-//}
-//
+            this->fpsCalculation(END);
+    }
+}
+
 ///***********************************************************************************************************************************************************************/
 ///******************************************************************************** renderIntoFramebuffer ***********************************************************************/
 ///***********************************************************************************************************************************************************************/
@@ -381,29 +370,31 @@ Application::~Application()
 ///***********************************************************************************************************************************************************************/
 ///*********************************************************************************** fpsCalculation ********************************************************************/
 ///***********************************************************************************************************************************************************************/
-//void Application::fpsCalculation(int moment)
-//{
-//    switch (moment)
-//    {
-//        case BEGIN:
-//            start_loop = SDL_GetTicks();
-//            break;
-//
-//        case END:
-//            end_loop = SDL_GetTicks();
-//            time_past = end_loop - start_loop;
-//            if(time_past < frame_rate)
-//            {
-//                SDL_Delay(frame_rate - time_past);
-//            }
-//            frame_rate = 1000 / m_data_manager.getFps();
-//            break;
-//        
-//        default:
-//            break;
-//    }
-//}
-//
+void Application::fpsCalculation(int moment)
+{
+    Uint32                  start_loop = 0, end_loop, time_past = 0;
+    unsigned int            frame_rate = 0;
+    switch (moment)
+    {
+        case BEGIN:
+            start_loop = SDL_GetTicks();
+            break;
+
+        case END:
+            end_loop = SDL_GetTicks();
+            time_past = end_loop - start_loop;
+            if(time_past < frame_rate)
+            {
+                SDL_Delay(frame_rate - time_past);
+            }
+            frame_rate = 1000 / m_state.getFps();
+            break;
+        
+        default:
+            break;
+    }
+}
+
 ///***********************************************************************************************************************************************************************/
 ///*********************************************************************************** renderScene ***********************************************************************/
 ///***********************************************************************************************************************************************************************/
@@ -450,25 +441,26 @@ Application::~Application()
 ///***********************************************************************************************************************************************************************/
 ///*********************************************************************************** inputProcess *********************************************************************/
 ///***********************************************************************************************************************************************************************/
-//void Application::inputProcess()
-//{
-//    if(m_input != nullptr)
-//    {
-//        m_input->updateEvents();
-//
-//        if((m_input->getKey(SDL_SCANCODE_ESCAPE)) && (!menu_app_key_pressed))
-//        {
-//            render_menu = !render_menu;
-//            menu_app_key_pressed = true;
-//        }
-//        if ((m_input->getKey(SDL_SCANCODE_ESCAPE)) == false)
-//        {
-//            menu_app_key_pressed = false;
-//        }
-//    }
-//    
-//}
-//
+void Application::inputProcess()
+{
+    m_state.updateAllEvents();
+    /*if(m_input != nullptr)
+    {
+        m_input->updateEvents();
+
+        if((m_input->getKey(SDL_SCANCODE_ESCAPE)) && (!menu_app_key_pressed))
+        {
+            render_menu = !render_menu;
+            menu_app_key_pressed = true;
+        }
+        if ((m_input->getKey(SDL_SCANCODE_ESCAPE)) == false)
+        {
+            menu_app_key_pressed = false;
+        }
+    }*/
+    
+}
+
 ///***********************************************************************************************************************************************************************/
 ///*********************************************************************************** renderNameAndInfo *********************************************************************/
 ///***********************************************************************************************************************************************************************/
