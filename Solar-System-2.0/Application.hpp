@@ -22,11 +22,23 @@ PURPOSE : header of the Application class
         #include <iostream>
         #include <cassert>
 
+        #if defined(IMGUI_IMPL_OPENGL_ES2)
+        #include <SDL_opengles2.h>
+        #else
+        #include <SDL2/SDL_opengl.h>
+        #endif
+
+
+        #include "imgui.h"
+        #include "imgui_impl_sdl.h"
+        #include "imgui_impl_opengl3.h"
+
         #include "Engine/State.hpp"
         #include "DataManagementLayer/DataManager.hpp"
+        #include "Engine/GUI/GUIManager.hpp"
         
         
-       /* #include "DataManager.hpp
+       /* 
         #include "../InOut/Audio/Audio.hpp"
         #include "Settings/Settings.hpp"
         #include "Overlay/Overlay.hpp"
@@ -57,11 +69,16 @@ PURPOSE : header of the Application class
 
             Engine::State m_state;
             SDL_Window* m_window;
-
-            void    inputProcess();
-            void    fpsCalculation(int moment);
-
             DataManagementLayer::DataManager             m_data_manager;
+            Engine::GUI::GUIManager                     m_GUI_manager;
+            Uint32                  start_loop = 0, end_loop, time_past = 0;
+            unsigned int            frame_rate = 0;
+
+            void    manage_state();
+            void    fpsCalculation(int moment);
+            void    manage_GUI();
+
+            
 
             // Framebuffer     *m_framebuffer;
 
@@ -89,8 +106,8 @@ PURPOSE : header of the Application class
 
 
             //void    renderAudio();
-            //void    renderSettings();
             //void    renderOverlay();
+            //
             //void    renderScene();
             //void    renderNameAndInfo();
             //void    makeAllChanges();
@@ -111,9 +128,6 @@ PURPOSE : header of the Application class
             void            loadAssets();
             
            */
-
-
-
 
             // void    renderInfo(RenderData &render_data);
             // void    renderParticles(RenderData &render_data);

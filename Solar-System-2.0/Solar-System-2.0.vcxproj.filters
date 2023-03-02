@@ -126,6 +126,15 @@
     <ClCompile Include="DataManagementLayer\Loader.cpp">
       <Filter>Fichiers sources\DataManagementLayer</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\GUI\GUIManager.cpp">
+      <Filter>Fichiers sources\Engine\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GUI\Menu.cpp">
+      <Filter>Fichiers sources\Engine\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GUI\HUD.cpp">
+      <Filter>Fichiers sources\Engine\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -190,6 +199,15 @@
     </ClInclude>
     <ClInclude Include="DataManagementLayer\Loader.hpp">
       <Filter>Fichiers d%27en-tête\DataManagementLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GUI\GUIManager.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GUI\Menu.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GUI\HUD.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

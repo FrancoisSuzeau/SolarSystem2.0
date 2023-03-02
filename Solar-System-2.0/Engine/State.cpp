@@ -21,7 +21,8 @@ int State::m_height;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-State::State(int width, int height, double angle) : m_terminate(false), m_event(nullptr), m_key_input(nullptr), m_mouse_input(nullptr), m_fps(60)
+State::State(int width, int height, double angle) : m_terminate(false), m_event(nullptr), m_key_input(nullptr), m_mouse_input(nullptr), m_fps(60), m_render_menu(false),
+key_pressed(false), m_render_overlay(true)
 //bloom(true), bloom_strenght(10), render_normal(true), asteroid_count(100), ,
 //render_overlay(true), render_name(true), render_info(false), distance_from_ship(3.f), index_ship(0), change_skin(true), //for loading the skin at program launch
 //far_plane(1000.f), near_plane(0.1f), hilight_sun(true), render_shadow(true)
@@ -81,17 +82,17 @@ void State::clean()
 }
 
 /***********************************************************************************************************************************************************************/
-/**************************************************************************** updateAllEvents **************************************************************************/
+/**************************************************************************** listenEvents *****************************************************************************/
 /***********************************************************************************************************************************************************************/
-void State::updateAllEvents()
+void State::listenEvents()
 {
-    bool key_pressed = false;
+    bool tmp = this->getRenderMenu();
     if (m_key_input != nullptr)
     {
         m_key_input->updateEvents();
         if ((m_key_input->getKey(SDL_SCANCODE_ESCAPE)) && (!key_pressed))
         {
-            this->setTerminate(true);
+            this->setRenderMenu(!tmp);
             key_pressed = true;
         }
         if ((m_key_input->getKey(SDL_SCANCODE_ESCAPE)) == false)
@@ -103,7 +104,18 @@ void State::updateAllEvents()
     if (m_mouse_input != nullptr)
     {
         m_mouse_input->updateEvents();
+        if (this->m_render_menu)
+        {
+            m_mouse_input->capturePointer(false);
+            m_mouse_input->displayPointer(true);
+        }
+        else
+        {
+            m_mouse_input->capturePointer(true);
+            m_mouse_input->displayPointer(false);
+        }
     }
+    
 }
 
 ///***********************************************************************************************************************************************************************/
@@ -119,16 +131,16 @@ bool State::getTerminate() const
     return m_terminate;
 }
 
-//int State::getWidth()
-//{
-//    return m_width;
-//}
-//
-//int State::getHeight()
-//{
-//    return m_height;
-//}
-//
+void State::setRenderMenu(bool const value)
+{
+    m_render_menu = value;
+}
+
+bool State::getRenderMenu() const
+{
+    return m_render_menu;
+}
+
 void State::setFps(unsigned int const fps)
 {
     m_fps = fps;
@@ -137,6 +149,16 @@ void State::setFps(unsigned int const fps)
 unsigned int State::getFps() const
 {
     return m_fps;
+}
+
+void State::setRenderOverlay(bool const new_val)
+{
+    m_render_overlay = new_val;
+}
+
+bool State::getRenderOverlay() const
+{
+    return m_render_overlay;
 }
 
 //void State::setVolume(int const volume)
@@ -267,15 +289,7 @@ unsigned int State::getFps() const
 //    return asteroid_count;
 //}
 //
-//void State::setRenderOverlay(bool const new_val)
-//{
-//    render_overlay = new_val;
-//}
-//
-//bool State::getRenderOverlay() const
-//{
-//    return render_overlay;
-//}
+
 //
 //void State::setRenderName(bool const new_val)
 //{

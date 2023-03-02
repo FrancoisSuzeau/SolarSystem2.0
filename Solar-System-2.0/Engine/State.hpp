@@ -64,10 +64,11 @@ namespace Engine {
 
             private:
 
-                static int             m_width;
-                static int             m_height;
                 bool                   m_terminate;
-                unsigned int            m_fps;
+                unsigned int           m_fps;
+                bool                   m_render_menu;
+                bool                   key_pressed;
+                bool                   m_render_overlay;
 
                 InputDevices::KeyInput* m_key_input;
                 InputDevices::MouseInput* m_mouse_input;
@@ -110,18 +111,21 @@ namespace Engine {
                 State(int width, int height, double angle);
                 ~State();
 
+                static int             m_width;
+                static int             m_height;
+
                 bool            getTerminate() const;
                 void            setTerminate(bool const terminate);
-                void            updateAllEvents();
+                void            listenEvents();
                 void            setFps(unsigned int const fps);
                 unsigned int    getFps() const;
+                void            setRenderMenu(bool const value);
+                bool            getRenderMenu() const;
+                void            setRenderOverlay(bool const new_val);
+                bool            getRenderOverlay() const;
                 void            clean();
 
                 /*static std::vector<body_data>          m_bodys_data;
-
-                
-                static int             getWidth();
-                static int             getHeight();
                 
                 
                 void            setVolume(int const volume);
@@ -145,8 +149,7 @@ namespace Engine {
                 bool            getRenderNormal() const;
                 void            setAsteroidCount(int const new_val);
                 int             getAsteroidCount() const;
-                void            setRenderOverlay(bool const new_val);
-                bool            getRenderOverlay() const;
+                
                 void            setRenderName(bool const new_val);
                 bool            getRenderName() const;
                 void            setRenderInfo(bool const new_val);

@@ -64,22 +64,6 @@ void MouseInput::updateEvents()
                 m_rel_y = m_event->motion.yrel;
                 break;
 
-            //clicking on the cross
-           /* case SDL_WINDOWEVENT:
-                switch (m_event->window.event)
-                {
-                    case SDL_WINDOWEVENT_HIDDEN:
-                        std::cout << "Window %d hidden" << m_event->window.windowID << std::endl;
-                        break;
-                    case SDL_WINDOWEVENT_SHOWN:
-                        std::cout << "Window %d shown" << m_event->window.windowID << std::endl;
-                        break;
-                    case SDL_WINDOWEVENT_CLOSE:
-                        std::cout << "Window %d closed" << m_event->window.windowID << std::endl;
-                        break;
-                }
-                break;*/
-
             //scrolling
             case SDL_MOUSEWHEEL:
 
