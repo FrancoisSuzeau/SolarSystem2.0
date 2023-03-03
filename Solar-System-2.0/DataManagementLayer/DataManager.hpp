@@ -73,7 +73,7 @@ namespace DataManagementLayer {
             DataManager();
             ~DataManager();
 
-            void setConfigs(Engine::State &state);
+            void setConfigs(Engine::State* state);
 
     };
 }

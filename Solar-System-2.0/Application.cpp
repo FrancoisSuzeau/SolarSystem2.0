@@ -17,9 +17,16 @@ PURPOSE :   - creating OpenGL Context
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Application::Application(int width, int height, SDL_Window *window): m_state(width, height, 45.0), m_window(window), m_data_manager(), m_GUI_manager()
-//m_setting(), m_overlay(), m_audio(nullptr), camera(nullptr), m_skybox(nullptr), ship(nullptr), m_framebuffer(nullptr)
+Application::Application(int width, int height, SDL_Window *window): m_state(nullptr), m_window(window), m_data_manager(), m_engines_manager()
+//m_setting(), m_overlay(), m_audio(nullptr), camera(nullptr), m_skybox(nullptr), ship(nullptr)
 {
+    if (m_state == nullptr)
+    {
+        m_state = new Engine::State(width, height, 45.0);
+        assert(m_state);
+
+    }
+
     /*render_menu = false;
     menu_app_key_pressed = false;
 
@@ -27,12 +34,6 @@ Application::Application(int width, int height, SDL_Window *window): m_state(wid
     {
         m_audio = new Audio();
         assert(m_audio);
-    }
-
-    if(m_framebuffer == nullptr)
-    {
-        m_framebuffer = new Framebuffer();
-        assert(m_framebuffer);
     }*/
 }
 
@@ -46,9 +47,12 @@ Application::~Application()
 /***********************************************************************************************************************************************************************/
 void Application::cleanAll()
 {
-
-    m_GUI_manager.clean();
-    
+    if (m_state != nullptr)
+    {
+        m_state->clean();
+        delete m_state;
+        m_state = nullptr;
+    }
     /*if(m_skybox != nullptr)
     {
         m_skybox->clean();
@@ -74,13 +78,6 @@ void Application::cleanAll()
         m_audio = nullptr;
     }
 
-    if(m_framebuffer != nullptr)
-    {
-        m_framebuffer->clean();
-        delete m_framebuffer;
-        m_framebuffer = nullptr;
-    }
-
     m_setting.clean();
     m_overlay.clean();
 
@@ -90,18 +87,20 @@ void Application::cleanAll()
         delete m_solar_system;
         m_solar_system = nullptr;
     }*/
-
-    m_state.clean();
 }
 
 ///***********************************************************************************************************************************************************************/
-///********************************************************************************* loadFrameBuffer *********************************************************************/
+///*********************************************************************************** initEngines ***********************************************************************/
 ///***********************************************************************************************************************************************************************/
-//void Application::loadFrameBuffer()
-//{
-//    m_framebuffer->initFramebuffers(m_data_manager.getWidth(), m_data_manager.getHeight());
-//}
-//
+void Application::initEngines()
+{
+    m_engines_manager.initGUIEngine();
+    if (m_state != nullptr)
+    {
+        m_engines_manager.initRenderEngine(m_state);
+    }
+}
+
 ///***********************************************************************************************************************************************************************/
 ///*************************************************************************************** loadConfig ********************************************************************/
 ///***********************************************************************************************************************************************************************/
@@ -109,10 +108,6 @@ void Application::loadConfig()
 {
 
     m_data_manager.setConfigs(m_state);
-
-    /*ImGuiStyle& style = ImGui::GetStyle();
-    style.WindowTitleAlign = ImVec2(0.5f, 0.5f);
-    style.WindowMenuButtonPosition = ImGuiDir_None;*/
 }
 
 ///***********************************************************************************************************************************************************************/
@@ -181,7 +176,7 @@ void Application::loadConfig()
 ///***********************************************************************************************************************************************************************/
 void Application::mainLoop()
 {
-    while(!m_state.getTerminate())
+    while(!m_state->getTerminate())
     {
             this->fpsCalculation(BEGIN);
 //
@@ -224,7 +219,7 @@ void Application::mainLoop()
             //
             //        /******************************************************************* RENDER OVERLAY ********************************************************************/
             //            this->renderOverlay();
-                        this->manage_GUI();
+                        m_engines_manager.manageGUI();
             //        //======================================================================================================================================================
             //
             //        /******************************************************************* RENDER OVERLAY ********************************************************************/
@@ -357,7 +352,7 @@ void Application::fpsCalculation(int moment)
         {
             SDL_Delay(frame_rate - time_past);
         }
-        frame_rate = 1000 / m_state.getFps();
+        frame_rate = 1000 / m_state->getFps();
         break;
 
     default:
@@ -413,7 +408,7 @@ void Application::fpsCalculation(int moment)
 ///***********************************************************************************************************************************************************************/
 void Application::manage_state()
 {
-    m_state.listenEvents();
+    m_state->listenEvents();
 }
 
 ///***********************************************************************************************************************************************************************/
@@ -431,16 +426,6 @@ void Application::manage_state()
 //{
 //    m_solar_system->renderFlareSun(m_data_manager);
 //}
-//
-///***********************************************************************************************************************************************************************/
-///*********************************************************************************** manage_GUI *********************************************************************/
-///***********************************************************************************************************************************************************************/
-void Application::manage_GUI()
-{
-    m_GUI_manager.renderMenu(m_state);
-    m_GUI_manager.renderHUD(m_state);
-    m_GUI_manager.applyUserChoice(m_state);
-}
 
 /***********************************************************************************************************************************************************************/
 /********************************************************************************* renderParticles *********************************************************************/

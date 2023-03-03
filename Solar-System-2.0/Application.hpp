@@ -22,7 +22,7 @@ PURPOSE : header of the Application class
         #include <iostream>
         #include <cassert>
 
-        #if defined(IMGUI_IMPL_OPENGL_ES2)
+        /*#if defined(IMGUI_IMPL_OPENGL_ES2)
         #include <SDL_opengles2.h>
         #else
         #include <SDL2/SDL_opengl.h>
@@ -31,11 +31,11 @@ PURPOSE : header of the Application class
 
         #include "imgui.h"
         #include "imgui_impl_sdl.h"
-        #include "imgui_impl_opengl3.h"
+        #include "imgui_impl_opengl3.h"*/
 
         #include "Engine/State.hpp"
         #include "DataManagementLayer/DataManager.hpp"
-        #include "Engine/GUI/GUIManager.hpp"
+        #include "Engine/EnginesManager.hpp"
         
         
        /* 
@@ -48,8 +48,6 @@ PURPOSE : header of the Application class
 
         #include "../Skybox/Skybox.hpp"
         #include "../Objects/Spaceship/Spaceship.hpp"
-
-        #include "../InOut/Framebuffer/Framebuffer.hpp"
 
         #include "System/SolarSystemCreator.hpp"
         
@@ -67,16 +65,15 @@ PURPOSE : header of the Application class
 
         private:
 
-            Engine::State m_state;
+            Engine::State* m_state;
             SDL_Window* m_window;
             DataManagementLayer::DataManager             m_data_manager;
-            Engine::GUI::GUIManager                     m_GUI_manager;
-            Uint32                  start_loop = 0, end_loop, time_past = 0;
+            Uint32                  start_loop = 0, end_loop = 0, time_past = 0;
             unsigned int            frame_rate = 0;
+            Engine::EnginesManager  m_engines_manager;
 
             void    manage_state();
             void    fpsCalculation(int moment);
-            void    manage_GUI();
 
             
 
@@ -120,12 +117,12 @@ PURPOSE : header of the Application class
             ~Application();
 
             void            loadConfig();
+            void            initEngines();
             void            mainLoop();
             void            cleanAll();
 
             /*void          loadFrameBuffer();
-            
-            void            loadAssets();
+           
             
            */
 

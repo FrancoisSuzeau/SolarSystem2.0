@@ -25,8 +25,8 @@ PURPOSE : header of the Menu class
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_opengl3.h"
 
-#include <map>
 #include <string>
+#include <map>
 
 
 /********************************************************************* class definition *********************************************************************/
@@ -34,6 +34,8 @@ PURPOSE : header of the Menu class
 namespace Engine {
 
 	namespace GUI {
+
+		
 
 		class Menu
 		{
@@ -43,8 +45,8 @@ namespace Engine {
 				Menu();
 				~Menu();
 
-				void render(int width, int height);
-				static std::map<std::string, bool> menu_selection_value;
+				void render(int width, int height, std::map<std::string, bool> &menu_selection_value);
+				
 		};
 	}
 }
