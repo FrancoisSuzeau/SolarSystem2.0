@@ -113,64 +113,64 @@ void Application::loadConfig()
 ///***********************************************************************************************************************************************************************/
 ///*************************************************************************************** startLoop *********************************************************************/
 ///***********************************************************************************************************************************************************************/
-//void Application::loadAssets()
-//{
+void Application::loadAssets()
+{
 //    Renderer                *planete_renderer = nullptr;
 //    Renderer                *ring_renderer = nullptr;
 //    Renderer                *sphere_renderer = nullptr;
 //    Renderer                *square_renderer = nullptr;
 //    Square                  *square = nullptr;
-//    for(int assets_loads = -1; assets_loads < 11; assets_loads++)
-//    {
-//        ImGui_ImplOpenGL3_NewFrame();
-//        ImGui_ImplSDL2_NewFrame();
-//        ImGui::NewFrame();
-//
-//        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//
-//        if(assets_loads == 0)
-//        {
-//            square_renderer = new SquareRenderer(1.0);
-//            assert(square_renderer);
-//            square = new Square(1.0, "square");
-//            assert(square);
-//            planete_renderer = new PlaneteRenderer(1.f, 70.f, 70.f);
-//            assert(planete_renderer);
-//            ring_renderer = new RingRenderer();
-//            assert(ring_renderer);
-//            sphere_renderer = new SphereRenderer(1.f, 70.f, 70.f);
-//            assert(sphere_renderer);
-//
-//            m_overlay.initOverlayAssets(square_renderer, square);
-//            m_skybox = new Skybox();
-//            assert(m_skybox);
-//            ship = new Spaceship("model");
-//            assert(ship);
-//            ship->loadModelShip(m_data_manager);
-//            
-//            camera = new Camera(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f), ship);
-//            assert(camera);
-//
-//            DataManager::initDatas();
-//
-//            m_solar_system = new SolarSystemCreator();
-//            assert(m_solar_system);
-//            bool success = m_solar_system->MakingSystem(planete_renderer, ring_renderer, sphere_renderer, "Solar System");
-//            assert(success);
-//        }
+    for(int assets_loads = -1; assets_loads < 11; assets_loads++)
+    {
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+        ImGui::NewFrame();
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        /*if(assets_loads == 0)
+        {
+            square_renderer = new SquareRenderer(1.0);
+            assert(square_renderer);
+            square = new Square(1.0, "square");
+            assert(square);
+            planete_renderer = new PlaneteRenderer(1.f, 70.f, 70.f);
+            assert(planete_renderer);
+            ring_renderer = new RingRenderer();
+            assert(ring_renderer);
+            sphere_renderer = new SphereRenderer(1.f, 70.f, 70.f);
+            assert(sphere_renderer);
+
+            m_overlay.initOverlayAssets(square_renderer, square);
+            m_skybox = new Skybox();
+            assert(m_skybox);
+            ship = new Spaceship("model");
+            assert(ship);
+            ship->loadModelShip(m_data_manager);
+            
+            camera = new Camera(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f), ship);
+            assert(camera);
+
+            DataManager::initDatas();
+
+            m_solar_system = new SolarSystemCreator();
+            assert(m_solar_system);
+            bool success = m_solar_system->MakingSystem(planete_renderer, ring_renderer, sphere_renderer, "Solar System");
+            assert(success);
+        }*/
 //
 //        if((assets_loads >= 0) && (assets_loads < 8) && m_solar_system != nullptr) { m_solar_system->loadSystem(assets_loads);}
-//
-//        ImGui::Render();
-//        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-//        SDL_GL_SwapWindow(m_window);
-//
-//        if(assets_loads == 10) { SDL_Delay(1000);}
-//
-//        style.FrameRounding = save_frame;
-//    }
-//}
-//
+
+        Engine::GUI::GUIManager::renderScreenLoad(assets_loads);
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        SDL_GL_SwapWindow(m_window);
+        SDL_Delay(1000);
+
+        if(assets_loads == 10) { SDL_Delay(1000);}
+    }
+}
+
 ///***********************************************************************************************************************************************************************/
 ///*************************************************************************************** mainLoop **********************************************************************/
 ///***********************************************************************************************************************************************************************/

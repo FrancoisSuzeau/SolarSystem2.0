@@ -36,6 +36,7 @@ PURPOSE : header of the Application class
         #include "Engine/State.hpp"
         #include "DataManagementLayer/DataManager.hpp"
         #include "Engine/EnginesManager.hpp"
+        #include "Engine/GUI/GUIManager.hpp"
         
         
        /* 
@@ -117,14 +118,10 @@ PURPOSE : header of the Application class
             ~Application();
 
             void            loadConfig();
+            void            loadAssets();
             void            initEngines();
             void            mainLoop();
             void            cleanAll();
-
-            /*void          loadFrameBuffer();
-           
-            
-           */
 
             // void    renderInfo(RenderData &render_data);
             // void    renderParticles(RenderData &render_data);
