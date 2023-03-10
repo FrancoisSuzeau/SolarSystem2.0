@@ -53,6 +53,10 @@ void Application::cleanAll()
         delete m_state;
         m_state = nullptr;
     }
+    m_data_manager.clean(PREFERENCE);
+    m_data_manager.clean(BODIESDATA);
+
+    m_engines_manager.cleanAllEngines();
     /*if(m_skybox != nullptr)
     {
         m_skybox->clean();
@@ -106,8 +110,8 @@ void Application::initEngines()
 ///***********************************************************************************************************************************************************************/
 void Application::loadConfig()
 {
-
     m_data_manager.setConfigs(m_state);
+    m_data_manager.setTextures();
 }
 
 ///***********************************************************************************************************************************************************************/
@@ -115,10 +119,6 @@ void Application::loadConfig()
 ///***********************************************************************************************************************************************************************/
 void Application::loadAssets()
 {
-//    Renderer                *planete_renderer = nullptr;
-//    Renderer                *ring_renderer = nullptr;
-//    Renderer                *sphere_renderer = nullptr;
-//    Renderer                *square_renderer = nullptr;
 //    Square                  *square = nullptr;
     for(int assets_loads = -1; assets_loads < 11; assets_loads++)
     {

@@ -16,11 +16,13 @@ PURPOSE : header of the EnginesManager class
 
 /*************************************************************************** includes ***********************************************************************/
 
-	#include "RenderingEngine/Framebuffer.hpp"
+	#include "Framebuffer.hpp"
 	#include "DiscreteSimulation.hpp"
 	#include "PhysicsEngine.hpp"
 	#include "State.hpp"
 	#include "GUI/GUIManager.hpp"
+	#include "RenderingEngine/PlaneteRenderer.hpp"
+	#include "RenderingEngine/RingRenderer.hpp"
 
 
 /********************************************************************* class definition *********************************************************************/
@@ -33,7 +35,12 @@ namespace Engine {
 
 			GUI::GUIManager m_GUI_manager;
 			State* m_state;
-			RenderingEngine::Framebuffer m_framebuffer;
+			Framebuffer m_framebuffer;
+
+			RenderingEngine::Renderer* m_planete_renderer;
+			RenderingEngine::Renderer* m_ring_renderer;
+			RenderingEngine::Renderer* m_sphere_renderer;
+			RenderingEngine::Renderer* m_square_renderer;
 
 		public:
 			EnginesManager();
@@ -46,9 +53,5 @@ namespace Engine {
 	};
 
 }
-
-
-
-
 
 #endif

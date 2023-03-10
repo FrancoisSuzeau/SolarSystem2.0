@@ -20,63 +20,36 @@ PURPOSE :   - Load assets for stbi APi
 #include "Loader.hpp"
 
 using namespace DataManagementLayer;
-using json = nlohmann::json;
 
-json Loader::configData;
-
-//std::map<std::string, std::vector<std::string>> Loader:: textures_path;
 
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
 Loader::Loader()
 {
-    
+
 }
 
 Loader::~Loader()
 {
-    
+
 }
 
 /***********************************************************************************************************************************************************************/
 /********************************************************************************** Static Functions *******************************************************************/
 /***********************************************************************************************************************************************************************/
-void Loader::loadConfigs()
+CkJsonObject* Loader::loadJsonObject( std::string object_name)
 {
-    std::ifstream        flux_in("Contents/config.json");
-    configData = json::parse(flux_in);
+    std::ifstream flux_in("Contents/configs.json");
+    if (flux_in)
+    {
+        CkJsonObject read_all;
+        read_all.Load(std::string((std::istreambuf_iterator<char>(flux_in)), std::istreambuf_iterator<char>()).c_str());
+        flux_in.close();
+        return read_all.ObjectOf(object_name.c_str());
+    }
 }
 
-//void Loader::initializeMap()
-//{
-//    std::string surface_path = "assets/textures/CelestialBody/";
-//    
-//    textures_path["Mercury"] = {surface_path + "MercuryMap.jpg"};
-//
-//    textures_path["Venus"] = {surface_path + "VenusMap.jpg", surface_path + "VenusCloud.jpg"};
-//
-//    textures_path["Earth"] = {surface_path + "EarthDayMap.jpg", surface_path + "CloudMap.jpg", surface_path + "EarthNightMap.jpg"};
-//    textures_path["Moon"] = {surface_path + "MoonMap.jpg"};
-//
-//    textures_path["Mars"] = {surface_path + "MarsMap.jpg", surface_path + "MarsCloud.png"};
-//
-//    textures_path["Jupiter"] = {surface_path + "JupiterCloud.jpg"};
-//    textures_path["Io"] = {surface_path + "IoMap.jpg"};
-//    textures_path["Europa"] = {surface_path + "EuropaMap.jpg"};
-//    textures_path["Callisto"] = {surface_path + "CallistoMap.jpg"};
-//    textures_path["Ganymede"] = {surface_path + "GanymedeMap.jpg"};
-//
-//    textures_path["Saturn"] = {surface_path + "SaturnCloud.jpg"};
-//    textures_path["Mimas"] = {surface_path + "MimasMap.jpg"};
-//    textures_path["Enceladus"] = {surface_path + "EnceladusMap.jpg"};
-//    textures_path["Titan"] = {surface_path + "TitanMap.jpg", surface_path + "TitanCloud.jpg"};
-//
-//    textures_path["Uranus"] = {surface_path + "UranusCloud.jpg"};
-//
-//    textures_path["Neptune"] = {surface_path + "NeptuneCloud.jpg"};
-//}
-//
 ///***********************************************************************************************************************************************************************/
 ///********************************************************************************** loadWithStbi ***********************************************************************/
 ///***********************************************************************************************************************************************************************/

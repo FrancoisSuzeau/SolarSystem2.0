@@ -135,10 +135,28 @@
     <ClCompile Include="Engine\GUI\HUD.cpp">
       <Filter>Fichiers sources\Engine\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\RenderingEngine\Framebuffer.cpp">
+    <ClCompile Include="Engine\EnginesManager.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\RenderingEngine\SquareRenderer.cpp">
       <Filter>Fichiers sources\Engine\RenderingEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\EnginesManager.cpp">
+    <ClCompile Include="Engine\RenderingEngine\SquareTexturedRenderer.cpp">
+      <Filter>Fichiers sources\Engine\RenderingEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\RenderingEngine\StarRenderer.cpp">
+      <Filter>Fichiers sources\Engine\RenderingEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\RenderingEngine\PlaneteRenderer.cpp">
+      <Filter>Fichiers sources\Engine\RenderingEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\RenderingEngine\RingRenderer.cpp">
+      <Filter>Fichiers sources\Engine\RenderingEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\RenderingEngine\SphereRenderer.cpp">
+      <Filter>Fichiers sources\Engine\RenderingEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Framebuffer.cpp">
       <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -215,10 +233,31 @@
     <ClInclude Include="Engine\GUI\HUD.hpp">
       <Filter>Fichiers d%27en-tête\Engine\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\RenderingEngine\Framebuffer.hpp">
+    <ClInclude Include="Engine\EnginesManager.hpp">
+      <Filter>Fichiers d%27en-tête\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\RenderingEngine\StarRenderer.hpp">
       <Filter>Fichiers d%27en-tête\Engine\RenderingEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\EnginesManager.hpp">
+    <ClInclude Include="Engine\RenderingEngine\PlaneteRenderer.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\RenderingEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\RenderingEngine\Renderer.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\RenderingEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\RenderingEngine\RingRenderer.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\RenderingEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\RenderingEngine\SphereRenderer.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\RenderingEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\RenderingEngine\SquareRenderer.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\RenderingEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\RenderingEngine\SquareTexturedRenderer.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\RenderingEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Framebuffer.hpp">
       <Filter>Fichiers d%27en-tête\Engine</Filter>
     </ClInclude>
   </ItemGroup>

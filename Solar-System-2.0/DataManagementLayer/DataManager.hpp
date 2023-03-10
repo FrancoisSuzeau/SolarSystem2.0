@@ -17,8 +17,6 @@ PURPOSE : header of the DataManager class
 /********************************************************************* includes *********************************************************************/
         #include <iostream>
         #include <map>
-        #include <vector>
-        #include <glm/glm.hpp>
         #include <string>
 
         #include "Loader.hpp"
@@ -26,11 +24,9 @@ PURPOSE : header of the DataManager class
         
 
         /*#include "../Shader/Shader.hpp"*/
-        
-        /*#include <SDL2/SDL_ttf.h>*/
 
-        #define COLOR_FBO 0
-        #define DEPTH_FBO 1
+        #define PREFERENCE 0
+        #define BODIESDATA 1
         
 
 /********************************************************************* class definition *********************************************************************/
@@ -62,10 +58,23 @@ namespace DataManagementLayer {
 
     //} body_data;
 
+    typedef struct body_data {
+
+        std::string surface_texture_path;
+        std::string cloud_texture_path;
+        std::string night_texture_path;
+
+    } body_data;
+
     class DataManager
     {
 
         private:
+
+            CkJsonObject* preference_data;
+            CkJsonObject* bodies_data;
+
+            std::map<std::string, body_data> body_data_mapping;
 
 
         public:
@@ -73,7 +82,10 @@ namespace DataManagementLayer {
             DataManager();
             ~DataManager();
 
+            void clean(int const which_one);
+
             void setConfigs(Engine::State* state);
+            void setTextures();
 
     };
 }

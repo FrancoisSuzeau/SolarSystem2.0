@@ -15,32 +15,16 @@ PURPOSE : header of the Loader class
 
 
 /********************************************************************* includes *********************************************************************/
-        #include <nlohmann/json.hpp>
-        #include <fstream>
-
-       /* #include <GL/glew.h>
-        #include <SDL2/SDL.h>
-        #include <SDL2/SDL_image.h>
-        #include <SDL2/SDL_mixer.h>
-
         #include <iostream>
-        #include <vector>
+        #include <fstream>
+        #include <chilkat/CkJsonArray.h>
+        #include <chilkat/CkJsonObject.h>
         #include <cassert>
-        #include <map>
 
-        #define  IMGUI_INITIALIZE 0
-        #if defined(IMGUI_IMPL_OPENGL_ES2)
-        #include <SDL_opengles2.h>
-        #else
-        #include <SDL2/SDL_opengl.h>
-        #endif
-        #include <imgui.h>
-        #include <imgui_impl_sdl.h>
-        #include <imgui_impl_opengl3.h>*/
-
-        /*#include "../ErrorHandler.hpp"
-        #include "../Application/DataManager.hpp"*/
-        
+       #include <GL/glew.h>
+       #include <SDL2/SDL.h>
+        #include <SDL2/SDL_image.h>
+        /*#include <SDL2/SDL_mixer.h>*/
 
 /********************************************************************* class definition *********************************************************************/
 
@@ -62,12 +46,9 @@ namespace DataManagementLayer {
 
         public:
 
-            static void loadConfigs();
-            static nlohmann::json configData;
+            static CkJsonObject* loadJsonObject(std::string object_name);
 
-            /*static std::map<std::string, std::vector<std::string>> textures_path;
-            static std::map<std::string, std::string> normal_texture_path;
-
+            /*
             static bool loadWithStbi(std::string file_path, GLuint &id, int &w, int &h);
             static unsigned int loadWithStbi(const char *path, const std::string &directory);
             static  Mix_Music* loadWithSDLMixer(std::string file_path, Mix_Music *m_music);
