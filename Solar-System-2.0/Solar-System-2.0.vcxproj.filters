@@ -25,17 +25,11 @@
     <Filter Include="Fichiers sources\DataManagementLayer">
       <UniqueIdentifier>{8cf0d168-5595-4cdd-a2a5-fce23fd5c123}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\DataManagementLayer\Sounds">
-      <UniqueIdentifier>{624781ff-8060-4a7c-97c2-0a4244b0c49f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers sources\DataManagementLayer\imgui">
       <UniqueIdentifier>{0b6e2507-a3fe-4c0a-af5c-95c254ffc673}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers d%27en-tête\DataManagementLayer">
       <UniqueIdentifier>{e1d9577e-b101-47fd-a999-b5cb78e324f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\DataManagementLayer\Sounds">
-      <UniqueIdentifier>{cd48336a-6311-4f5b-b9c0-601f46f32719}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers d%27en-tête\DataManagementLayer\imgui">
       <UniqueIdentifier>{9dca0a77-f195-4665-8da1-6c3192f928db}</UniqueIdentifier>
@@ -64,22 +58,37 @@
     <Filter Include="Fichiers sources\Engine\RenderingEngine">
       <UniqueIdentifier>{772d8310-3ed3-4b15-941f-ff0b21cecf34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine\DiscreteSimulationEngine">
+      <UniqueIdentifier>{a416c67d-f46a-4460-b694-fc6b8ff1c051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine\DiscreteSimulationEngine">
+      <UniqueIdentifier>{fe99073c-bc4b-4aa8-9131-4d3ae9b80779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects">
+      <UniqueIdentifier>{1e722266-3b5b-481a-87ea-ffa91afcf6c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\Blender">
+      <UniqueIdentifier>{144cb36f-af70-4560-be11-e25600e8d6f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\OpenGL">
+      <UniqueIdentifier>{16fed297-ffac-4f16-9447-e133b5820036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine\DiscreteSimulationEngine\Objects">
+      <UniqueIdentifier>{df63b2d9-4b2c-44e7-9aa9-295d1233b08e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine\DiscreteSimulationEngine\Objects\Blender">
+      <UniqueIdentifier>{772b20d9-7fc6-4e1a-b3e9-6183ed3ff183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine\DiscreteSimulationEngine\Objects\OpenGL">
+      <UniqueIdentifier>{1995ddc9-0e73-4112-b6fd-32ec9acd14e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DiscreteSimulation.cpp">
-      <Filter>Fichiers sources\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\PhysicsEngine.cpp">
       <Filter>Fichiers sources\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="DataManagementLayer\Sounds\AmbiantSounds.cpp">
-      <Filter>Fichiers sources\DataManagementLayer\Sounds</Filter>
-    </ClCompile>
-    <ClCompile Include="DataManagementLayer\Sounds\Musics.cpp">
-      <Filter>Fichiers sources\DataManagementLayer\Sounds</Filter>
     </ClCompile>
     <ClCompile Include="DataManagementLayer\imgui\imgui.cpp">
       <Filter>Fichiers sources\DataManagementLayer\imgui</Filter>
@@ -159,22 +168,67 @@
     <ClCompile Include="Engine\Framebuffer.cpp">
       <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\FlareTexture.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Object.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Planete.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Ring.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Spaceship.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Sphere.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Square.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Star.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\Blender\Model.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\Blender</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\Blender\Mesh.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\Blender</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\FlareManager.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\AsteroidField.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\PlanetarySystem.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\SolarSystem.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\RenderingEngine\Shader.cpp">
+      <Filter>Fichiers sources\Engine\RenderingEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DiscreteSimulationEngine\Skybox.cpp">
+      <Filter>Fichiers sources\Engine\DiscreteSimulationEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\AudioEngine\Music.cpp">
+      <Filter>Fichiers sources\Engine\AudioEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\AudioEngine\AmbiantSound.cpp">
+      <Filter>Fichiers sources\Engine\AudioEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\DiscreteSimulation.hpp">
-      <Filter>Fichiers d%27en-tête\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\PhysicsEngine.hpp">
       <Filter>Fichiers d%27en-tête\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="DataManagementLayer\Sounds\AmbiantSounds.hpp">
-      <Filter>Fichiers d%27en-tête\DataManagementLayer\Sounds</Filter>
-    </ClInclude>
-    <ClInclude Include="DataManagementLayer\Sounds\Musics.hpp">
-      <Filter>Fichiers d%27en-tête\DataManagementLayer\Sounds</Filter>
     </ClInclude>
     <ClInclude Include="DataManagementLayer\imgui\imconfig.h">
       <Filter>Fichiers d%27en-tête\DataManagementLayer\imgui</Filter>
@@ -259,6 +313,72 @@
     </ClInclude>
     <ClInclude Include="Engine\Framebuffer.hpp">
       <Filter>Fichiers d%27en-tête\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\Blender\Model.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\Blender</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\Blender\Mesh.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\Blender</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\FlareTexture.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Object.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Planete.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Ring.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Spaceship.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Sphere.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Square.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\Star.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\FlareManager.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\AsteroidField.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine\Objects\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\PlanetarySystem.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\SolarSystem.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\SolarSystemCreator.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\System.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\SystemCreator.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\PlanetarySystemCreator.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\RenderingEngine\Shader.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\RenderingEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DiscreteSimulationEngine\Skybox.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\DiscreteSimulationEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\AudioEngine\AmbiantSound.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\AudioEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\AudioEngine\Music.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\AudioEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

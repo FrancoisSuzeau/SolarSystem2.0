@@ -41,11 +41,11 @@ namespace Engine {
 
                 virtual ~SystemCreator() {};
 
-                /*virtual System* FactoryMethod(Renderer* planete_renderer, Renderer* ring_renderer, Renderer* sphere_renderer, std::string const system_name) = 0;
+                virtual System* FactoryMethod(std::string const system_name) = 0;
 
-                bool MakingSystem(Renderer* planete_renderer, Renderer* ring_renderer, Renderer* sphere_renderer, std::string const system_name)
+                bool MakingSystem(std::string const system_name)
                 {
-                    m_system = this->FactoryMethod(planete_renderer, ring_renderer, sphere_renderer, system_name);
+                    m_system = this->FactoryMethod(system_name);
                     assert(m_system);
                     return true;
                 }
@@ -56,7 +56,12 @@ namespace Engine {
                     return 1;
                 }
 
-                void renderNameAndInfo(Applications::DataManager& data_manager)
+                void cleanSystem()
+                {
+                    m_system->clean();
+                }
+
+                /*void renderNameAndInfo(Applications::DataManager& data_manager)
                 {
                     m_system->renderNameAndInfo(data_manager);
                 }
@@ -84,13 +89,6 @@ namespace Engine {
                 {
                     m_system->renderAtmosphere(data_manager);
                 }
-
-                void cleanSystem()
-                {
-                    m_system->clean();
-                }
-
-
 
                 void renderFlareSun(Applications::DataManager& data_manager)
                 {

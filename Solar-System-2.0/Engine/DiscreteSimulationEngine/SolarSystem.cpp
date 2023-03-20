@@ -16,18 +16,12 @@ using namespace Engine::DiscreteSimulationEngine;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-SolarSystem::SolarSystem(/*Renderer* planete_renderer, Renderer* ring_renderer, Renderer* sphere_renderer, std::string const system_name*/)
+SolarSystem::SolarSystem(std::string const system_name)
 {
     /*m_sun = new Star(1.f, "assets/textures/CelestialBody/SunMap.jpg", "sun");
     assert(m_sun);
     m_sun->updateSize(glm::vec3(10.f));
 
-    m_star_renderer = new StarRenderer(1.f, 70.f, 70.f);
-    assert(m_star_renderer);
-
-    m_planete_renderer = planete_renderer;
-    m_ring_renderer = ring_renderer;
-    m_sphere_renderer = sphere_renderer;
 
     m_asteroid_field = new AsteroidField("INSTmodel");
     assert(m_asteroid_field);*/
@@ -42,128 +36,128 @@ SolarSystem::~SolarSystem()
 /***********************************************************************************************************************************************************************/
 /****************************************************************************** clean ******************************************************************************/
 /***********************************************************************************************************************************************************************/
-//void SolarSystem::clean()
-//{
-//    if(m_sun != nullptr)
-//    {
-//        m_sun->clean();
-//        delete m_sun;
-//        m_sun = nullptr;
-//    }
-//    if(m_star_renderer != nullptr)
-//    {
-//        m_star_renderer->clean();
-//        delete m_star_renderer;
-//        m_star_renderer = nullptr;
-//    }
-//    if(m_sphere_renderer != nullptr)
-//    {
-//        m_sphere_renderer->clean();
-//        delete m_sphere_renderer;
-//        m_sphere_renderer = nullptr;
-//    }
-//    if(m_ring_renderer != nullptr)
-//    {
-//        m_ring_renderer->clean();
-//        delete m_ring_renderer;
-//        m_ring_renderer = nullptr;
-//    }
-//    if(m_planete_renderer != nullptr)
-//    {
-//        m_planete_renderer->clean();
-//        delete m_planete_renderer;
-//        m_planete_renderer = nullptr;
-//    }
-//    if(m_asteroid_field != nullptr)
-//    {
-//        m_asteroid_field->clean();
-//        delete m_asteroid_field;
-//        m_asteroid_field = nullptr;
-//    }
-//
-//    for(std::vector<Planete*>::iterator it = m_planetes.begin(); it != m_planetes.end(); ++it)
-//    {
-//        if(it[0] != nullptr)
-//        {
-//            it[0]->clean();
-//            delete it[0];
-//            it[0] = nullptr;
-//        }
-//    }
-//
-//    for(std::vector<SystemCreator*>::iterator it = m_planetary_systems.begin(); it != m_planetary_systems.end(); ++it)
-//    {
-//        if(it[0] != nullptr)
-//        {
-//            it[0]->cleanSystem();
-//            delete it[0];
-//            it[0] = nullptr;
-//        }
-//    }
-//}
-//
-//// /***********************************************************************************************************************************************************************/
-//// /******************************************************************************* loadSystem ****************************************************************************/
-//// /***********************************************************************************************************************************************************************/
-//void SolarSystem::loadSystem(int count)
-//{
-//    if(count == 0)
-//    {
-//        m_planetes.push_back(new Planete(Applications::DataManager::getBodyData(0)));
-//        assert(m_planetes[0]);
-//    }
-//    else if (count == 1)
-//    {
-//        m_planetes.push_back(new Planete(Applications::DataManager::getBodyData(1)));
-//        assert(m_planetes[1]);
-//    }
-//    else if (count == 2)
-//    {
-//        m_planetary_systems.push_back(new PlanetarySystemCreator());
-//        assert(m_planetary_systems[0]);
-//        bool success = m_planetary_systems[0]->MakingSystem(m_planete_renderer, m_ring_renderer, m_sphere_renderer, "Earth System");
-//        assert(success);
-//        m_planetary_systems[0]->loadSystem();
-//    }
-//    else if (count == 3)
-//    {
-//        m_planetes.push_back(new Planete(Applications::DataManager::getBodyData(4)));
-//        assert(m_planetes[2]);
-//    }
-//    else if (count == 4)
-//    {
-//        m_planetary_systems.push_back(new PlanetarySystemCreator());
-//        assert(m_planetary_systems[1]);
-//        bool success = m_planetary_systems[1]->MakingSystem(m_planete_renderer, m_ring_renderer, m_sphere_renderer, "Jovian System");
-//        assert(success);
-//        m_planetary_systems[1]->loadSystem();
-//    }
-//    else if (count == 5)
-//    {
-//        m_planetary_systems.push_back(new PlanetarySystemCreator());
-//        assert(m_planetary_systems[2]);
-//        bool success = m_planetary_systems[2]->MakingSystem(m_planete_renderer, m_ring_renderer, m_sphere_renderer, "Saturnian System");
-//        assert(success);
-//        m_planetary_systems[2]->loadSystem();
-//    }
-//    else if (count == 6)
-//    {
-//        m_planetary_systems.push_back(new PlanetarySystemCreator());
-//        assert(m_planetary_systems[3]);
-//        bool success = m_planetary_systems[3]->MakingSystem(m_planete_renderer, m_ring_renderer, m_sphere_renderer, "Uranian System");
-//        assert(success);
-//        m_planetary_systems[3]->loadSystem();
-//    }
-//    else if (count == 7)
-//    {
-//        m_planetary_systems.push_back(new PlanetarySystemCreator());
-//        assert(m_planetary_systems[4]);
-//        bool success = m_planetary_systems[4]->MakingSystem(m_planete_renderer, m_ring_renderer, m_sphere_renderer, "Neptunian System");
-//        assert(success);
-//        m_planetary_systems[4]->loadSystem();
-//    }
-//}
-//
+void SolarSystem::clean()
+{
+    /*if(m_sun != nullptr)
+    {
+        m_sun->clean();
+        delete m_sun;
+        m_sun = nullptr;
+    }
+    if(m_star_renderer != nullptr)
+    {
+        m_star_renderer->clean();
+        delete m_star_renderer;
+        m_star_renderer = nullptr;
+    }
+    if(m_sphere_renderer != nullptr)
+    {
+        m_sphere_renderer->clean();
+        delete m_sphere_renderer;
+        m_sphere_renderer = nullptr;
+    }
+    if(m_ring_renderer != nullptr)
+    {
+        m_ring_renderer->clean();
+        delete m_ring_renderer;
+        m_ring_renderer = nullptr;
+    }
+    if(m_planete_renderer != nullptr)
+    {
+        m_planete_renderer->clean();
+        delete m_planete_renderer;
+        m_planete_renderer = nullptr;
+    }
+    if(m_asteroid_field != nullptr)
+    {
+        m_asteroid_field->clean();
+        delete m_asteroid_field;
+        m_asteroid_field = nullptr;
+    }
+
+    for(std::vector<Planete*>::iterator it = m_planetes.begin(); it != m_planetes.end(); ++it)
+    {
+        if(it[0] != nullptr)
+        {
+            it[0]->clean();
+            delete it[0];
+            it[0] = nullptr;
+        }
+    }
+
+    for(std::vector<SystemCreator*>::iterator it = m_planetary_systems.begin(); it != m_planetary_systems.end(); ++it)
+    {
+        if(it[0] != nullptr)
+        {
+            it[0]->cleanSystem();
+            delete it[0];
+            it[0] = nullptr;
+        }
+    }*/
+}
+
+/***********************************************************************************************************************************************************************/
+/******************************************************************************* loadSystem ****************************************************************************/
+/***********************************************************************************************************************************************************************/
+void SolarSystem::loadSystem(int count)
+{
+    /*if(count == 0)
+    {
+        m_planetes.push_back(new Planete(Applications::DataManager::getBodyData(0)));
+        assert(m_planetes[0]);
+    }
+    else if (count == 1)
+    {
+        m_planetes.push_back(new Planete(Applications::DataManager::getBodyData(1)));
+        assert(m_planetes[1]);
+    }
+    else if (count == 2)
+    {
+        m_planetary_systems.push_back(new PlanetarySystemCreator());
+        assert(m_planetary_systems[0]);
+        bool success = m_planetary_systems[0]->MakingSystem(m_planete_renderer, m_ring_renderer, m_sphere_renderer, "Earth System");
+        assert(success);
+        m_planetary_systems[0]->loadSystem();
+    }
+    else if (count == 3)
+    {
+        m_planetes.push_back(new Planete(Applications::DataManager::getBodyData(4)));
+        assert(m_planetes[2]);
+    }
+    else if (count == 4)
+    {
+        m_planetary_systems.push_back(new PlanetarySystemCreator());
+        assert(m_planetary_systems[1]);
+        bool success = m_planetary_systems[1]->MakingSystem(m_planete_renderer, m_ring_renderer, m_sphere_renderer, "Jovian System");
+        assert(success);
+        m_planetary_systems[1]->loadSystem();
+    }
+    else if (count == 5)
+    {
+        m_planetary_systems.push_back(new PlanetarySystemCreator());
+        assert(m_planetary_systems[2]);
+        bool success = m_planetary_systems[2]->MakingSystem(m_planete_renderer, m_ring_renderer, m_sphere_renderer, "Saturnian System");
+        assert(success);
+        m_planetary_systems[2]->loadSystem();
+    }
+    else if (count == 6)
+    {
+        m_planetary_systems.push_back(new PlanetarySystemCreator());
+        assert(m_planetary_systems[3]);
+        bool success = m_planetary_systems[3]->MakingSystem(m_planete_renderer, m_ring_renderer, m_sphere_renderer, "Uranian System");
+        assert(success);
+        m_planetary_systems[3]->loadSystem();
+    }
+    else if (count == 7)
+    {
+        m_planetary_systems.push_back(new PlanetarySystemCreator());
+        assert(m_planetary_systems[4]);
+        bool success = m_planetary_systems[4]->MakingSystem(m_planete_renderer, m_ring_renderer, m_sphere_renderer, "Neptunian System");
+        assert(success);
+        m_planetary_systems[4]->loadSystem();
+    }*/
+}
+
 ///***********************************************************************************************************************************************************************/
 ///****************************************************************************** makeChanges ****************************************************************************/
 ///***********************************************************************************************************************************************************************/

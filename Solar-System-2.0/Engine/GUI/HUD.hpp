@@ -29,6 +29,7 @@ PURPOSE : header of the HUD class
 
 #include <ctime>
 #include <string>
+#include <map>
 
 
 /********************************************************************* class definition *********************************************************************/
@@ -37,15 +38,25 @@ namespace Engine {
 
 	namespace GUI {
 
+		typedef struct music_info {
+
+			std::string title;
+			std::string author;
+			std::string studio;
+
+		} music_info;
+
 		class HUD
 		{
-			private:
+		private:
 
-			public:
-				HUD();
-				~HUD();
 
-				void render();
+		public:
+			HUD();
+			~HUD();
+
+			void renderApplicationHUD();
+			void renderMusicHUD(int width, int height, std::map<std::string, int>& hud_music_selection, music_info infos);
 		};
 	}
 }

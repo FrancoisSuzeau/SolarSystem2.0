@@ -17,8 +17,8 @@ PURPOSE :   - creating OpenGL Context
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Application::Application(int width, int height, SDL_Window *window): m_state(nullptr), m_window(window), m_data_manager(), m_engines_manager()
-//m_setting(), m_overlay(), m_audio(nullptr), camera(nullptr), m_skybox(nullptr), ship(nullptr)
+Application::Application(int width, int height, SDL_Window *window): m_state(nullptr), m_window(window), m_data_manager(), m_engines_manager(), progress(0.f)
+//m_setting(), m_overlay(), camera(nullptr)
 {
     if (m_state == nullptr)
     {
@@ -27,14 +27,7 @@ Application::Application(int width, int height, SDL_Window *window): m_state(nul
 
     }
 
-    /*render_menu = false;
-    menu_app_key_pressed = false;
-
-    if(m_audio == nullptr)
-    {
-        m_audio = new Audio();
-        assert(m_audio);
-    }*/
+    m_data_manager.setConfigs(m_state);
 }
 
 Application::~Application()
@@ -53,44 +46,25 @@ void Application::cleanAll()
         delete m_state;
         m_state = nullptr;
     }
+
     m_data_manager.clean(PREFERENCE);
     m_data_manager.clean(BODIESDATA);
+    m_data_manager.clean(SHADERSDATA);
+    m_data_manager.clean(SPACESHIPSDATA);
+    m_data_manager.clean(SKYBOXPATHS);
 
     m_engines_manager.cleanAllEngines();
-    /*if(m_skybox != nullptr)
-    {
-        m_skybox->clean();
-        delete m_skybox;
-        m_skybox = nullptr;
-    }
+    /*
     if(camera != nullptr)
     {
         delete camera;
         camera = nullptr;
     }
-    if(ship != nullptr)
-    {
-        ship->clean();
-        delete ship;
-        ship = nullptr;
-    }
-    
-    if(m_audio != nullptr)
-    {
-        m_audio->clean();
-        delete m_audio;
-        m_audio = nullptr;
-    }
 
     m_setting.clean();
     m_overlay.clean();
 
-    if(m_solar_system != nullptr)
-    {
-        m_solar_system->cleanSystem();
-        delete m_solar_system;
-        m_solar_system = nullptr;
-    }*/
+    */
 }
 
 ///***********************************************************************************************************************************************************************/
@@ -98,77 +72,83 @@ void Application::cleanAll()
 ///***********************************************************************************************************************************************************************/
 void Application::initEngines()
 {
-    m_engines_manager.initGUIEngine();
-    if (m_state != nullptr)
+    for (std::string function : {"createBuffers", "manageFramebuffers", "renderers"})
     {
-        m_engines_manager.initRenderEngine(m_state);
-    }
-}
+        this->initFrame();
 
-///***********************************************************************************************************************************************************************/
-///*************************************************************************************** loadConfig ********************************************************************/
-///***********************************************************************************************************************************************************************/
-void Application::loadConfig()
-{
-    m_data_manager.setConfigs(m_state);
-    m_data_manager.setTextures();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        if (m_state != nullptr)
+        {
+            m_engines_manager.initRenderEngine(m_state, function, progress / 87.f);
+        }
+
+        this->endFrame();
+        SDL_Delay(1500);
+        progress++;
+    }
+    m_engines_manager.initDiscreteSimEngine();
+    SDL_Delay(1500);
 }
 
 ///***********************************************************************************************************************************************************************/
 ///*************************************************************************************** startLoop *********************************************************************/
 ///***********************************************************************************************************************************************************************/
 void Application::loadAssets()
-{
-//    Square                  *square = nullptr;
-    for(int assets_loads = -1; assets_loads < 11; assets_loads++)
+{   
+    int nb_bodies = m_data_manager.getNbBodies();
+    int nb_shaders = m_data_manager.getNbShaders();
+    int nb_musics = m_data_manager.getNbMusics();
+
+    std::vector<std::string> skybox_paths = m_data_manager.getSkyboxPath();
+    for (std::vector<std::string>::iterator it = skybox_paths.begin(); it != skybox_paths.end(); it++)
     {
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplSDL2_NewFrame();
-        ImGui::NewFrame();
-
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        /*if(assets_loads == 0)
-        {
-            square_renderer = new SquareRenderer(1.0);
-            assert(square_renderer);
-            square = new Square(1.0, "square");
-            assert(square);
-            planete_renderer = new PlaneteRenderer(1.f, 70.f, 70.f);
-            assert(planete_renderer);
-            ring_renderer = new RingRenderer();
-            assert(ring_renderer);
-            sphere_renderer = new SphereRenderer(1.f, 70.f, 70.f);
-            assert(sphere_renderer);
-
-            m_overlay.initOverlayAssets(square_renderer, square);
-            m_skybox = new Skybox();
-            assert(m_skybox);
-            ship = new Spaceship("model");
-            assert(ship);
-            ship->loadModelShip(m_data_manager);
-            
-            camera = new Camera(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f), ship);
-            assert(camera);
-
-            DataManager::initDatas();
-
-            m_solar_system = new SolarSystemCreator();
-            assert(m_solar_system);
-            bool success = m_solar_system->MakingSystem(planete_renderer, ring_renderer, sphere_renderer, "Solar System");
-            assert(success);
-        }*/
-//
-//        if((assets_loads >= 0) && (assets_loads < 8) && m_solar_system != nullptr) { m_solar_system->loadSystem(assets_loads);}
-
-        Engine::GUI::GUIManager::renderScreenLoad(assets_loads);
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        SDL_GL_SwapWindow(m_window);
-        SDL_Delay(1000);
-
-        if(assets_loads == 10) { SDL_Delay(1000);}
+        this->sendToEngine(progress, it[0], "skybox");
+        progress++;
     }
+    for (int current_load = 0; current_load < nb_bodies; current_load++)
+    {
+        for (std::string texture_type : {"surface", "cloud", "night", "normal"})
+        {
+            std::string path = m_data_manager.getTexturePath(current_load, texture_type);
+
+            if (path.size() != 0)
+            {
+                this->sendToEngine(progress, path, "body_texture");
+            }
+            progress++;
+        }
+    }
+    for (int current_load = 0; current_load < nb_shaders; current_load++)
+    {
+        m_data_manager.setShaderPaths(current_load);
+        std::string text = "Currently loading " + m_data_manager.getShaderPaths()["name"] + " shader ...";
+        this->sendToEngine(progress, text, "shader");
+        progress++;
+        //SDL_Delay(1000);
+    }
+
+    std::string spaceship_path = m_data_manager.setAndGetSpaceshipPath(m_state->getSpaceshipName());
+    this->sendToEngine(progress, spaceship_path, "spaceship");
+    progress++;
+    //SDL_Delay(1000);
+
+    std::string music_path = m_data_manager.setAndGetMusicPath(0);
+    this->sendToEngine(progress, music_path, "music");
+
+    
+}
+
+
+void Application::sendToEngine(float& progress, std::string text, std::string type)
+{
+    this->initFrame();
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    m_engines_manager.addToEngine(progress / 88.f, text, type, m_data_manager);
+
+    this->endFrame();
 }
 
 ///***********************************************************************************************************************************************************************/
@@ -181,7 +161,7 @@ void Application::mainLoop()
             this->fpsCalculation(BEGIN);
 //
 //        /******************************************************************* MANAGING EVENTS ******************************************************************/
-            this->manage_state();
+            m_state->listenEvents();
             //        //=====================================================================================================================================================
             //
             //        /******************************************************************* MANAGING CHANGES *****************************************************************/
@@ -190,12 +170,11 @@ void Application::mainLoop()
             //
             //        /******************************************************************* RENDER AUDIO **********************************************************************/
             //            this->renderAudio();
+                            m_engines_manager.manageAudioEngine(m_data_manager);
             //        //======================================================================================================================================================
             //
             //        /******************************************************************* IMGUI PIPELINE ********************************************************************/
-                        ImGui_ImplOpenGL3_NewFrame();
-                        ImGui_ImplSDL2_NewFrame();
-                        ImGui::NewFrame();
+                        this->initFrame();
             //        //======================================================================================================================================================
             //
             //        /******************************************************************* DEPTH MAP CALCULATION *************************************************************/
@@ -219,7 +198,7 @@ void Application::mainLoop()
             //
             //        /******************************************************************* RENDER OVERLAY ********************************************************************/
             //            this->renderOverlay();
-                        m_engines_manager.manageGUI();
+                        m_engines_manager.manageGUI(m_data_manager);
             //        //======================================================================================================================================================
             //
             //        /******************************************************************* RENDER OVERLAY ********************************************************************/
@@ -234,9 +213,7 @@ void Application::mainLoop()
             //            m_framebuffer->renderFrame(m_data_manager);
             //
             //        /******************************************************************* SWAPPING WINDOWS *******************************************************************/
-                        ImGui::Render();
-                        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-                        SDL_GL_SwapWindow(m_window);
+                        this->endFrame();
             //        //=======================================================================================================================================================
             //
             this->fpsCalculation(END);
@@ -341,28 +318,50 @@ void Application::fpsCalculation(int moment)
     
     switch (moment)
     {
-    case BEGIN:
-        start_loop = SDL_GetTicks();
-        break;
+        case BEGIN:
+            start_loop = SDL_GetTicks();
+            break;
 
-    case END:
-        end_loop = SDL_GetTicks();
-        time_past = end_loop - start_loop;
-        if (time_past < frame_rate)
-        {
-            SDL_Delay(frame_rate - time_past);
-        }
-        frame_rate = 1000 / m_state->getFps();
-        break;
+        case END:
+            end_loop = SDL_GetTicks();
+            time_past = end_loop - start_loop;
+            if (time_past < frame_rate)
+            {
+                SDL_Delay(frame_rate - time_past);
+            }
+            frame_rate = 1000 / m_state->getFps();
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 }
 
-///***********************************************************************************************************************************************************************/
-///*********************************************************************************** renderScene ***********************************************************************/
-///***********************************************************************************************************************************************************************/
+
+
+/***********************************************************************************************************************************************************************/
+/********************************************************************************** initFrame **************************************************************************/
+/***********************************************************************************************************************************************************************/
+void Application::initFrame()
+{
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplSDL2_NewFrame();
+    ImGui::NewFrame();
+}
+
+/***********************************************************************************************************************************************************************/
+/*********************************************************************************** endFrame **************************************************************************/
+/***********************************************************************************************************************************************************************/
+void Application::endFrame()
+{
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    SDL_GL_SwapWindow(m_window);
+}
+
+/***********************************************************************************************************************************************************************/
+/*********************************************************************************** renderScene ***********************************************************************/
+/***********************************************************************************************************************************************************************/
 //void Application::renderOverlay()
 //{
 //    if(m_data_manager.getRenderOverlay())

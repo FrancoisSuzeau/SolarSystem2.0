@@ -18,7 +18,7 @@ using namespace Engine::DiscreteSimulationEngine;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-PlanetarySystem::PlanetarySystem(/*Renderer* planete_renderer, Renderer* ring_renderer, Renderer* sphere_renderer, std::string const system_name*/)
+PlanetarySystem::PlanetarySystem(std::string const system_name)
 {
     /*m_planete_renderer = planete_renderer;
     m_ring_renderer = ring_renderer;
@@ -36,88 +36,88 @@ PlanetarySystem::~PlanetarySystem()
 /***********************************************************************************************************************************************************************/
 /****************************************************************************** clean ******************************************************************************/
 /***********************************************************************************************************************************************************************/
-//void PlanetarySystem::clean()
-//{
-//    for(std::vector<Planete*>::iterator it = m_moons.begin(); it != m_moons.end(); ++it)
-//    {
-//        if(it[0] != nullptr)
-//        {
-//            it[0]->clean();
-//            delete it[0];
-//            it[0] = nullptr;
-//        }
-//    }
-//
-//    if(m_host != nullptr)
-//    {
-//        m_host->clean();
-//        delete m_host;
-//        m_host = nullptr;
-//    }
-//}
-//
-//// /***********************************************************************************************************************************************************************/
-//// /******************************************************************************** loadSystem ***************************************************************************/
-//// /***********************************************************************************************************************************************************************/
-//void PlanetarySystem::loadSystem(int count)
-//{
-//    
-//    /************************************************* loading companion ********************************************************/
-//    if(m_system_name == "Earth System")
-//    {
-//        m_moons.push_back(new Planete(Applications::DataManager::getBodyData(2)));
-//        assert(m_moons[0]);
-//
-//        m_host = new Planete(Applications::DataManager::getBodyData(3));
-//        assert(m_host);
-//    }
-//    else if (m_system_name == "Jovian System")
-//    {
-//        for (int i(6); i < 10; i++)
-//        {
-//            m_moons.push_back(new Planete(Applications::DataManager::getBodyData(i)));
-//            assert(m_moons[i - 6]);
-//        }
-//
-//        m_host = new Planete(Applications::DataManager::getBodyData(5));
-//        assert(m_host);
-//
-//    }
-//    else if (m_system_name == "Saturnian System")
-//    {
-//        for (int i(11); i < 14; i++)
-//        {
-//            m_moons.push_back(new Planete(Applications::DataManager::getBodyData(i)));
-//            assert(m_moons[i - 11]);
-//        }
-//
-//        m_host = new Planete(Applications::DataManager::getBodyData(10));
-//        assert(m_host);
-//    }
-//    else if (m_system_name == "Uranian System")
-//    {
-//        // for (int i(11); i < 14; i++)
-//        // {
-//        //     m_moons.push_back(new Planete(Applications::DataManager::getBodyData(i)));
-//        //     assert(m_moons[i - 11]);
-//        // }
-//
-//        m_host = new Planete(Applications::DataManager::getBodyData(14));
-//        assert(m_host);
-//    }
-//    else if (m_system_name == "Neptunian System")
-//    {
-//        // for (int i(11); i < 14; i++)
-//        // {
-//        //     m_moons.push_back(new Planete(Applications::DataManager::getBodyData(i)));
-//        //     assert(m_moons[i - 11]);
-//        // }
-//
-//        m_host = new Planete(Applications::DataManager::getBodyData(15));
-//        assert(m_host);
-//    }
-//}
-//
+void PlanetarySystem::clean()
+{
+    /*for(std::vector<Planete*>::iterator it = m_moons.begin(); it != m_moons.end(); ++it)
+    {
+        if(it[0] != nullptr)
+        {
+            it[0]->clean();
+            delete it[0];
+            it[0] = nullptr;
+        }
+    }
+
+    if(m_host != nullptr)
+    {
+        m_host->clean();
+        delete m_host;
+        m_host = nullptr;
+    }*/
+}
+
+// /***********************************************************************************************************************************************************************/
+// /******************************************************************************** loadSystem ***************************************************************************/
+// /***********************************************************************************************************************************************************************/
+void PlanetarySystem::loadSystem(int count)
+{
+    
+    /************************************************* loading companion ********************************************************/
+    //if(m_system_name == "Earth System")
+    //{
+    //    m_moons.push_back(new Planete(Applications::DataManager::getBodyData(2)));
+    //    assert(m_moons[0]);
+
+    //    m_host = new Planete(Applications::DataManager::getBodyData(3));
+    //    assert(m_host);
+    //}
+    //else if (m_system_name == "Jovian System")
+    //{
+    //    for (int i(6); i < 10; i++)
+    //    {
+    //        m_moons.push_back(new Planete(Applications::DataManager::getBodyData(i)));
+    //        assert(m_moons[i - 6]);
+    //    }
+
+    //    m_host = new Planete(Applications::DataManager::getBodyData(5));
+    //    assert(m_host);
+
+    //}
+    //else if (m_system_name == "Saturnian System")
+    //{
+    //    for (int i(11); i < 14; i++)
+    //    {
+    //        m_moons.push_back(new Planete(Applications::DataManager::getBodyData(i)));
+    //        assert(m_moons[i - 11]);
+    //    }
+
+    //    m_host = new Planete(Applications::DataManager::getBodyData(10));
+    //    assert(m_host);
+    //}
+    //else if (m_system_name == "Uranian System")
+    //{
+    //    // for (int i(11); i < 14; i++)
+    //    // {
+    //    //     m_moons.push_back(new Planete(Applications::DataManager::getBodyData(i)));
+    //    //     assert(m_moons[i - 11]);
+    //    // }
+
+    //    m_host = new Planete(Applications::DataManager::getBodyData(14));
+    //    assert(m_host);
+    //}
+    //else if (m_system_name == "Neptunian System")
+    //{
+    //    // for (int i(11); i < 14; i++)
+    //    // {
+    //    //     m_moons.push_back(new Planete(Applications::DataManager::getBodyData(i)));
+    //    //     assert(m_moons[i - 11]);
+    //    // }
+
+    //    m_host = new Planete(Applications::DataManager::getBodyData(15));
+    //    assert(m_host);
+    //}
+}
+
 //// /***********************************************************************************************************************************************************************/
 //// /****************************************************************************** makeChanges ****************************************************************************/
 //// /***********************************************************************************************************************************************************************/

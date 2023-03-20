@@ -16,18 +16,28 @@ PURPOSE : header of the EnginesManager class
 
 /*************************************************************************** includes ***********************************************************************/
 
-	#include "Framebuffer.hpp"
-	#include "DiscreteSimulation.hpp"
-	#include "PhysicsEngine.hpp"
-	#include "State.hpp"
-	#include "GUI/GUIManager.hpp"
-	#include "RenderingEngine/PlaneteRenderer.hpp"
-	#include "RenderingEngine/RingRenderer.hpp"
+#include "Framebuffer.hpp"
+#include "PhysicsEngine.hpp"
+#include "State.hpp"
+#include "GUI/GUIManager.hpp"
+#include "RenderingEngine/PlaneteRenderer.hpp"
+#include "RenderingEngine/RingRenderer.hpp"
+#include "DiscreteSimulationEngine/SolarSystemCreator.hpp"
+#include "RenderingEngine/Shader.hpp"
+#include "DiscreteSimulationEngine/Skybox.hpp"
+#include "../DataManagementLayer/DataManager.hpp"
+#include "AudioEngine/Music.hpp"
+
+#include <assimp/scene.h>
+
+#define BEGIN   0
+#define END     1
 
 
 /********************************************************************* class definition *********************************************************************/
 
 namespace Engine {
+
 
 	class EnginesManager
 	{
@@ -36,21 +46,34 @@ namespace Engine {
 			GUI::GUIManager m_GUI_manager;
 			State* m_state;
 			Framebuffer m_framebuffer;
+			DiscreteSimulationEngine::SystemCreator* m_solar_system;
+			AudioEngine::Music m_music_engine;
 
 			RenderingEngine::Renderer* m_planete_renderer;
 			RenderingEngine::Renderer* m_ring_renderer;
 			RenderingEngine::Renderer* m_sphere_renderer;
 			RenderingEngine::Renderer* m_square_renderer;
 
+			std::map<std::string, RenderingEngine::Shader*> map_shader;
+			DiscreteSimulationEngine::Skybox *m_skybox;
+
+			int ancient_track;
+
+			void changeCurrentTrack(DataManagementLayer::DataManager data_manager);
+
 		public:
 			EnginesManager();
 			~EnginesManager();
 
-			void initRenderEngine(State* state);
-			void initGUIEngine();
+			void initRenderEngine(State* state, std::string function, float progress);
+			void initDiscreteSimEngine();
+			void addToEngine(float progress, std::string text, std::string type, DataManagementLayer::DataManager data_manager);
+
 			void cleanAllEngines();
-			void manageGUI();
-	};
+
+			void manageGUI(DataManagementLayer::DataManager data_manager);
+			void manageAudioEngine(DataManagementLayer::DataManager data_manager);
+		};
 
 }
 

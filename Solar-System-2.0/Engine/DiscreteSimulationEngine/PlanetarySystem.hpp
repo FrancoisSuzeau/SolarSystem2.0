@@ -43,14 +43,16 @@ namespace Engine {
 
             public:
 
-                PlanetarySystem(/*Renderer* planete_renderer, Renderer* ring_renderer, Renderer* sphere_renderer, std::string const system_name*/);
+                PlanetarySystem(std::string const system_name);
                 ~PlanetarySystem();
 
+                void loadSystem(int count = 0) override;
+                void clean() override;
 
-                /*void loadSystem(int count = 0) override;
+                /*
                 void render(Applications::DataManager& data_manager) override;
                 void makeChanges(Applications::DataManager& data_manager) override;
-                void clean() override;
+                
                 void renderNameAndInfo(Applications::DataManager& data_manager) override;
                 void renderRing(Applications::DataManager& data_manager) override;
                 void renderAtmosphere(Applications::DataManager& data_manager) override;

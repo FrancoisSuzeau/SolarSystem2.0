@@ -2,108 +2,326 @@
     "preference_data": {
 
         "fps":60,
-        "render_overlay":true
+        "render_overlay":true,
+        "spaceship_name":"Star Hunter - Class Eviscerator"
     },
     
     "bodies_data":
     {
-        "bodies_textures":[
+        "bodies":[
             {
                 "name":"Mercury",
+                "host_name":"",
                 "texture_surface_path":"Contents/textures/CelestialBody/MercuryMap.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Venus",
+                "host_name":"",
                 "texture_surface_path":"Contents/textures/CelestialBody/VenusMap.jpg",
                 "texture_cloud_path":"Contents/textures/CelestialBody/VenusCloud.jpg",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Earth",
+                "host_name":"",
                 "texture_surface_path":"Contents/textures/CelestialBody/EarthDayMap.jpg",
                 "texture_cloud_path":"Contents/textures/CelestialBody/CloudMap.jpg",
-                "texture_night_path":"Contents/textures/CelestialBody/EarthNightMap.jpg"
+                "texture_night_path":"Contents/textures/CelestialBody/EarthNightMap.jpg",
+                "texture_normal_path":""
             },
             {
                 "name":"Moon",
+                "host_name":"Earth",
                 "texture_surface_path":"Contents/textures/CelestialBody/MoonMap.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Mars",
+                "host_name":"",
                 "texture_surface_path":"Contents/textures/CelestialBody/MarsMap.jpg",
                 "texture_cloud_path":"Contents/textures/CelestialBody/MarsCloud.png",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Jupiter",
+                "host_name":"",
                 "texture_surface_path":"Contents/textures/CelestialBody/JupiterCloud.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Io",
+                "host_name":"Jupiter",
                 "texture_surface_path":"Contents/textures/CelestialBody/IoMap.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Europa",
+                "host_name":"Jupiter",
                 "texture_surface_path":"Contents/textures/CelestialBody/EuropaMap.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Callisto",
+                "host_name":"Jupiter",
                 "texture_surface_path":"Contents/textures/CelestialBody/CallistoMap.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Ganymede",
+                "host_name":"Jupiter",
                 "texture_surface_path":"Contents/textures/CelestialBody/GanymedeMap.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Saturn",
+                "host_name":"",
                 "texture_surface_path":"Contents/textures/CelestialBody/SaturnCloud.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Mimas",
+                "host_name":"Saturn",
                 "texture_surface_path":"Contents/textures/CelestialBody/MimasMap.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Enceladus",
+                "host_name":"Saturn",
                 "texture_surface_path":"Contents/textures/CelestialBody/EnceladusMap.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Titan",
+                "host_name":"Saturn",
                 "texture_surface_path":"Contents/textures/CelestialBody/TitanMap.jpg",
                 "texture_cloud_path":"Contents/textures/CelestialBody/TitanCloud.jpg",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Uranus",
+                "host_name":"",
                 "texture_surface_path":"Contents/textures/CelestialBody/UranusMap.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             },
             {
                 "name":"Neptune",
+                "host_name":"",
                 "texture_surface_path":"Contents/textures/CelestialBody/NeptuneMap.jpg",
                 "texture_cloud_path":"",
-                "texture_night_path":""
+                "texture_night_path":"",
+                "texture_normal_path":""
             }
         ] 
+    },
+
+    "shaders_data" : 
+    {
+        "shaders":[
+            {
+                "name":"screen",
+                "v_shader_path":"Shaders/screenShader.vert",
+                "f_shader_path":"Shaders/screenShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"blur",
+                "v_shader_path":"Shaders/blurShader.vert",
+                "f_shader_path":"Shaders/blurShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"depthmap",
+                "v_shader_path":"Shaders/depthmapShader.vert",
+                "f_shader_path":"Shaders/depthmapShader.frag",
+                "g_shader_path":"Shaders/depthmapShader.geom"
+            },
+            {
+                "name":"square",
+                "v_shader_path":"Shaders/squareShader.vert",
+                "f_shader_path":"Shaders/squareShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"skybox",
+                "v_shader_path":"Shaders/skyboxShader.vert",
+                "f_shader_path":"Shaders/skyboxShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"model",
+                "v_shader_path":"Shaders/modelShader.vert",
+                "f_shader_path":"Shaders/modelShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"sun",
+                "v_shader_path":"Shaders/sunShader.vert",
+                "f_shader_path":"Shaders/sunShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"simple_textured_planete",
+                "v_shader_path":"Shaders/planeteShader.vert",
+                "f_shader_path":"Shaders/uniqueTexturePlaneteShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"double_textured_planete",
+                "v_shader_path":"Shaders/planeteShader.vert",
+                "f_shader_path":"Shaders/doubleTexturePlaneteShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"earth",
+                "v_shader_path":"Shaders/planeteShader.vert",
+                "f_shader_path":"Shaders/earthShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"ring",
+                "v_shader_path":"Shaders/ringShader.vert",
+                "f_shader_path":"Shaders/ringShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"modelinstanced",
+                "v_shader_path":"Shaders/modelinstancedShader.vert",
+                "f_shader_path":"Shaders/modelinstancedShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"atmosphere",
+                "v_shader_path":"Shaders/atmosphereShader.vert",
+                "f_shader_path":"Shaders/atmosphereShader.frag",
+                "g_shader_path":"NONE"
+            },
+            {
+                "name":"flare",
+                "v_shader_path":"Shaders/flareShader.vert",
+                "f_shader_path":"Shaders/flareShader.frag",
+                "g_shader_path":"NONE"
+            }
+
+        ]
+
+    },
+    "spaceships_data":
+    {
+        "spaceships":[
+            {
+                "name":"Star Hunter - Class Eviscerator",
+                "blender_path":"Contents/model/spaceship/untitled.obj"
+            },
+            {
+                "name":"Donut X37 - Class Yummi Yummi",
+                "blender_path":"Contents/model/donut/donut.obj"
+            },
+            {
+                "name":"Spaceshuttle Atlantis Fuel Tank Booster",
+                "blender_path":"Contents/model/spaceshuttle/spaceshuttle.obj"
+            }
+
+        ]
+
+
+    },
+    "skybox_paths": {
+        "right":"Contents/textures/SkyboxMap/right.png",
+        "left":"Contents/textures/SkyboxMap/left.png",
+        "up":"Contents/textures/SkyboxMap/up.png",
+        "bottom":"Contents/textures/SkyboxMap/bottom.png",
+        "front":"Contents/textures/SkyboxMap/front.png",
+        "back":"Contents/textures/SkyboxMap/back.png"
+    },
+    "musics_data":
+    {
+        "tracks":[
+            {
+                "path":"Contents/sounds/musics/mass_effect.mp3",
+                "title":"Mass Effect - Vigil",
+                "author":"Jack Wall",
+                "studio":"EA Games Soundtrack"
+            },
+            {
+                "path":"Contents/sounds/musics/critical-mass.mp3",
+                "title":"Critical Mass",
+                "author":" ",
+                "studio":"Epic Hybrid Orchestra"
+            },
+            {
+                "path":"Contents/sounds/musics/natural_splender.mp3",
+                "title":"Natural Splender",
+                "author":"Gerald M. Dorai",
+                "studio":"Le Phonarium - Nantes"
+            },
+            {
+                "path":"Contents/sounds/musics/dying-star.mp3",
+                "title":"Dying Star",
+                "author":"Utho Riley",
+                "studio":"Symphonic Orchestral Music"
+            },
+            {
+                "path":"Contents/sounds/musics/SC-Orizon-theme.mp3",
+                "title":"Orizon Theme",
+                "author":"Pedro Camacho",
+                "studio":"Star Citizen Soundtrack"
+            },
+            {
+                "path":"Contents/sounds/musics/engine-of-creation.mp3",
+                "title":"Engine of Creation",
+                "author":"Utho Riley",
+                "studio":"Epic Hybrid Orchestra"
+            },
+            {
+                "path":"Contents/sounds/musics/mass-effect_map-theme.mp3",
+                "title":"Mass Effect - Map Theme",
+                "author":"Jack Wall",
+                "studio":"EA Games Soundtrack"
+            },
+            {
+                "path":"Contents/sounds/musics/unbound.mp3",
+                "title":"Unbound",
+                "author":"Utho Riley",
+                "studio":"Epic Hybrid Orchestra"
+            },
+            {
+                "path":"Contents/sounds/musics/dreamscape.mp3",
+                "title":"Dreamscape",
+                "author":" ",
+                "studio":" "
+            },
+            {
+                "path":"Contents/sounds/musics/two-moons.mp3",
+                "title":"Two Moons",
+                "author":"Bobby Richards",
+                "studio":"YouTube Audio Library"
+            }
+        ]
     }
 }

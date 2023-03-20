@@ -40,10 +40,10 @@ PURPOSE : header of the Model class
         #include <vector>
         #include <Windows.h>
         
-        #include "../Application/DataManager.hpp"
-        #include "../ErrorHandler.hpp"
+        /*#include "../Application/DataManager.hpp"
+        #include "../ErrorHandler.hpp"*/
         #include "Mesh.hpp"
-        #include "../Loader/Loader.hpp"
+        //#include "../Loader/Loader.hpp"
 
        
 

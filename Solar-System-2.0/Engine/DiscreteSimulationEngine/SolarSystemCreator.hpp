@@ -50,20 +50,18 @@ namespace Engine {
                 }
 
 
-                //System* FactoryMethod(Renderer* planete_renderer, Renderer* ring_renderer, Renderer* sphere_renderer, std::string const system_name) override
-                //{
-                //    // puts("");
-                //    // puts("");
-                //    std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Solar System Creator :  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << std::endl;
-                //    return new SolarSystem(planete_renderer, ring_renderer, sphere_renderer, system_name);
-                //}
+                System* FactoryMethod(std::string const system_name) override
+                {
+                    std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Solar System Creator :  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+                    return new SolarSystem(system_name);
+                }
 
-                //bool MakingSystem(Renderer* planete_renderer, Renderer* ring_renderer, Renderer* sphere_renderer, std::string const system_name)
-                //{
-                //    m_system = this->FactoryMethod(planete_renderer, ring_renderer, sphere_renderer, system_name);
-                //    assert(m_system);
-                //    return true;
-                //}
+                bool MakingSystem(std::string const system_name)
+                {
+                    m_system = this->FactoryMethod(system_name);
+                    assert(m_system);
+                    return true;
+                }
 
 
             };

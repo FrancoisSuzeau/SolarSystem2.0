@@ -15,79 +15,89 @@ PURPOSE : header of the DataManager class
 
 
 /********************************************************************* includes *********************************************************************/
-        #include <iostream>
-        #include <map>
-        #include <string>
+#include <iostream>
+#include <map>
+#include <string>
 
-        #include "Loader.hpp"
-        #include "../Engine/State.hpp"
-        
+#include "Loader.hpp"
+#include "../Engine/State.hpp"
 
-        /*#include "../Shader/Shader.hpp"*/
+#define PREFERENCE 0
+#define BODIESDATA 1
+#define SHADERSDATA 2
+#define SPACESHIPSDATA 3
+#define SKYBOXPATHS 4
+#define MUSICSDATA 5
 
-        #define PREFERENCE 0
-        #define BODIESDATA 1
-        
 
 /********************************************************************* class definition *********************************************************************/
 
 namespace DataManagementLayer {
 
-    /*typedef struct shader_datas {
+	//typedef struct body_data {
 
-        std::string v_shader_path;
-        std::string f_shader_path;
-        std::string g_shader_path;
-        std::string key;
+	//    float                           size;
+	//    std::string                     type;
+	//    int                             shininess;
+	//    float                           oppacity;
+	//    glm::vec3                       initial_pos;
+	//    std::string                     name;
+	//    float                           inclinaison_angle;
+	//    float                           light_strength;
+	//    // std::vector<std::string> nom_disp_path;
+	//    // std::string name;
+	//    // float   speed_rotation;
 
-    }shader_datas;*/
+	//} body_data;
 
-    //typedef struct body_data {
+	class DataManager
+	{
 
-    //    float                           size;
-    //    std::string                     type;
-    //    int                             shininess;
-    //    float                           oppacity;
-    //    glm::vec3                       initial_pos;
-    //    std::string                     name;
-    //    float                           inclinaison_angle;
-    //    float                           light_strength;
-    //    // std::vector<std::string> nom_disp_path;
-    //    // std::string name;
-    //    // float   speed_rotation;
+	private:
 
-    //} body_data;
-
-    typedef struct body_data {
-
-        std::string surface_texture_path;
-        std::string cloud_texture_path;
-        std::string night_texture_path;
-
-    } body_data;
-
-    class DataManager
-    {
-
-        private:
-
-            CkJsonObject* preference_data;
-            CkJsonObject* bodies_data;
-
-            std::map<std::string, body_data> body_data_mapping;
+		CkJsonObject* preference_data;
+		CkJsonObject* bodies_data;
+		CkJsonObject* musics_data;
+		CkJsonObject* shaders_data;
+		CkJsonObject* spaceships_data;
+		CkJsonObject* skybox_paths;
+		int nb_bodies;
+		int nb_shaders;
+		int nb_spaceships;
+		int nb_musics;
 
 
-        public:
+	public:
 
-            DataManager();
-            ~DataManager();
+		DataManager();
+		~DataManager();
 
-            void clean(int const which_one);
+		void clean(int const which_one);
 
-            void setConfigs(Engine::State* state);
-            void setTextures();
+		void setConfigs(Engine::State* state);
 
-    };
+		std::string getTexturePath(int i, std::string texture_type);
+		GLuint getTextureId(std::string const path) const;
+
+		void setShaderPaths(int i);
+		std::map<std::string, std::string> getShaderPaths();
+
+		std::string setAndGetMusicPath(int i);
+		Mix_Music* getMusic();
+		std::map<std::string, std::string> getMusicInfo();
+
+		std::string setAndGetSpaceshipPath(std::string const prefered_ship);
+		assimp_data getBlenderModel(std::string path);
+
+		std::vector <std::string> getSkyboxPath();
+		unsigned int getSkyboxTexture() const;
+
+ 		int getNbBodies() const;
+		int getNbShaders() const;
+		int getNbSpaceships() const;
+		int getNbMusics() const;
+
+	};
 }
 
 #endif

@@ -31,7 +31,6 @@ int main(int argc, char** argv)
 
     Application MyApp(sdl_manager.win_width, sdl_manager.win_height, sdl_manager.window);
     MyApp.initEngines();
-    MyApp.loadConfig();
     MyApp.loadAssets();
 
     MyApp.mainLoop();

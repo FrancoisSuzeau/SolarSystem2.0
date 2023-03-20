@@ -27,27 +27,32 @@ PURPOSE : header of the virtual PlanetarySystemCreator class
         #include "PlanetarySystem.hpp"
        
 /********************************************************************* class definition *********************************************************************/
+namespace Engine {
 
-        class PlanetarySystemCreator : public SystemCreator 
+    namespace DiscreteSimulationEngine {
+
+    
+    class PlanetarySystemCreator : public SystemCreator
+    {
+
+    private:
+
+
+
+    public:
+
+
+        System* FactoryMethod(std::string const system_name) override
         {
-            
-            private:
-
-                
-                
-            public:
-
-
-                System* FactoryMethod(Renderer *planete_renderer, Renderer *ring_renderer, Renderer *sphere_renderer, std::string const system_name) override
-                {
-                        // puts("");
-                        // puts("");
-                        // std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> System Creator : " << data.name_sys << " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << std::endl;
-                        return new PlanetarySystem(planete_renderer, ring_renderer, sphere_renderer, system_name);
-                }
+            // puts("");
+            // puts("");
+            // std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> System Creator : " << data.name_sys << " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+            return new PlanetarySystem(system_name);
+        }
 
 
-        };
+    };
 
-
+}
+}
 #endif

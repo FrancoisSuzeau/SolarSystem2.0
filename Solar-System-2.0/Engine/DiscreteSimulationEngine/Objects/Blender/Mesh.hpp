@@ -35,8 +35,8 @@ PURPOSE : header of the Mesh class
         #include <vector>
         #include <Windows.h>
 
-        #include "../Application/DataManager.hpp"
-        #include "../Objects/Object.hpp"
+        /*#include "../Application/DataManager.hpp"
+        #include "../Objects/Object.hpp"*/
 
         #define MAX_BONE_INFLUENCE 4
 

@@ -15,120 +15,86 @@ PURPOSE : header of the Application class
 
 
 /********************************************************************* preprocessing *********************************************************************/
-        
-        #include <SDL2/SDL.h>
-        #include <GL/glew.h>
 
-        #include <iostream>
-        #include <cassert>
-
-        /*#if defined(IMGUI_IMPL_OPENGL_ES2)
-        #include <SDL_opengles2.h>
-        #else
-        #include <SDL2/SDL_opengl.h>
-        #endif
+#include <SDL2/SDL.h>
+#include <GL/glew.h>
+#include <iostream>
+#include <cassert>
+#include "Engine/State.hpp"
+#include "DataManagementLayer/DataManager.hpp"
+#include "Engine/EnginesManager.hpp"
+#include "Engine/GUI/GUIManager.hpp"
 
 
-        #include "imgui.h"
-        #include "imgui_impl_sdl.h"
-        #include "imgui_impl_opengl3.h"*/
-
-        #include "Engine/State.hpp"
-        #include "DataManagementLayer/DataManager.hpp"
-        #include "Engine/EnginesManager.hpp"
-        #include "Engine/GUI/GUIManager.hpp"
-        
-        
-       /* 
-        #include "../InOut/Audio/Audio.hpp"
-        #include "Settings/Settings.hpp"
-        #include "Overlay/Overlay.hpp"
-
-        #include "../Objects/BasicObjects/Square.hpp"
-        #include "../Renderers/BasicRenderers/SquareRenderer.hpp"
-
-        #include "../Skybox/Skybox.hpp"
-        #include "../Objects/Spaceship/Spaceship.hpp"
-
-        #include "System/SolarSystemCreator.hpp"
-        
-
-        #include "Camera/Camera.hpp"*/
-
-        #define BEGIN   0
-        #define END     1
-        
-
-/********************************************************************* class definition *********************************************************************/
-
-    class Application
-    {
-
-        private:
-
-            Engine::State* m_state;
-            SDL_Window* m_window;
-            DataManagementLayer::DataManager             m_data_manager;
-            Uint32                  start_loop = 0, end_loop = 0, time_past = 0;
-            unsigned int            frame_rate = 0;
-            Engine::EnginesManager  m_engines_manager;
-
-            void    manage_state();
-            void    fpsCalculation(int moment);
-
-            
-
-            // Framebuffer     *m_framebuffer;
-
-            // bool speed_key_pressed;
-            // bool info_key_pressed;
-
-            // //ParticuleManager *m_particule_manager;
-            // bool is_moving;
+/*
+ 
+ #include "Settings/Settings.hpp"
+ #include "Overlay/Overlay.hpp"
 
 
-
-            //SystemCreator* m_solar_system = nullptr;
-
-
-            //Settings                m_setting;
-            
-            //Audio* m_audio;
-            //Overlay                 m_overlay;
-            //Skybox* m_skybox;
-            //Camera* camera;
-            //Spaceship* ship;
-
-            //bool                    menu_app_key_pressed;
-            //bool                    render_menu;
+ #include "Camera/Camera.hpp"*/
 
 
-            //void    renderAudio();
-            //void    renderOverlay();
-            //
-            //void    renderScene();
-            //void    renderNameAndInfo();
-            //void    makeAllChanges();
-            //void    renderIntoFramebuffer(int type);
-            //void    renderFlare();
+ /********************************************************************* class definition *********************************************************************/
 
-        public:
+class Application
+{
 
-            Application(int width, int height, SDL_Window* window);
-            ~Application();
+private:
 
-            void            loadConfig();
-            void            loadAssets();
-            void            initEngines();
-            void            mainLoop();
-            void            cleanAll();
+	Engine::State* m_state;
+	SDL_Window* m_window;
+	DataManagementLayer::DataManager             m_data_manager;
+	Uint32                  start_loop = 0, end_loop = 0, time_past = 0;
+	unsigned int            frame_rate = 0;
+	Engine::EnginesManager  m_engines_manager;
+	float progress;
 
-            // void    renderInfo(RenderData &render_data);
-            // void    renderParticles(RenderData &render_data);
+	void    manage_state();
+	void    fpsCalculation(int moment);
+	void loadModel(float& progress);
+	void sendToEngine(float& progress, std::string text, std::string type);
+	void initFrame();
+	void endFrame();
+
+	
+
+	// //ParticuleManager *m_particule_manager;
+	
+
+
+	//Settings                m_setting;
+
+	
+	//Overlay                 m_overlay;
+	//Camera* camera;
+
+
+	//
+	//void    renderOverlay();
+	//
+	//void    renderScene();
+	//void    renderNameAndInfo();
+	//void    makeAllChanges();
+	//void    renderIntoFramebuffer(int type);
+	//void    renderFlare();
+
+public:
+
+	Application(int width, int height, SDL_Window* window);
+	~Application();
+
+	void            loadAssets();
+	void            initEngines();
+	void            mainLoop();
+	void            cleanAll();
+
+	// void    renderInfo(RenderData &render_data);
+	// void    renderParticles(RenderData &render_data);
 
 
 
-        };
+};
 
 
 #endif

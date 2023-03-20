@@ -47,7 +47,9 @@ namespace Engine {
 
 				Menu *m_menu;
 				HUD* m_hud;
-				std::map<std::string, bool> menu_selection_value;
+				
+				music_info m_music_infos;
+				
 
 				
 
@@ -55,13 +57,16 @@ namespace Engine {
 				GUIManager();
 				~GUIManager();
 
-				void initGUIs();
+				std::map<std::string, bool> menu_selection_value;
+				std::map<std::string, int> hud_music_selection;
+
+				void initGUIs(std::map < std::string, std::string> map_info);
 				void clean();
 
-				static void renderScreenLoad(int assets_loaded);
+				void renderScreenLoad(float progress, std::string path);
 				void renderMenu(bool render_menu);
 				void renderHUD(bool render_overlay);
-				void applyUserChoice(Engine::State* state);
+				void changeMusicInfo(std::map < std::string, std::string> map_info);
 		};
 	}
 }

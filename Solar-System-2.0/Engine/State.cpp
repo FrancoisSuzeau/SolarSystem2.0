@@ -161,35 +161,26 @@ bool State::getRenderOverlay() const
     return m_render_overlay;
 }
 
-//void State::setVolume(int const volume)
-//{
-//    m_volume = volume;
-//}
-//
-//int State::getVolume() const
-//{
-//    return m_volume;
-//}
-//
-//void State::setPause(bool const pause)
-//{
-//    m_pause_music = pause;
-//} 
-//
-//bool State::getPause() const
-//{
-//    return m_pause_music;
-//}
-//
-//void State::setTrack(int const track)
-//{
-//    m_track = track;
-//}
-//
-//int State::getTrack() const
-//{
-//    return m_track;
-//}
+void State::setSpaceshipName(std::string const name)
+{
+    m_spaceship_name = name;
+}
+
+std::string State::getSpaceshipName() const
+{
+    return m_spaceship_name;
+}
+
+void State::setChangeTrack(bool const new_val)
+{
+    m_change_track = new_val;
+}
+
+bool State::getChangeTrack() const
+{
+    return m_change_track;
+}
+
 //
 //void State::setShader()
 //{
