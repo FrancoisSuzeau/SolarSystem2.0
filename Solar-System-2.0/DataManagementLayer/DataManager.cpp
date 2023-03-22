@@ -125,6 +125,8 @@ void DataManager::setConfigs(Engine::State* state)
     state->setFps(preference_data->IntOf("fps"));
     state->setRenderOverlay(preference_data->BoolOf("render_overlay"));
     state->setSpaceshipName(preference_data->stringOf("spaceship_name"));
+    state->setBloomStrength(preference_data->IntOf("bloom_strenght"));
+    state->setBloom(preference_data->BoolOf("bloom"));
 }
 
 std::string DataManager::getTexturePath(int i, std::string texture_type)
@@ -175,11 +177,11 @@ std::vector <std::string> DataManager::getSkyboxPath()
     return skybox_path;
 }
 
-unsigned int DataManager::getSkyboxTexture() const
+unsigned int DataManager::getSkyboxTexture(std::vector<std::string> skybox_paths) const
 {
-    /*unsigned int ret = Loader::loadSkyboxTextures(skybox_path);
-    assert(ret);*/
-    return 0;
+    unsigned int ret = Loader::loadSkyboxTextures(skybox_paths);
+    assert(ret != 0);
+    return ret;
 }
 
 int DataManager::getNbSpaceships() const

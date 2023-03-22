@@ -20,6 +20,7 @@ PURPOSE : header of the Framebuffer class
 
 #include <iostream>
 #include <cassert>
+#include "RenderingEngine/Shader.hpp"
 
 #define COLOR_FBO 0
 #define DEPTH_FBO 1
@@ -60,8 +61,8 @@ namespace Engine {
 		void manageRenderBuffer(int width, int height);
 		void managePinPongFBO(int width, int height);
 
-		/*void drawBlur(Applications::DataManager& data_manager, bool& horizontal);
-		void drawScreenTexture(Applications::DataManager &data_manager, bool &horizontal);*/
+		void drawBlur(RenderingEngine::Shader* blur_shader, bool& horizontal, int const bloomStrength, bool const bloom);
+		void drawScreenTexture(RenderingEngine::Shader* screen_shader, bool &horizontal, bool const bloom);
 
 		bool checkFramebufferStatus(std::string const framebuffer_type);
 
@@ -76,7 +77,7 @@ namespace Engine {
 		void bindFramebuffer(int type);
 		void unbindFramebuffer();
 
-		/*void renderFrame(Applications::DataManager& data_manager);*/
+		void renderFrame(RenderingEngine::Shader* blur_shader, RenderingEngine::Shader* screen_shader, int const bloomStrength, bool const bloom);
 
 
 		unsigned int getFB(int type) const;

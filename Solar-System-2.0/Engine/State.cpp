@@ -22,13 +22,13 @@ int State::m_height;
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
 State::State(int width, int height, double angle) : m_terminate(false), m_event(nullptr), m_key_input(nullptr), m_mouse_input(nullptr), m_fps(60), m_render_menu(false),
-key_pressed(false), m_render_overlay(true)
-//bloom(true), bloom_strenght(10), render_normal(true), asteroid_count(100), ,
+key_pressed(false), m_render_overlay(true), far_plane(1000.f), near_plane(0.1f), bloom(true), bloom_strenght(10)
+//, render_normal(true), asteroid_count(100), ,
 //render_overlay(true), render_name(true), render_info(false), distance_from_ship(3.f), index_ship(0), change_skin(true), //for loading the skin at program launch
-//far_plane(1000.f), near_plane(0.1f), hilight_sun(true), render_shadow(true)
+// hilight_sun(true), render_shadow(true)
 {
-    /*proj_mat = glm::perspective(glm::radians(angle), (double)width / height, (double)near_plane, (double)far_plane);
-    view_mat = glm::mat4(1.0f);*/
+    proj_mat = glm::perspective(glm::radians(angle), (double)width / height, (double)near_plane, (double)far_plane);
+    view_mat = glm::mat4(1.0f);
 
     m_width = width;
     m_height = height;
@@ -181,85 +181,70 @@ bool State::getChangeTrack() const
     return m_change_track;
 }
 
-//
-//void State::setShader()
-//{
-//    std::string shader_path = "Shaders/";
-//
-//    std::vector<shader_datas> shader_init;
-//    shader_init.push_back({shader_path + "screenShader.vert", shader_path + "screenShader.frag", "NONE", "screen"});
-//    shader_init.push_back({shader_path + "blur.vert", shader_path + "blur.frag", "NONE", "blur"});
-//    shader_init.push_back({shader_path + "depthShader.vert", shader_path + "depthShader.frag", shader_path + "depthShader.geom", "depth_map"});
-//    shader_init.push_back({shader_path + "squareShader.vert", shader_path + "squareShader.frag", "NONE", "square"});
-//    shader_init.push_back({shader_path + "skybox.vert", shader_path + "skybox.frag", "NONE", "skybox"});
-//    shader_init.push_back({shader_path + "model.vert", shader_path + "model.frag", "NONE", "model"});
-//    shader_init.push_back({shader_path + "sunShader.vert", shader_path + "sunShader.frag", "NONE", "sun"});
-//    shader_init.push_back({shader_path + "planeteShader.vert", shader_path + "uniqueTexturePlaneteShader.frag", "NONE", "simple_textured_planete"});
-//    shader_init.push_back({shader_path + "planeteShader.vert", shader_path + "doubleTexturePlaneteShader.frag", "NONE", "double_textured_planete"});
-//    shader_init.push_back({shader_path + "planeteShader.vert", shader_path + "earthShader.frag", "NONE", "earth"});
-//    shader_init.push_back({shader_path + "ringShader.vert", shader_path + "ringShader.frag", "NONE", "ring"});
-//    shader_init.push_back({shader_path + "modelInstanced.vert", shader_path + "modelInstanced.frag", "NONE", "INSTmodel"});
-//    shader_init.push_back({shader_path + "sphereShader.vert", shader_path + "sphereShader.frag", "NONE", "atmosphere"});            
-//    shader_init.push_back({shader_path + "flareShader.vert", shader_path + "flareShader.frag", "NONE", "flare_texture"});            
-//
-//    for(std::vector<shader_datas>::iterator it = shader_init.begin(); it != shader_init.end(); ++it)
-//    {
-//        map_shader[it[0].key] = new Shader(it[0].v_shader_path, it[0].f_shader_path, it[0].g_shader_path);
-//        assert(map_shader[it[0].key]);
-//        bool success = map_shader[it[0].key]->loadShader();
-//        assert(success);
-//    }              
-//}
-//
-//Shader* State::getShader(std::string key)
-//{
-//    return map_shader[key];
-//}
-//
-//void State::setViewMat(glm::mat4 const new_val)
-//{
-//    view_mat = new_val;
-//}
-//glm::mat4 State::getViewMat()
-//{
-//    return view_mat;
-//}
-//
-//glm::mat4 State::getProjMat() const
-//{
-//    return proj_mat;
-//}
-//
-//void State::lockView(glm::vec3 position, glm::vec3 target, glm::vec3 up)
-//{
-//    view_mat = glm::lookAt(position, target, up);
-//}
-//
-//void State::resetViewMat(glm::mat4 const new_val)
-//{
-//    view_mat = new_val;
-//}
-//
-//void State::setBloom(bool const new_val)
-//{
-//    bloom = new_val;
-//}
-//
-//bool State::getBloom() const
-//{
-//    return bloom;
-//}
-//
-//void State::setBloomStrength(int const new_val)
-//{
-//    bloom_strenght = new_val;
-//}
-//
-//int State::getBloomStrength() const
-//{
-//    return bloom_strenght;
-//}
-//
+void State::setViewMat(glm::mat4 const new_val)
+{
+    view_mat = new_val;
+}
+glm::mat4 State::getViewMat()
+{
+    return view_mat;
+}
+
+glm::mat4 State::getProjMat() const
+{
+    return proj_mat;
+}
+
+void State::lockView(glm::vec3 position, glm::vec3 target, glm::vec3 up)
+{
+    view_mat = glm::lookAt(position, target, up);
+}
+
+void State::resetViewMat(glm::mat4 const new_val)
+{
+    view_mat = new_val;
+}
+
+float State::getFar() const
+{
+    return far_plane;
+}
+
+float State::getNear() const
+{
+    return near_plane;
+}
+
+void State::setPass(int const new_val)
+{
+    pass = new_val;
+}
+
+int State::getPass() const
+{
+    return pass;
+}
+
+void State::setBloom(bool const new_val)
+{
+    bloom = new_val;
+}
+
+bool State::getBloom() const
+{
+    return bloom;
+}
+
+void State::setBloomStrength(int const new_val)
+{
+    bloom_strenght = new_val;
+}
+
+int State::getBloomStrength() const
+{
+    return bloom_strenght;
+}
+
 //void State::setRenderNormal(bool const new_val)
 //{
 //    render_normal = new_val;
@@ -357,16 +342,7 @@ bool State::getChangeTrack() const
 //    return glm::vec3(0.f) - ship_position;
 //}
 //
-//float State::getFar() const
-//{
-//    return far_plane;
-//}
-//
-//float State::getNear() const
-//{
-//    return near_plane;
-//}
-//
+
 //std::vector<glm::mat4> State::getLightSpaceMatrix()
 //{
 //    glm::vec3 lightPos = this->getSunPos();
@@ -395,16 +371,7 @@ bool State::getChangeTrack() const
 //    return depth_map;
 //}
 //
-//void State::setPass(int const new_val)
-//{
-//    pass = new_val;
-//}
-//
-//int State::getPass() const
-//{
-//    return pass;
-//}
-//
+
 //void State::setHilightSun(bool const new_val)
 //{
 //    hilight_sun = new_val;

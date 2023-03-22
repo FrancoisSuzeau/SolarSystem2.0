@@ -94,61 +94,37 @@ Skybox::~Skybox()
 }
 
 /***********************************************************************************************************************************************************************/
-/**************************************************************************** sendToShader *****************************************************************************/
+/********************************************************************************* render *****************************************************************************/
 /***********************************************************************************************************************************************************************/
-//void Skybox::sendToShader(Applications::DataManager &data_manager)
-//{
-//    if(data_manager.getShader("skybox") != nullptr)
-//    {
-//        glUseProgram(data_manager.getShader("skybox")->getProgramID());
-//
-//            glm::mat4 view = glm::mat4(glm::mat3(data_manager.getViewMat()));
-//
-//            data_manager.getShader("skybox")->setMat4("view", view);
-//            data_manager.getShader("skybox")->setMat4("projection", data_manager.getProjMat());
-//
-//            data_manager.getShader("skybox")->setTexture("skybox", 0);
-//            // data_manager.getShader("skybox")->setInt("hdr", data_manager.getHDR());
-//
-//        glUseProgram(0);
-//    }
-//}
-//
-///***********************************************************************************************************************************************************************/
-///********************************************************************************* render *****************************************************************************/
-///***********************************************************************************************************************************************************************/
-//void Skybox::render(Applications::DataManager &data_manager)
-//{   
-//    
-//    glDepthFunc(GL_LEQUAL);
-//
-//    if(data_manager.getShader("skybox") != nullptr)
-//    {
-//        glUseProgram(data_manager.getShader("skybox")->getProgramID());
-//
-//            //lock vao
-//            glBindVertexArray(m_vaoID);
-//
-//                //lock texture
-//                glActiveTexture(GL_TEXTURE0);
-//                glBindTexture(GL_TEXTURE_CUBE_MAP, m_texture_id);
-//
-//                //display the form
-//                glDrawArrays(GL_TRIANGLES, 0, 36);
-//
-//                //unlock texture
-//                glActiveTexture(GL_TEXTURE0);
-//                glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-//
-//            //unlock VAO
-//            glBindVertexArray(0);
-//
-//        glUseProgram(0);
-//    }   
-//
-//    glDepthFunc(GL_LESS);
-//    
-//}
+void Skybox::render(GLuint pgr_id)
+{   
+    
+    glDepthFunc(GL_LEQUAL);
+
+        glUseProgram(pgr_id);
+
+        //lock vao
+            glBindVertexArray(m_vaoID);
+
+            //lock texture
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, m_texture_id);
+
+            //display the form
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+
+            //unlock texture
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+            //unlock VAO
+            glBindVertexArray(0);
+
+        glUseProgram(0);
+
+    glDepthFunc(GL_LESS);
+    
+}
 
 /***********************************************************************************************************************************************************************/
 /********************************************************************************* clean *****************************************************************************/

@@ -61,6 +61,9 @@ namespace Engine {
 
 			void changeCurrentTrack(DataManagementLayer::DataManager data_manager);
 			void correctIncrement(DataManagementLayer::DataManager data_manager);
+			void manageSkybox();
+
+			void renderScene();
 
 		public:
 			EnginesManager();
@@ -74,6 +77,13 @@ namespace Engine {
 
 			void manageGUI(DataManagementLayer::DataManager data_manager);
 			void manageAudioEngine(DataManagementLayer::DataManager data_manager);
+
+			void makeAllChanges();
+
+			void pushIntoFramebuffer(int type);
+			void renderFrameBuffer();
+			
+
 		};
 
 }

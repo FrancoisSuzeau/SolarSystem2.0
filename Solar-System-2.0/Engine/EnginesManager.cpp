@@ -193,7 +193,7 @@ void EnginesManager::correctIncrement(DataManagementLayer::DataManager data_mana
 /***********************************************************************************************************************************************************************/
 /**************************************************************************** manageAudioEngine ************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Engine::EnginesManager::manageAudioEngine(DataManagementLayer::DataManager data_manager)
+void EnginesManager::manageAudioEngine(DataManagementLayer::DataManager data_manager)
 {
 	if (m_music_engine.getVolume() != m_GUI_manager.hud_music_selection["volume"])
 	{
@@ -233,13 +233,14 @@ void Engine::EnginesManager::manageAudioEngine(DataManagementLayer::DataManager 
 /***********************************************************************************************************************************************************************/
 /**************************************************************************** addToEngine ************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Engine::EnginesManager::addToEngine(float progress, std::string text, std::string type, DataManagementLayer::DataManager data_manager)
+void EnginesManager::addToEngine(float progress, std::string text, std::string type, DataManagementLayer::DataManager data_manager)
 {
 	if (type.compare("skybox") == 0)
 	{
 		if (m_skybox == nullptr)
 		{
-			m_skybox = new DiscreteSimulationEngine::Skybox(data_manager.getSkyboxTexture());
+			std::vector<std::string> skybox_paths = data_manager.getSkyboxPath();
+			m_skybox = new DiscreteSimulationEngine::Skybox(data_manager.getSkyboxTexture(skybox_paths));
 		}
 	}
 	if (type.compare("body_texture") == 0)
@@ -268,4 +269,118 @@ void Engine::EnginesManager::addToEngine(float progress, std::string text, std::
 	}
 	
 	m_GUI_manager.renderScreenLoad(progress, text);
+}
+
+void EnginesManager::manageSkybox()
+{
+	if (map_shader["skybox"] != nullptr)
+	{
+		glUseProgram(map_shader["skybox"]->getProgramID());
+			glm::mat4 view = glm::mat4(glm::mat3(m_state->getViewMat()));
+			map_shader["skybox"]->setMat4("view", view);
+			map_shader["skybox"]->setMat4("projection", m_state->getProjMat());
+			map_shader["skybox"]->setTexture("skybox", 0);
+		glUseProgram(0);
+	}
+}
+
+/***********************************************************************************************************************************************************************/
+/******************************************************************************** makeAllChanges ***********************************************************************/
+/***********************************************************************************************************************************************************************/
+void EnginesManager::makeAllChanges()
+{
+	if (m_skybox != nullptr)
+	{
+		this->manageSkybox();
+	}
+
+    /*if((ship != nullptr) && (m_input != nullptr))
+    {
+        if((!render_menu))
+        {
+            ship->transform(glm::vec3(0.f), m_input);
+            ship->sendToShader(m_data_manager);
+            m_data_manager.setShipPos(ship->getPosition());
+            m_data_manager.setShipOrientation(ship->getOrientation());
+        }
+        ship->loadModelShip(m_data_manager);
+    }
+
+    if((camera != nullptr) && (m_input != nullptr))
+    {
+        camera->setDistFromShip(m_data_manager.getDistancteFromShip());
+        camera->move(m_input, render_menu);
+        m_data_manager.setViewMat(camera->getViewMatrix());
+        m_data_manager.setCamPos(camera->getPosition());
+    }
+
+    
+
+    if(m_solar_system != nullptr)
+    {
+        m_solar_system->makeChanges(m_data_manager);
+    }
+
+    std::vector<glm::mat4> shadowTransforms = m_data_manager.getLightSpaceMatrix();
+    glUseProgram(m_data_manager.getShader("depth_map")->getProgramID());
+        for(int i = 0; i < 6; ++i)
+        {
+            m_data_manager.getShader("depth_map")->setMat4("shadowMatrices[" + std::to_string(i) + "]", shadowTransforms[i]);
+        }
+        m_data_manager.getShader("depth_map")->setFloat("far_plane", m_data_manager.getFar());
+        m_data_manager.getShader("depth_map")->setVec3("sunPos", m_data_manager.getSunPos());
+    glUseProgram(0);*/
+}
+
+void EnginesManager::pushIntoFramebuffer(int type)
+{
+	    m_framebuffer.bindFramebuffer(type);
+    
+        if(m_state->getPass() == DEPTH_FBO)
+        {
+            glViewport(0, 0, State::m_width, State::m_width);
+            glClear(GL_DEPTH_BUFFER_BIT);
+            glCullFace(GL_FRONT);
+        }
+        else
+        {
+            glViewport(0, 0, State::m_width, State::m_height);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        }
+
+        /******************************************************************* RENDER SCENE *********************************************************************/
+            this->renderScene();
+        //======================================================================================================================================================
+
+        if(m_state->getPass() == DEPTH_FBO)
+        {
+            glCullFace(GL_BACK);
+            m_framebuffer.unbindFramebuffer();
+        }
+}
+
+void EnginesManager::renderFrameBuffer()
+{
+	m_framebuffer.unbindFramebuffer();
+	m_framebuffer.renderFrame(map_shader["blur"], map_shader["screen"], m_state->getBloomStrength(), m_state->getBloom());
+}
+
+void EnginesManager::renderScene()
+{
+	//
+//    if(!render_menu && (m_data_manager.getPass() == COLOR_FBO))
+//    {
+//        ship->drawSpaceship(m_data_manager);
+//    }
+    if(m_skybox != nullptr)
+    {
+        m_skybox->render(map_shader["skybox"]->getProgramID());
+    }
+//
+//    if(m_solar_system != nullptr)
+//    {
+//        m_solar_system->render(m_data_manager);
+//        m_solar_system->renderRing(m_data_manager);
+//        m_solar_system->renderAtmosphere(m_data_manager);
+//    }
 }

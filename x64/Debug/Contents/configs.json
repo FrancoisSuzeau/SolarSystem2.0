@@ -3,7 +3,9 @@
 
         "fps":60,
         "render_overlay":true,
-        "spaceship_name":"Star Hunter - Class Eviscerator"
+        "spaceship_name":"Star Hunter - Class Eviscerator",
+        "bloom_strenght":10,
+        "bloom":true
     },
     
     "bodies_data":

@@ -306,112 +306,112 @@ void Framebuffer::manageFramebuffers(int width, int height)
     //===================================================================================================================
 }
 
-///***********************************************************************************************************************************************************************/
-///*********************************************************************** renderFrame ***********************************************************************************/
-///***********************************************************************************************************************************************************************/
-//void Framebuffer::renderFrame(Applications::DataManager &data_manager)
-//{
-//    bool horizontal = true;
-//    this->drawBlur(data_manager, horizontal);
-//    this->drawScreenTexture(data_manager, horizontal);
-//}
-//
-///***********************************************************************************************************************************************************************/
-///************************************************************************* drawBlur ************************************************************************************/
-///***********************************************************************************************************************************************************************/
-//void Framebuffer::drawBlur(Applications::DataManager &data_manager, bool &horizontal)
-//{
-//    bool first_it = true;
-//    
-//    unsigned int amount = data_manager.getBloomStrength();
-//
-//        glUseProgram(data_manager.getShader("blur")->getProgramID());
-//
-//        if(data_manager.getBloom())
-//        {
-//            for (unsigned int i = 0; i < amount; i++)
-//            {
-//                glBindFramebuffer(GL_FRAMEBUFFER, ping_pongFBO[horizontal]);
-//                
-//                data_manager.getShader("blur")->setInt("horizontal", horizontal);
-//                data_manager.getShader("blur")->setTexture("screenTexture", 0);
-//
-//                if(first_it)
-//                {
-//                    glActiveTexture(GL_TEXTURE0);
-//                    glBindTexture(GL_TEXTURE_2D, colorBuffers[1]);
-//                    first_it = false;
-//                }
-//                else
-//                {
-//                    glActiveTexture(GL_TEXTURE0);
-//                    glBindTexture(GL_TEXTURE_2D, ping_pong_text[!horizontal]);
-//                }
-//
-//                glBindVertexArray(quadVAO);
-//
-//                    glDrawArrays(GL_TRIANGLES, 0, 6);
-//
-//                    glActiveTexture(GL_TEXTURE0);
-//                    glBindTexture(GL_TEXTURE_2D, 0);        
-//
-//                glBindVertexArray(0);
-//                horizontal = !horizontal;
-//            }
-//        }
-//
-//    glUseProgram(0);
-//
-//    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//}
-//
-///***********************************************************************************************************************************************************************/
-///**************************************************************** drawScreenTexture ************************************************************************************/
-///***********************************************************************************************************************************************************************/
-//void Framebuffer::drawScreenTexture(Applications::DataManager &data_manager, bool &horizontal)
-//{   
-//    if(data_manager.getShader("screen") != nullptr)
-//    {
-//        glUseProgram(data_manager.getShader("screen")->getProgramID());
-//
-//            data_manager.getShader("screen")->setInt("bloom", data_manager.getBloom());
-//
-//            data_manager.getShader("screen")->setTexture("screen_texture", 0);
-//            data_manager.getShader("screen")->setTexture("bloom_texture", 1);
-//
-//            glBindVertexArray(quadVAO);
-//
-//                glActiveTexture(GL_TEXTURE0);
-//                glBindTexture(GL_TEXTURE_2D, colorBuffers[0]);
-//
-//                if(data_manager.getBloom())
-//                {
-//                    glActiveTexture(GL_TEXTURE1);
-//                    glBindTexture(GL_TEXTURE_2D, ping_pong_text[!horizontal]);
-//                }  
-//                
-//                glDrawArrays(GL_TRIANGLES, 0, 6);
-//
-//                glActiveTexture(GL_TEXTURE0);
-//                glBindTexture(GL_TEXTURE_2D, 0);
-//
-//                if(data_manager.getBloom())
-//                {
-//                    glActiveTexture(GL_TEXTURE1);
-//                    glBindTexture(GL_TEXTURE_2D, 0);
-//                }
-//
-//            glBindVertexArray(0);
-//
-//            
-//        glUseProgram(0);
-//    }
-//
-//    data_manager.setDepthMapTexture(depth_map);
-//    
-//}
-//
+/***********************************************************************************************************************************************************************/
+/*********************************************************************** renderFrame ***********************************************************************************/
+/***********************************************************************************************************************************************************************/
+void Framebuffer::renderFrame(RenderingEngine::Shader* blur_shader, RenderingEngine::Shader* screen_shader, int const bloomStrength, bool const bloom)
+{
+    bool horizontal = true;
+    this->drawBlur(blur_shader, horizontal, bloomStrength, bloom);
+    this->drawScreenTexture(screen_shader, horizontal, bloom);
+}
+
+/***********************************************************************************************************************************************************************/
+/************************************************************************* drawBlur ************************************************************************************/
+/***********************************************************************************************************************************************************************/
+void Framebuffer::drawBlur(RenderingEngine::Shader* blur_shader, bool &horizontal, int const bloomStrength, bool const bloom)
+{
+    bool first_it = true;
+    
+    unsigned int amount = bloomStrength;
+
+        glUseProgram(blur_shader->getProgramID());
+
+        if(bloom)
+        {
+            for (unsigned int i = 0; i < amount; i++)
+            {
+                glBindFramebuffer(GL_FRAMEBUFFER, ping_pongFBO[horizontal]);
+                
+                blur_shader->setInt("horizontal", horizontal);
+                blur_shader->setTexture("screenTexture", 0);
+
+                if(first_it)
+                {
+                    glActiveTexture(GL_TEXTURE0);
+                    glBindTexture(GL_TEXTURE_2D, colorBuffers[1]);
+                    first_it = false;
+                }
+                else
+                {
+                    glActiveTexture(GL_TEXTURE0);
+                    glBindTexture(GL_TEXTURE_2D, ping_pong_text[!horizontal]);
+                }
+
+                glBindVertexArray(quadVAO);
+
+                    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+                    glActiveTexture(GL_TEXTURE0);
+                    glBindTexture(GL_TEXTURE_2D, 0);        
+
+                glBindVertexArray(0);
+                horizontal = !horizontal;
+            }
+        }
+
+    glUseProgram(0);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+/***********************************************************************************************************************************************************************/
+/**************************************************************** drawScreenTexture ************************************************************************************/
+/***********************************************************************************************************************************************************************/
+void Framebuffer::drawScreenTexture(RenderingEngine::Shader* screen_shader, bool &horizontal, bool const bloom)
+{   
+    if(screen_shader != nullptr)
+    {
+        glUseProgram(screen_shader->getProgramID());
+
+        screen_shader->setInt("bloom", bloom);
+
+        screen_shader->setTexture("screen_texture", 0);
+        screen_shader->setTexture("bloom_texture", 1);
+
+            glBindVertexArray(quadVAO);
+
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, colorBuffers[0]);
+
+                if(bloom)
+                {
+                    glActiveTexture(GL_TEXTURE1);
+                    glBindTexture(GL_TEXTURE_2D, ping_pong_text[!horizontal]);
+                }  
+                
+                glDrawArrays(GL_TRIANGLES, 0, 6);
+
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, 0);
+
+                if(bloom)
+                {
+                    glActiveTexture(GL_TEXTURE1);
+                    glBindTexture(GL_TEXTURE_2D, 0);
+                }
+
+            glBindVertexArray(0);
+
+            
+        glUseProgram(0);
+    }
+
+    //data_manager.setDepthMapTexture(depth_map);
+    
+}
+
 ///***********************************************************************************************************************************************************************/
 ///****************************************************************** bindFramebuffer ************************************************************************************/
 ///***********************************************************************************************************************************************************************/

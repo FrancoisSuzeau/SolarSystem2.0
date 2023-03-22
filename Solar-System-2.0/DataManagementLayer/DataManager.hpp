@@ -90,7 +90,7 @@ namespace DataManagementLayer {
 		assimp_data getBlenderModel(std::string path);
 
 		std::vector <std::string> getSkyboxPath();
-		unsigned int getSkyboxTexture() const;
+		unsigned int getSkyboxTexture(std::vector<std::string> skybox_paths) const;
 
  		int getNbBodies() const;
 		int getNbShaders() const;

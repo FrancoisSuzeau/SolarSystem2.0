@@ -29,9 +29,7 @@ PURPOSE : header of the Skybox class
         #include <vector>
         #include <cassert>
 
-        /*#include "../Application/DataManager.hpp"
-        #include "../ErrorHandler.hpp"
-        #include "../Loader/Loader.hpp"*/
+#include "../State.hpp"
 
 
 /********************************************************************* class definition *********************************************************************/
@@ -58,8 +56,7 @@ namespace Engine
                 ~Skybox();
 
 
-                /*void                    render(Applications::DataManager &data_manager);
-                void                    sendToShader(Applications::DataManager &data_manager);*/
+                void                    render(GLuint pgr_id);
                 void                    clean();
 
         };

@@ -84,11 +84,11 @@ void Application::initEngines()
         }
 
         this->endFrame();
-        SDL_Delay(1500);
+        //SDL_Delay(1500);
         progress++;
     }
     m_engines_manager.initDiscreteSimEngine();
-    SDL_Delay(1500);
+    //SDL_Delay(1500);
 }
 
 ///***********************************************************************************************************************************************************************/
@@ -125,13 +125,11 @@ void Application::loadAssets()
         std::string text = "Currently loading " + m_data_manager.getShaderPaths()["name"] + " shader ...";
         this->sendToEngine(progress, text, "shader");
         progress++;
-        //SDL_Delay(1000);
     }
 
     std::string spaceship_path = m_data_manager.setAndGetSpaceshipPath(m_state->getSpaceshipName());
     this->sendToEngine(progress, spaceship_path, "spaceship");
     progress++;
-    //SDL_Delay(1000);
 
     std::string music_path = "NONE";
     int i = 0;
@@ -152,8 +150,6 @@ void Application::loadAssets()
         }
     }
     this->sendToEngine(progress, music_path, "music");
-
-    
 }
 
 
@@ -182,11 +178,10 @@ void Application::mainLoop()
             //        //=====================================================================================================================================================
             //
             //        /******************************************************************* MANAGING CHANGES *****************************************************************/
-            //            this->makeAllChanges();
+                        m_engines_manager.makeAllChanges();
             //        //=====================================================================================================================================================
             //
             //        /******************************************************************* RENDER AUDIO **********************************************************************/
-            //            this->renderAudio();
                             m_engines_manager.manageAudioEngine(m_data_manager);
             //        //======================================================================================================================================================
             //
@@ -200,13 +195,13 @@ void Application::mainLoop()
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             //            
-            //            m_data_manager.setPass(DEPTH_FBO);
-            //            this->renderIntoFramebuffer(DEPTH_FBO);
+                        m_state->setPass(DEPTH_FBO);
+                        m_engines_manager.pushIntoFramebuffer(DEPTH_FBO);
             //        //======================================================================================================================================================
             //
             //        /******************************************************************* RENDER SYSTEM *********************************************************************/
-            //            m_data_manager.setPass(COLOR_FBO);
-            //            this->renderIntoFramebuffer(COLOR_FBO);
+                        m_state->setPass(COLOR_FBO);
+                        m_engines_manager.pushIntoFramebuffer(COLOR_FBO);
             //        //======================================================================================================================================================
             //
             //        /******************************************************************* RENDER SETTINGS *******************************************************************/
@@ -226,8 +221,7 @@ void Application::mainLoop()
             //            this->renderFlare();
             //        //======================================================================================================================================================
             //
-            //            m_framebuffer->unbindFramebuffer();
-            //            m_framebuffer->renderFrame(m_data_manager);
+                        m_engines_manager.renderFrameBuffer();
             //
             //        /******************************************************************* SWAPPING WINDOWS *******************************************************************/
                         this->endFrame();
@@ -237,96 +231,7 @@ void Application::mainLoop()
     }
 }
 
-///***********************************************************************************************************************************************************************/
-///******************************************************************************** renderIntoFramebuffer ***********************************************************************/
-///***********************************************************************************************************************************************************************/
-//void Application::renderIntoFramebuffer(int type)
-//{
-//    m_framebuffer->bindFramebuffer(type);
-//    
-//
-//        if(m_data_manager.getPass() == DEPTH_FBO)
-//        {
-//            glViewport(0, 0, m_data_manager.getWidth(), m_data_manager.getWidth());
-//            glClear(GL_DEPTH_BUFFER_BIT);
-//            glCullFace(GL_FRONT);
-//        }
-//        else
-//        {
-//            glViewport(0, 0, m_data_manager.getWidth(), m_data_manager.getHeight());
-//            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//        }
-//
-//        /******************************************************************* RENDER SCENE *********************************************************************/
-//            this->renderScene();
-//        //======================================================================================================================================================
-//
-//        if(m_data_manager.getPass() == DEPTH_FBO)
-//        {
-//            glCullFace(GL_BACK);
-//            m_framebuffer->unbindFramebuffer();
-//        }
-//}
-//
-///***********************************************************************************************************************************************************************/
-///******************************************************************************** makeAllChanges ***********************************************************************/
-///***********************************************************************************************************************************************************************/
-//void Application::makeAllChanges()
-//{
-//    if((ship != nullptr) && (m_input != nullptr))
-//    {
-//        if((!render_menu))
-//        {
-//            ship->transform(glm::vec3(0.f), m_input);
-//            ship->sendToShader(m_data_manager);
-//            m_data_manager.setShipPos(ship->getPosition());
-//            m_data_manager.setShipOrientation(ship->getOrientation());
-//        }
-//        ship->loadModelShip(m_data_manager);
-//    }
-//
-//    if((camera != nullptr) && (m_input != nullptr))
-//    {
-//        camera->setDistFromShip(m_data_manager.getDistancteFromShip());
-//        camera->move(m_input, render_menu);
-//        m_data_manager.setViewMat(camera->getViewMatrix());
-//        m_data_manager.setCamPos(camera->getPosition());
-//    }
-//
-//    if(m_skybox != nullptr)
-//    {
-//        m_skybox->sendToShader(m_data_manager);
-//    }
-//
-//    if(m_solar_system != nullptr)
-//    {
-//        m_solar_system->makeChanges(m_data_manager);
-//    }
-//
-//    std::vector<glm::mat4> shadowTransforms = m_data_manager.getLightSpaceMatrix();
-//    glUseProgram(m_data_manager.getShader("depth_map")->getProgramID());
-//        for(int i = 0; i < 6; ++i)
-//        {
-//            m_data_manager.getShader("depth_map")->setMat4("shadowMatrices[" + std::to_string(i) + "]", shadowTransforms[i]);
-//        }
-//        m_data_manager.getShader("depth_map")->setFloat("far_plane", m_data_manager.getFar());
-//        m_data_manager.getShader("depth_map")->setVec3("sunPos", m_data_manager.getSunPos());
-//    glUseProgram(0);
-//}
-//
-///***********************************************************************************************************************************************************************/
-///*********************************************************************************** renderAudio ***********************************************************************/
-///***********************************************************************************************************************************************************************/
-//void Application::renderAudio()
-//{
-//    if(m_audio != nullptr)
-//    {
-//        m_audio->changeVolume(m_data_manager.getVolume());
-//        m_audio->pause(m_data_manager.getPause());
-//        m_audio->updateTrack(m_data_manager);
-//    }
-//}
-//
+
 ///***********************************************************************************************************************************************************************/
 ///*********************************************************************************** fpsCalculation ********************************************************************/
 ///***********************************************************************************************************************************************************************/
@@ -401,22 +306,7 @@ void Application::endFrame()
 ///***********************************************************************************************************************************************************************/
 //void Application::renderScene()
 //{   
-//
-//    if(!render_menu && (m_data_manager.getPass() == COLOR_FBO))
-//    {
-//        ship->drawSpaceship(m_data_manager);
-//    }
-//    if(m_skybox != nullptr)
-//    {
-//        m_skybox->render(m_data_manager);
-//    }
-//
-//    if(m_solar_system != nullptr)
-//    {
-//        m_solar_system->render(m_data_manager);
-//        m_solar_system->renderRing(m_data_manager);
-//        m_solar_system->renderAtmosphere(m_data_manager);
-//    }
+
 //}
 //
 ///***********************************************************************************************************************************************************************/
