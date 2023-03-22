@@ -82,7 +82,7 @@ namespace DataManagementLayer {
 		void setShaderPaths(int i);
 		std::map<std::string, std::string> getShaderPaths();
 
-		std::string setAndGetMusicPath(int i);
+		std::string setAndGetMusicPath(int i, std::string const radio);
 		Mix_Music* getMusic();
 		std::map<std::string, std::string> getMusicInfo();
 
@@ -96,7 +96,7 @@ namespace DataManagementLayer {
 		int getNbShaders() const;
 		int getNbSpaceships() const;
 		int getNbMusics() const;
-
+		int getIfrom(std::string jsonObject) const;
 	};
 }
 

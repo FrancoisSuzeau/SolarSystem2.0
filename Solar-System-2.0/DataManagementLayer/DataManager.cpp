@@ -55,6 +55,7 @@ skybox_paths(nullptr), musics_data(nullptr), nb_musics(0)
     nb_bodies = bodies_data->SizeOfArray("bodies");
     nb_shaders = shaders_data->SizeOfArray("shaders");
     nb_musics = musics_data->SizeOfArray("tracks");
+    
 }
 
 DataManager::~DataManager()
@@ -191,7 +192,29 @@ int DataManager::getNbMusics() const
     return nb_musics;
 }
 
-std::map<std::string, std::string> DataManagementLayer::DataManager::getShaderPaths()
+int DataManager::getIfrom(std::string jsonObject) const
+{
+    if (jsonObject.compare("music") == 0)
+    {
+        return musics_data->get_I();
+    }
+    if (jsonObject.compare("shader") == 0)
+    {
+        return shaders_data->get_I();
+    }
+    if (jsonObject.compare("bodies") == 0)
+    {
+        return bodies_data->get_I();
+    }
+    if (jsonObject.compare("spaceship") == 0)
+    {
+        return spaceships_data->get_I();
+    }
+    
+    return -1;
+}
+
+std::map<std::string, std::string> DataManager::getShaderPaths()
 {
     return std::map<std::string, std::string>(
         {
@@ -203,10 +226,19 @@ std::map<std::string, std::string> DataManagementLayer::DataManager::getShaderPa
     );
 }
 
-std::string DataManager::setAndGetMusicPath(int i)
+std::string DataManager::setAndGetMusicPath(int i, std::string const radio)
 {
+   
     musics_data->put_I(i);
-    return musics_data->stringOf("tracks[i].path");
+    if (musics_data->stringOf("tracks[i].radio") == radio)
+    {
+        return musics_data->stringOf("tracks[i].path");
+    }
+    else
+    {
+        return "NONE";
+    }
+    
 }
 
 Mix_Music* DataManager::getMusic()
@@ -220,7 +252,7 @@ std::map<std::string, std::string> DataManager::getMusicInfo()
         {
             std::make_pair("title", musics_data->stringOf("tracks[i].title")),
             std::make_pair("author", musics_data->stringOf("tracks[i].author")),
-            std::make_pair("studio", musics_data->stringOf("tracks[i].studio")),
+            std::make_pair("studio", musics_data->stringOf("tracks[i].studio"))
         }
     
     );
@@ -240,7 +272,7 @@ std::string DataManager::setAndGetSpaceshipPath(std::string const prefered_ship)
     }
 }
 
-assimp_data DataManagementLayer::DataManager::getBlenderModel(std::string path)
+assimp_data DataManager::getBlenderModel(std::string path)
 {
     return Loader::loadModel(path);
 }

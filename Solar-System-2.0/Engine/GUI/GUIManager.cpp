@@ -18,7 +18,7 @@ GUIManager::~GUIManager()
 /***********************************************************************************************************************************************************************/
 /******************************************************************************** initGUIs *****************************************************************************/
 /***********************************************************************************************************************************************************************/
-void GUIManager::initGUIs(std::map < std::string, std::string> map_info)
+void GUIManager::initGUIs(std::map < std::string, std::string> map_info, int i)
 {
 	if (m_menu == nullptr)
 	{
@@ -36,9 +36,10 @@ void GUIManager::initGUIs(std::map < std::string, std::string> map_info)
 
 	menu_selection_value.insert(std::make_pair("quit", false));
 
-	hud_music_selection.insert(std::make_pair("current_track", 0));
+	hud_music_selection.insert(std::make_pair("current_track", (i >= 0 ? i : 0)));
 	hud_music_selection.insert(std::make_pair("volume", MIX_MAX_VOLUME / 2));
 	hud_music_selection.insert(std::make_pair("pause", 0));
+	hud_music_selection.insert(std::make_pair("current_radio", 0));
 
 	m_music_infos.title = map_info["title"];
 	m_music_infos.author = map_info["author"];

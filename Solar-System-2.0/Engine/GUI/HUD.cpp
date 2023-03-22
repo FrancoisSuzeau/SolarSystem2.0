@@ -88,6 +88,7 @@ void HUD::renderMusicHUD(int width, int height, std::map<std::string, int>& hud_
     ImGui::SameLine();
 
     float spacing = ImGui::GetStyle().ItemInnerSpacing.x;
+    int test = 0;
     ImGui::PushButtonRepeat(true);
     if (ImGui::ArrowButton("##left", ImGuiDir_Left)) { hud_music_selection["current_track"]--; }
     ImGui::SameLine(0.0f, spacing);
@@ -108,9 +109,10 @@ void HUD::renderMusicHUD(int width, int height, std::map<std::string, int>& hud_
     ImGui::Checkbox("Mute music", &pause);
     hud_music_selection["pause"] = pause ? 1 : 0;
 
-    const char* items[] = { "Epic Orchestra", "-Error Canal Transmission-", "-Error Canal Transmission-", "-Error Canal Transmission-" };
-    static int item_current = 0;
-    ImGui::Combo("Radio", &item_current, items, IM_ARRAYSIZE(items));
+    const char* items[] = { "Epic Orchestra", "Citadel radio", "Retro Wave 86", "-Error Canal Transmission-" };
+    //static int item_current = 0;
+    //ImGui::Combo("Radio", &item_current, items, IM_ARRAYSIZE(items));
+    ImGui::Combo("Radio", &hud_music_selection["current_radio"], items, IM_ARRAYSIZE(items));
 
     //ImGui::SameLine();
     //std::string t_mp = "For now there only is one radio available until NASA engineers upgrade their Deep Space Network.";

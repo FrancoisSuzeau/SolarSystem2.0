@@ -8,7 +8,7 @@ using namespace Engine;
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
 EnginesManager::EnginesManager() : m_GUI_manager(), m_state(nullptr), m_framebuffer(), m_planete_renderer(nullptr), m_ring_renderer(nullptr), m_sphere_renderer(nullptr),
-m_square_renderer(nullptr), m_solar_system(nullptr), m_skybox(nullptr), m_music_engine(), ancient_track(0)
+m_square_renderer(nullptr), m_solar_system(nullptr), m_skybox(nullptr), m_music_engine(), ancient_track(0), ancient_radio("Epic Orchestra")
 {
 
 }
@@ -154,20 +154,39 @@ void EnginesManager::manageGUI(DataManagementLayer::DataManager data_manager)
 /***********************************************************************************************************************************************************************/
 void EnginesManager::changeCurrentTrack(DataManagementLayer::DataManager data_manager)
 {
+	std::string music_path = "NONE";
+	std::string items[] = { "Epic Orchestra", "Citadel radio", "Retro Wave 86", "-Error Canal Transmission-" };
 	if (ancient_track != m_GUI_manager.hud_music_selection["current_track"])
 	{
-		if (m_GUI_manager.hud_music_selection["current_track"] == data_manager.getNbMusics())
+		int direction = (m_GUI_manager.hud_music_selection["current_track"] > ancient_track ? 1 : -1);
+		while (music_path == "NONE")
 		{
-			m_GUI_manager.hud_music_selection["current_track"] = 0;
+			this->correctIncrement(data_manager);
+			music_path = data_manager.setAndGetMusicPath(m_GUI_manager.hud_music_selection["current_track"], items[m_GUI_manager.hud_music_selection["current_radio"]]);
+			if (music_path != "NONE")
+			{
+				break;
+			}
+			else
+			{
+				m_GUI_manager.hud_music_selection["current_track"] += direction;
+			}
 		}
-		if (m_GUI_manager.hud_music_selection["current_track"] == -1)
-		{
-			m_GUI_manager.hud_music_selection["current_track"] = data_manager.getNbMusics() - 1;
-		}
-		data_manager.setAndGetMusicPath(m_GUI_manager.hud_music_selection["current_track"]);
 		m_GUI_manager.changeMusicInfo(data_manager.getMusicInfo());
 		ancient_track = m_GUI_manager.hud_music_selection["current_track"];
 		m_state->setChangeTrack(true);
+	}
+}
+
+void EnginesManager::correctIncrement(DataManagementLayer::DataManager data_manager)
+{
+	if (m_GUI_manager.hud_music_selection["current_track"] == data_manager.getNbMusics())
+	{
+		m_GUI_manager.hud_music_selection["current_track"] = 0;
+	}
+	if (m_GUI_manager.hud_music_selection["current_track"] == -1)
+	{
+		m_GUI_manager.hud_music_selection["current_track"] = data_manager.getNbMusics() - 1;
 	}
 }
 
@@ -187,6 +206,19 @@ void Engine::EnginesManager::manageAudioEngine(DataManagementLayer::DataManager 
 	{
 		m_GUI_manager.hud_music_selection["current_track"]++;
 		this->changeCurrentTrack(data_manager);
+	}
+
+	std::string items[] = { "Epic Orchestra", "Citadel radio", "Retro Wave 86", "-Error Canal Transmission-" };
+	
+	if (ancient_radio != items[m_GUI_manager.hud_music_selection["current_radio"]])
+	{
+		if (items[m_GUI_manager.hud_music_selection["current_radio"]] != "-Error Canal Transmission-")
+		{
+			m_GUI_manager.hud_music_selection["current_track"] = 0;
+			this->changeCurrentTrack(data_manager);
+		}
+		
+		ancient_radio = items[m_GUI_manager.hud_music_selection["current_radio"]];
 	}
 
 	//a user want to change the music or the music
@@ -230,9 +262,9 @@ void Engine::EnginesManager::addToEngine(float progress, std::string text, std::
 	}
 	if (type.compare("music") == 0)
 	{
-		m_GUI_manager.initGUIs(data_manager.getMusicInfo());
+		m_GUI_manager.initGUIs(data_manager.getMusicInfo(), data_manager.getIfrom("music"));
 		m_music_engine.updateTrack(data_manager.getMusic());
-
+		ancient_track = data_manager.getIfrom("music");
 	}
 	
 	m_GUI_manager.renderScreenLoad(progress, text);

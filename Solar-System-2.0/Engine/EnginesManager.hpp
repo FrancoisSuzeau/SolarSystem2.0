@@ -56,10 +56,11 @@ namespace Engine {
 
 			std::map<std::string, RenderingEngine::Shader*> map_shader;
 			DiscreteSimulationEngine::Skybox *m_skybox;
-
 			int ancient_track;
+			std::string ancient_radio;
 
 			void changeCurrentTrack(DataManagementLayer::DataManager data_manager);
+			void correctIncrement(DataManagementLayer::DataManager data_manager);
 
 		public:
 			EnginesManager();

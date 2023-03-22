@@ -133,7 +133,24 @@ void Application::loadAssets()
     progress++;
     //SDL_Delay(1000);
 
-    std::string music_path = m_data_manager.setAndGetMusicPath(0);
+    std::string music_path = "NONE";
+    int i = 0;
+    while (music_path == "NONE")
+    {
+        music_path = m_data_manager.setAndGetMusicPath(i, "Epic Orchestra");
+        if (music_path != "NONE")
+        {
+            break;
+        }
+        if (i == m_data_manager.getNbMusics() - 1)
+        {
+            i = 0;
+        }
+        else
+        {
+            i++;
+        }
+    }
     this->sendToEngine(progress, music_path, "music");
 
     

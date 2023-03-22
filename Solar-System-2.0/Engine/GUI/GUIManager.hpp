@@ -60,7 +60,7 @@ namespace Engine {
 				std::map<std::string, bool> menu_selection_value;
 				std::map<std::string, int> hud_music_selection;
 
-				void initGUIs(std::map < std::string, std::string> map_info);
+				void initGUIs(std::map < std::string, std::string> map_info, int i);
 				void clean();
 
 				void renderScreenLoad(float progress, std::string path);

@@ -263,64 +263,109 @@
     {
         "tracks":[
             {
+                "path":"Contents/sounds/musics/the-phantom-operator.mp3",
+                "title":"The Phantom Operator",
+                "author":"NewRetroWave",
+                "studio":" ",
+                "radio":"Retro Wave 86"
+            },
+            {
                 "path":"Contents/sounds/musics/mass_effect.mp3",
                 "title":"Mass Effect - Vigil",
                 "author":"Jack Wall",
-                "studio":"EA Games Soundtrack"
+                "studio":"EA Games Soundtrack",
+                "radio":"Citadel radio"
             },
             {
                 "path":"Contents/sounds/musics/critical-mass.mp3",
                 "title":"Critical Mass",
                 "author":" ",
-                "studio":"Epic Hybrid Orchestra"
+                "studio":"Epic Hybrid Orchestra",
+                "radio":"Epic Orchestra"
             },
             {
                 "path":"Contents/sounds/musics/natural_splender.mp3",
                 "title":"Natural Splender",
                 "author":"Gerald M. Dorai",
-                "studio":"Le Phonarium - Nantes"
+                "studio":"Le Phonarium - Nantes",
+                "radio":"Epic Orchestra"
             },
             {
                 "path":"Contents/sounds/musics/dying-star.mp3",
                 "title":"Dying Star",
                 "author":"Utho Riley",
-                "studio":"Symphonic Orchestral Music"
+                "studio":"Symphonic Orchestral Music",
+                "radio":"Epic Orchestra"
             },
             {
                 "path":"Contents/sounds/musics/SC-Orizon-theme.mp3",
                 "title":"Orizon Theme",
                 "author":"Pedro Camacho",
-                "studio":"Star Citizen Soundtrack"
+                "studio":"Star Citizen Soundtrack",
+                "radio":"Epic Orchestra"
             },
             {
                 "path":"Contents/sounds/musics/engine-of-creation.mp3",
                 "title":"Engine of Creation",
                 "author":"Utho Riley",
-                "studio":"Epic Hybrid Orchestra"
+                "studio":"Epic Hybrid Orchestra",
+                "radio":"Epic Orchestra"
             },
             {
                 "path":"Contents/sounds/musics/mass-effect_map-theme.mp3",
                 "title":"Mass Effect - Map Theme",
                 "author":"Jack Wall",
-                "studio":"EA Games Soundtrack"
+                "studio":"EA Games Soundtrack",
+                "radio":"Citadel radio"
             },
             {
                 "path":"Contents/sounds/musics/unbound.mp3",
                 "title":"Unbound",
                 "author":"Utho Riley",
-                "studio":"Epic Hybrid Orchestra"
+                "studio":"Epic Hybrid Orchestra",
+                "radio":"Epic Orchestra"
             },
             {
                 "path":"Contents/sounds/musics/dreamscape.mp3",
                 "title":"Dreamscape",
-                "author":" ",
-                "studio":" "
+                "author":"Twin Musicom",
+                "studio":" ",
+                "radio":"Epic Orchestra"
             },
             {
                 "path":"Contents/sounds/musics/two-moons.mp3",
                 "title":"Two Moons",
                 "author":"Bobby Richards",
-                "studio":"YouTube Audio Library"
+                "studio":"YouTube Audio Library",
+                "radio":"Epic Orchestra"
+            },
+            {
+                "path":"Contents/sounds/musics/lost-years.mp3",
+                "title":"Lost Years",
+                "author":"NewRetroWave",
+                "studio":" ",
+                "radio":"Retro Wave 86"
+            },
+            {
+                "path":"Contents/sounds/musics/nuclear.mp3",
+                "title":"Nuclear",
+                "author":"Lost Years",
+                "studio":" ",
+                "radio":"Retro Wave 86"
+            },
+            {
+                "path":"Contents/sounds/musics/octoparis.mp3",
+                "title":"Octoparis",
+                "author":"Ferus Melek",
+                "studio":" ",
+                "radio":"Retro Wave 86"
+            },
+            {
+                "path":"Contents/sounds/musics/space-traveller.mp3",
+                "title":"Space Traveler",
+                "author":"Kotovsky86",
+                "studio":" ",
+                "radio":"Retro Wave 86"
             }
         ]
     }
