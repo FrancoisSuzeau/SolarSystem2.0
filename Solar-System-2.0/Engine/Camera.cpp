@@ -198,7 +198,7 @@ glm::vec3 Camera::getPosition() const
     return m_position;
 }
 
-void Camera::setShip(DiscreteSimulationEngine::Objects::OpenGL::Spaceship* ship)
-{
-    m_ship = ship;
-}
+//void Camera::setShip(DiscreteSimulationEngine::Objects::OpenGL::Spaceship* ship)
+//{
+//    m_ship = ship;
+//}

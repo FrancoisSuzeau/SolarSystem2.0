@@ -27,7 +27,7 @@ PURPOSE : header of the EnginesManager class
 #include "DiscreteSimulationEngine/Skybox.hpp"
 #include "../DataManagementLayer/DataManager.hpp"
 #include "AudioEngine/Music.hpp"
-//#include "Camera.hpp"
+#include "Camera.hpp"
 
 #include <assimp/scene.h>
 
@@ -59,7 +59,7 @@ namespace Engine {
 			DiscreteSimulationEngine::Skybox *m_skybox;
 			int ancient_track;
 			std::string ancient_radio;
-			//Camera		m_camera;
+			Camera		m_camera;
 
 			void changeCurrentTrack(DataManagementLayer::DataManager data_manager);
 			void correctIncrement(DataManagementLayer::DataManager data_manager);

@@ -24,7 +24,7 @@ PURPOSE : header of the Camera class
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 #include "InputDevices/InputDevices.hpp"
-#include "DiscreteSimulationEngine/Objects/OpenGL/Spaceship.hpp"
+//#include "DiscreteSimulationEngine/Objects/OpenGL/Spaceship.hpp"
 
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
@@ -34,7 +34,7 @@ namespace Engine {
 
 	private:
 
-		DiscreteSimulationEngine::Objects::OpenGL::Spaceship *m_ship;
+		//DiscreteSimulationEngine::Objects::OpenGL::Spaceship *m_ship;
 
 		glm::vec3   m_vertical_axe;
 		glm::vec3   m_position;
@@ -61,7 +61,7 @@ namespace Engine {
 		glm::mat4       getViewMatrix();
 		void    setDistFromShip(float const new_val);		
 		glm::vec3 getPosition() const;
-		void		setShip(DiscreteSimulationEngine::Objects::OpenGL::Spaceship* ship);
+		//void		setShip(DiscreteSimulationEngine::Objects::OpenGL::Spaceship* ship);
 
 
 	};
