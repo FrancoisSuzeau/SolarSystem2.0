@@ -56,8 +56,8 @@ namespace Engine {
 		int             pass;
 		bool            bloom;
 		int             bloom_strenght;
-
-
+		float           distance_from_ship;
+		glm::vec3       cam_pos;
 
 		/*
 		
@@ -66,7 +66,7 @@ namespace Engine {
 		bool            render_overlay;
 		bool            render_name;
 		bool            render_info;
-		float           distance_from_ship;
+		
 		int             index_ship;
 		bool            change_skin;
 		
@@ -76,7 +76,7 @@ namespace Engine {
 
 		
 		glm::vec3       ship_position;
-		glm::vec3       cam_pos;
+		
 		glm::vec3       ship_orientation;
 
 		bool            hilight_sun;*/
@@ -120,6 +120,14 @@ namespace Engine {
 		void            setBloomStrength(int const new_val);
 		int             getBloomStrength() const;
 
+		InputDevices::KeyInput getKeyInput() const;
+		InputDevices::MouseInput getMouseInput() const;
+
+		void            setDistanceFromShip(float const new_val);
+		float           getDistancteFromShip() const;
+		void            setCamPos(glm::vec3 const new_val);
+		glm::vec3       getCamPos() const;
+
 		void            clean();
 
 		/*static std::vector<body_data>          m_bodys_data;
@@ -135,16 +143,14 @@ namespace Engine {
 		bool            getRenderName() const;
 		void            setRenderInfo(bool const new_val);
 		bool            getRenderInfo() const;
-		void            setDistanceFromShip(float const new_val);
-		float           getDistancteFromShip() const;
+		
 		void            setIndexShip(int const new_val);
 		int             getIndexShip() const;
 		void            setChangeSkin(bool const new_val);
 		bool            getChangeSkin() const;
 		void            setShipPos(glm::vec3 const new_val);
 		glm::vec3       getShipPos() const;
-		void            setCamPos(glm::vec3 const new_val);
-		glm::vec3       getCamPos() const;
+		
 		glm::vec3       getSunPos() const;
 		
 		std::vector<glm::mat4>       getLightSpaceMatrix();

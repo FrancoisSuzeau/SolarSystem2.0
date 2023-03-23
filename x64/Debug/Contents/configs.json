@@ -5,7 +5,8 @@
         "render_overlay":true,
         "spaceship_name":"Star Hunter - Class Eviscerator",
         "bloom_strenght":10,
-        "bloom":true
+        "bloom":true,
+        "distance_from_ship":"3.0"
     },
     
     "bodies_data":

@@ -145,6 +145,7 @@
     <ClCompile Include="DataManagementLayer\Loader.cpp" />
     <ClCompile Include="Engine\AudioEngine\AmbiantSound.cpp" />
     <ClCompile Include="Engine\AudioEngine\Music.cpp" />
+    <ClCompile Include="Engine\Camera.cpp" />
     <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\Blender\Mesh.cpp" />
     <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\Blender\Model.cpp" />
     <ClCompile Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\AsteroidField.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="DataManagementLayer\Loader.hpp" />
     <ClInclude Include="Engine\AudioEngine\AmbiantSound.hpp" />
     <ClInclude Include="Engine\AudioEngine\Music.hpp" />
+    <ClInclude Include="Engine\Camera.hpp" />
     <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\Blender\Mesh.hpp" />
     <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\Blender\Model.hpp" />
     <ClInclude Include="Engine\DiscreteSimulationEngine\Objects\OpenGL\AsteroidField.hpp" />

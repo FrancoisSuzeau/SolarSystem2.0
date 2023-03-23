@@ -9,6 +9,7 @@ using namespace Engine;
 /***********************************************************************************************************************************************************************/
 EnginesManager::EnginesManager() : m_GUI_manager(), m_state(nullptr), m_framebuffer(), m_planete_renderer(nullptr), m_ring_renderer(nullptr), m_sphere_renderer(nullptr),
 m_square_renderer(nullptr), m_solar_system(nullptr), m_skybox(nullptr), m_music_engine(), ancient_track(0), ancient_radio("Epic Orchestra")
+//,m_camera(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f))
 {
 
 }
@@ -368,7 +369,10 @@ void EnginesManager::renderFrameBuffer()
 void Engine::EnginesManager::changeView()
 {
 	m_state->listenEvents();
-	//camera movement
+	/*m_camera.setDistFromShip(m_state->getDistancteFromShip());
+	m_camera.move(m_state->getMouseInput(), m_state->getRenderMenu());
+	m_state->setViewMat(m_camera.getViewMatrix());
+	m_state->setCamPos(m_camera.getPosition());*/
 	//ship movement
 }
 

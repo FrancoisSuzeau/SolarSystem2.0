@@ -22,9 +22,9 @@ int State::m_height;
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
 State::State(int width, int height, double angle) : m_terminate(false), m_key_input(nullptr), m_mouse_input(nullptr), m_fps(60), m_render_menu(false),
-key_pressed(false), m_render_overlay(true), far_plane(1000.f), near_plane(0.1f), bloom(true), bloom_strenght(10)
+key_pressed(false), m_render_overlay(true), far_plane(1000.f), near_plane(0.1f), bloom(true), bloom_strenght(10), distance_from_ship(0.f)
 //, render_normal(true), asteroid_count(100), ,
-//render_overlay(true), render_name(true), render_info(false), distance_from_ship(3.f), index_ship(0), change_skin(true), //for loading the skin at program launch
+//render_overlay(true), render_name(true), render_info(false),, index_ship(0), change_skin(true), //for loading the skin at program launch
 // hilight_sun(true), render_shadow(true)
 {
     proj_mat = glm::perspective(glm::radians(angle), (double)width / height, (double)near_plane, (double)far_plane);
@@ -237,6 +237,37 @@ int State::getBloomStrength() const
     return bloom_strenght;
 }
 
+InputDevices::KeyInput State::getKeyInput() const
+{
+    return *m_key_input;
+}
+
+InputDevices::MouseInput State::getMouseInput() const
+{
+    return *m_mouse_input;
+}
+
+void State::setDistanceFromShip(float const new_val)
+{
+    distance_from_ship = new_val;
+}
+
+float State::getDistancteFromShip() const
+{
+    return distance_from_ship;
+}
+
+void State::setCamPos(glm::vec3 const new_val)
+{
+    cam_pos = new_val;
+}
+
+glm::vec3 State::getCamPos() const
+{
+    return cam_pos;
+}
+
+
 //void State::setRenderNormal(bool const new_val)
 //{
 //    render_normal = new_val;
@@ -279,15 +310,7 @@ int State::getBloomStrength() const
 //    return render_info;
 //}
 //
-//void State::setDistanceFromShip(float const new_val)
-//{
-//    distance_from_ship = new_val;
-//}
-//
-//float State::getDistancteFromShip() const
-//{
-//    return distance_from_ship;
-//}
+
 //
 //void State::setIndexShip(int const new_val)
 //{
@@ -319,16 +342,7 @@ int State::getBloomStrength() const
 //    return ship_position;
 //}
 //
-//void State::setCamPos(glm::vec3 const new_val)
-//{
-//    cam_pos = new_val;
-//}
-//
-//glm::vec3 State::getCamPos() const
-//{
-//    return cam_pos;
-//}
-//
+
 //glm::vec3 State::getSunPos() const
 //{
 //    return glm::vec3(0.f) - ship_position;
