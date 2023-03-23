@@ -28,6 +28,7 @@ PURPOSE : header of the EnginesManager class
 #include "../DataManagementLayer/DataManager.hpp"
 #include "AudioEngine/Music.hpp"
 #include "Camera.hpp"
+#include "DiscreteSimulationEngine/Objects/OpenGL/Spaceship.hpp"
 
 #include <assimp/scene.h>
 
@@ -60,6 +61,7 @@ namespace Engine {
 			int ancient_track;
 			std::string ancient_radio;
 			Camera		m_camera;
+			DiscreteSimulationEngine::Objects::OpenGL::Spaceship* m_ship;
 
 			void changeCurrentTrack(DataManagementLayer::DataManager data_manager);
 			void correctIncrement(DataManagementLayer::DataManager data_manager);

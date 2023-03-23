@@ -27,7 +27,7 @@ PURPOSE : header of the Spaceship class
         #include <math.h>
         #include <vector>
         
-        #include "../Blender/Model.hpp"
+        //#include "../Blender/Model.hpp"
         #include "Object.hpp"
 
        
@@ -48,7 +48,7 @@ namespace Engine {
 
                         typedef Object super;
 
-                        /*Model* m_spaceship_models;
+                        //Model* m_spaceship_models;
 
                         std::vector<std::string> file_paths;
 
@@ -70,10 +70,10 @@ namespace Engine {
                         glm::mat4 yaw_mat;
                         glm::mat4 pitch_mat;
 
-                        void orientateShip(Input input);
-                        void changePitch(Input input);
-                        void changeYaw(Input input);
-                        void move(Input input);*/
+                        void orientateShip();
+                        void changePitch();
+                        void changeYaw();
+                        void move();
 
 
                     public:
@@ -81,11 +81,11 @@ namespace Engine {
                         Spaceship(std::string const type);
                         ~Spaceship();
 
-                        /*void    clean();
-                        void transform(glm::vec3 ship_pos = glm::vec3(0.f), Input* input = nullptr) override;
-                        void sendToShader(Applications::DataManager& data_manager) override;
+                        void    clean();
+                        void transform(glm::vec3 ship_pos = glm::vec3(0.f)) override;
+                        void sendToShader() override;
 
-                        void drawSpaceship(Applications::DataManager& data_manager);
+                        void drawSpaceship();
                         float getRotX() const;
                         float getRotY() const;
                         glm::vec3       getOrientation() const;
@@ -94,9 +94,9 @@ namespace Engine {
                         void setSpeed(float speed);
                         void setMinimumSpeed();
                         void setMaximumSpeed();
-                        void loadModelShip(Applications::DataManager& data_manager);
+                        void loadModel();
 
-                        void updateSpeed(float const new_val);*/
+                        void updateSpeed(float const new_val);
                 };
 
             }

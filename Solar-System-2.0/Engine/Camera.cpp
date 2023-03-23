@@ -73,8 +73,7 @@ void Camera::calculateAngleAroundShip(InputDevices::MouseInput mouse_input)
 /***********************************************************************************************************************************************************************/
 float Camera::calculateHorizontalDistance()
 {
-    //return (float) distance_from_ship * cos(glm::radians((m_ship->getRotY() - 90.0f + pitch)));
-    return 0;
+    return (float) distance_from_ship * cos(glm::radians((m_ship->getRotY() - 90.0f + pitch)));
 }
 
 /***********************************************************************************************************************************************************************/
@@ -82,8 +81,7 @@ float Camera::calculateHorizontalDistance()
 /***********************************************************************************************************************************************************************/
 float Camera::calculateVerticalDistance()
 {
-    //return (float) distance_from_ship * sin(glm::radians((m_ship->getRotY() - 90.0f + pitch)));
-    return 0;
+    return (float) distance_from_ship * sin(glm::radians((m_ship->getRotY() - 90.0f + pitch)));
 }
 
 /***********************************************************************************************************************************************************************/
@@ -91,7 +89,7 @@ float Camera::calculateVerticalDistance()
 /***********************************************************************************************************************************************************************/
 void Camera::calculateCameraPostion(float horizontal_distance, float vertical_distance)
 {
-    /*if(m_ship != nullptr)
+    if(m_ship != nullptr)
     {
         float theta =  angle_around_player + m_ship->getRotX();
         float offset_x = (float) horizontal_distance * sin(glm::radians(theta));
@@ -101,7 +99,7 @@ void Camera::calculateCameraPostion(float horizontal_distance, float vertical_di
         m_position.y = 0.0f + offset_y;
         m_position.z = 0.0f + vertical_distance;
 
-    }*/
+    }
     
 }
 
@@ -198,7 +196,7 @@ glm::vec3 Camera::getPosition() const
     return m_position;
 }
 
-//void Camera::setShip(DiscreteSimulationEngine::Objects::OpenGL::Spaceship* ship)
-//{
-//    m_ship = ship;
-//}
+void Camera::setShip(DiscreteSimulationEngine::Objects::OpenGL::Spaceship* ship)
+{
+    m_ship = ship;
+}

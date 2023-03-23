@@ -43,7 +43,7 @@ namespace Engine {
                 {
                     protected:
 
-                        /*glm::vec3   m_position;
+                        glm::vec3   m_position;
                         glm::mat4   m_model_mat;
                         glm::vec3   m_size;
                         glm::vec3   m_inclinaison_vector;
@@ -58,17 +58,17 @@ namespace Engine {
                         int             m_shininess = 0;
 
                         std::vector<GLuint>          surface_tex_ids;
-                        GLuint                          normal_texture_id = 0;*/
+                        GLuint                          normal_texture_id = 0;
 
                     public:
 
                         Object(std::string const type);
                         ~Object();
 
-                        /*virtual void transform(glm::vec3 ship_pos = glm::vec3(0.f), Input* input = nullptr) = 0;
-                        virtual void sendToShader(Applications::DataManager& data_manager) = 0;*/
+                        virtual void transform(glm::vec3 ship_pos = glm::vec3(0.f)) = 0;
+                        virtual void sendToShader() = 0;
 
-                        /*void updatePosition(glm::vec3 const new_val);
+                        void updatePosition(glm::vec3 const new_val);
                         void rotateObject(glm::mat4& model, float angle);
                         void inclineObject(glm::mat4& model, float angle);
                         void translateObject(glm::mat4& model, glm::vec3 pos);
@@ -87,7 +87,7 @@ namespace Engine {
                         GLuint getNormalTextureID() const;
                         GLuint getDispTextureID()   const;
 
-                        void clean();*/
+                        void clean();
 
                 };
 
