@@ -18,7 +18,7 @@ using namespace Engine::InputDevices;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-MouseInput::MouseInput(SDL_Event* event): m_x(0), m_y(0), m_rel_x(0), m_rel_y(0), m_scroll(0), m_event(event)
+MouseInput::MouseInput(): m_x(0), m_y(0), m_rel_x(0), m_rel_y(0), m_scroll(0)
 {  
     //initialize mouse array
     for (int i(0); i < 8; i++)
@@ -35,55 +35,50 @@ MouseInput::~MouseInput()
 /***********************************************************************************************************************************************************************/
 /************************************************************************************ UpdateEvents *********************************************************************/
 /***********************************************************************************************************************************************************************/
-void MouseInput::updateEvents()
+void MouseInput::updateEvents(SDL_Event event)
 {
     m_rel_x = 0;
     m_rel_y = 0;
-    while(SDL_PollEvent(m_event))
+    switch (event.type)
     {
-        
-        switch (m_event->type)
+
+        ////click on the mouse
+    case SDL_MOUSEBUTTONDOWN:
+        m_mouse_button[event.button.button] = true;
+
+        break;
+
+    case SDL_MOUSEBUTTONUP:
+        m_mouse_button[event.button.button] = false;
+        break;
+
+        //mouse is moving
+    case SDL_MOUSEMOTION:
+        m_x = event.motion.x;
+        m_y = event.motion.y;
+
+        m_rel_x = event.motion.xrel;
+        m_rel_y = event.motion.yrel;
+        break;
+
+        //scrolling
+    case SDL_MOUSEWHEEL:
+
+        if (event.wheel.y > 0) //goes up
         {
-            
-            ////click on the mouse
-            case SDL_MOUSEBUTTONDOWN:
-                m_mouse_button[m_event->button.button] = true;
-                
-                break;
-            
-            case SDL_MOUSEBUTTONUP:
-                m_mouse_button[m_event->button.button] = false;
-                break;
-
-            //mouse is moving
-            case SDL_MOUSEMOTION:
-                m_x = m_event->motion.x;
-                m_y = m_event->motion.y;
-
-                m_rel_x = m_event->motion.xrel;
-                m_rel_y = m_event->motion.yrel;
-                break;
-
-            //scrolling
-            case SDL_MOUSEWHEEL:
-
-                if(m_event->wheel.y > 0) //goes up
-                {
-                    m_scroll = 1;
-                }
-
-                if(m_event->wheel.y < 0) //goes down
-                {
-                    m_scroll = -1;
-                }
-
-                break;
-
-            default:
-                break;
+            m_scroll = 1;
         }
-    }
 
+        if (event.wheel.y < 0) //goes down
+        {
+            m_scroll = -1;
+        }
+
+        break;
+
+    default:
+        break;
+    }
 }
 
 

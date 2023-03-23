@@ -365,6 +365,13 @@ void EnginesManager::renderFrameBuffer()
 	m_framebuffer.renderFrame(map_shader["blur"], map_shader["screen"], m_state->getBloomStrength(), m_state->getBloom());
 }
 
+void Engine::EnginesManager::changeView()
+{
+	m_state->listenEvents();
+	//camera movement
+	//ship movement
+}
+
 void EnginesManager::renderScene()
 {
 	//

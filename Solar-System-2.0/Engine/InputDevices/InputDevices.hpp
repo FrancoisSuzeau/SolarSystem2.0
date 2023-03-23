@@ -33,15 +33,14 @@ PURPOSE : header of the MouseInput class
 
                 private:
 
-                    SDL_Event* m_event;
                     bool        m_keys[SDL_NUM_SCANCODES];
 
                 public:
 
-                    KeyInput(SDL_Event* m_event);
+                    KeyInput();
                     ~KeyInput();
 
-                    void updateEvents();
+                    void updateEvents(SDL_Event event);
                     bool getKey(const SDL_Scancode key) const;
 
                 };
@@ -52,7 +51,6 @@ PURPOSE : header of the MouseInput class
 
                 private:
 
-                    SDL_Event   *m_event;
                     bool        m_mouse_button[8];
                     int         m_x;
                     int         m_y;
@@ -65,10 +63,10 @@ PURPOSE : header of the MouseInput class
 
                 public:
 
-                    MouseInput(SDL_Event* m_event);
+                    MouseInput();
                     ~MouseInput();
 
-                    void updateEvents();
+                    void updateEvents(SDL_Event event);
 
                     bool getMouseButton(const Uint8 button) const; //application crash with Uint32
                     bool getMouseMotion() const;

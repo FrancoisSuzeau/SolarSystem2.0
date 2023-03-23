@@ -27,12 +27,8 @@ PURPOSE : header of the Application class
 
 
 /*
- 
  #include "Settings/Settings.hpp"
- #include "Overlay/Overlay.hpp"
-
-
- #include "Camera/Camera.hpp"*/
+ #include "Overlay/Overlay.hpp"*/
 
 
  /********************************************************************* class definition *********************************************************************/
@@ -67,16 +63,12 @@ private:
 
 	
 	//Overlay                 m_overlay;
-	//Camera* camera;
 
 
 	//
 	//void    renderOverlay();
-	//
-	//void    renderScene();
+	
 	//void    renderNameAndInfo();
-	//void    makeAllChanges();
-	//void    renderIntoFramebuffer(int type);
 	//void    renderFlare();
 
 public:

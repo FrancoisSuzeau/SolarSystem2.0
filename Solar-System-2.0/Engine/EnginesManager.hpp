@@ -83,6 +83,7 @@ namespace Engine {
 			void pushIntoFramebuffer(int type);
 			void renderFrameBuffer();
 			
+			void changeView();
 
 		};
 

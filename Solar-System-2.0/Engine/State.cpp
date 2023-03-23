@@ -21,7 +21,7 @@ int State::m_height;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-State::State(int width, int height, double angle) : m_terminate(false), m_event(nullptr), m_key_input(nullptr), m_mouse_input(nullptr), m_fps(60), m_render_menu(false),
+State::State(int width, int height, double angle) : m_terminate(false), m_key_input(nullptr), m_mouse_input(nullptr), m_fps(60), m_render_menu(false),
 key_pressed(false), m_render_overlay(true), far_plane(1000.f), near_plane(0.1f), bloom(true), bloom_strenght(10)
 //, render_normal(true), asteroid_count(100), ,
 //render_overlay(true), render_name(true), render_info(false), distance_from_ship(3.f), index_ship(0), change_skin(true), //for loading the skin at program launch
@@ -33,21 +33,15 @@ key_pressed(false), m_render_overlay(true), far_plane(1000.f), near_plane(0.1f),
     m_width = width;
     m_height = height;
 
-    if (m_event == nullptr)
-    {
-        m_event = new SDL_Event();
-        assert(m_event);
-    }
-
     if (m_key_input == nullptr)
     {
-        m_key_input = new Engine::InputDevices::KeyInput(m_event);
+        m_key_input = new Engine::InputDevices::KeyInput();
         assert(m_key_input);
     }
 
     if (m_mouse_input == nullptr)
     {
-        m_mouse_input = new Engine::InputDevices::MouseInput(m_event);
+        m_mouse_input = new Engine::InputDevices::MouseInput();
         assert(m_mouse_input);
     }
 }
@@ -73,12 +67,6 @@ void State::clean()
         delete m_mouse_input;
         m_mouse_input = nullptr;
     }
-
-    if (m_event != nullptr)
-    {
-        delete m_event;
-        m_event = nullptr;
-    }
 }
 
 /***********************************************************************************************************************************************************************/
@@ -86,10 +74,15 @@ void State::clean()
 /***********************************************************************************************************************************************************************/
 void State::listenEvents()
 {
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+        m_key_input->updateEvents(event);
+        m_mouse_input->updateEvents(event);
+    }
     bool tmp = this->getRenderMenu();
     if (m_key_input != nullptr)
     {
-        m_key_input->updateEvents();
         if ((m_key_input->getKey(SDL_SCANCODE_ESCAPE)) && (!key_pressed))
         {
             this->setRenderMenu(!tmp);
@@ -100,10 +93,9 @@ void State::listenEvents()
             key_pressed = false;
         }
     }
-
     if (m_mouse_input != nullptr)
     {
-        m_mouse_input->updateEvents();
+        
         if (this->m_render_menu)
         {
             m_mouse_input->capturePointer(false);

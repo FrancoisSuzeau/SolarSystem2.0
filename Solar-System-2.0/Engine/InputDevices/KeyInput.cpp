@@ -18,7 +18,7 @@ using namespace Engine::InputDevices;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-KeyInput::KeyInput(SDL_Event *event) : m_event(event)
+KeyInput::KeyInput()
 {
     //initialize key array
     for (int i(0); i < SDL_NUM_SCANCODES; i++)
@@ -36,24 +36,20 @@ KeyInput::~KeyInput()
 /***********************************************************************************************************************************************************************/
 /************************************************************************************ UpdateEvents *********************************************************************/
 /***********************************************************************************************************************************************************************/
-void KeyInput::updateEvents()
+void KeyInput::updateEvents(SDL_Event event)
 {
     
-    while(SDL_PollEvent(m_event))
+    switch (event.type)
     {
-        
-        switch (m_event->type)
-        {
-            //activate a key
-            case SDL_KEYDOWN:
-                m_keys[m_event->key.keysym.scancode] = true;
-                break;
-            case SDL_KEYUP:
-                m_keys[m_event->key.keysym.scancode] = false;
-                break;
-            default:
-                break;
-        }
+        //activate a key
+    case SDL_KEYDOWN:
+        m_keys[event.key.keysym.scancode] = true;
+        break;
+    case SDL_KEYUP:
+        m_keys[event.key.keysym.scancode] = false;
+        break;
+    default:
+        break;
     }
 
 }
