@@ -87,7 +87,6 @@ namespace DataManagementLayer {
 		std::map<std::string, std::string> getMusicInfo();
 
 		std::string setAndGetSpaceshipPath(std::string const prefered_ship);
-		assimp_data getBlenderModel(std::string path);
 
 		std::vector <std::string> getSkyboxPath();
 		unsigned int getSkyboxTexture(std::vector<std::string> skybox_paths) const;

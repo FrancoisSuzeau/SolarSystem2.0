@@ -25,7 +25,7 @@ PURPOSE : Interface Object
         #include <glm/gtc/type_ptr.hpp>
 
         #include <vector>
-
+#include "../../../InputDevices/InputDevices.hpp"
 
 
         
@@ -65,7 +65,7 @@ namespace Engine {
                         Object(std::string const type);
                         ~Object();
 
-                        virtual void transform(glm::vec3 ship_pos = glm::vec3(0.f)) = 0;
+                        virtual void transform(InputDevices::KeyInput key_input, InputDevices::MouseInput mouse_input, glm::vec3 ship_pos = glm::vec3(0.f)) = 0;
                         virtual void sendToShader() = 0;
 
                         void updatePosition(glm::vec3 const new_val);

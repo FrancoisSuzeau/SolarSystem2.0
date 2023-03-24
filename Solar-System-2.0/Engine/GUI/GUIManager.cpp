@@ -24,14 +24,12 @@ void GUIManager::initGUIs(std::map < std::string, std::string> map_info, int i)
 	{
 		m_menu = new Menu();
 		assert(m_menu);
-		
 	}
 
 	if (m_hud == nullptr)
 	{
 		m_hud = new HUD();
 		assert(m_hud);
-		
 	}
 
 	menu_selection_value.insert(std::make_pair("quit", false));

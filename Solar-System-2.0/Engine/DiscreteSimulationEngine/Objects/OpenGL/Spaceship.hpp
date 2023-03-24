@@ -30,8 +30,6 @@ PURPOSE : header of the Spaceship class
         #include "../Blender/Model.hpp"
         #include "Object.hpp"
 
-       
-
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
 
@@ -48,7 +46,7 @@ namespace Engine {
 
                         typedef Object super;
 
-                        //Model* m_spaceship_models;
+                        Blender::Model* m_model;
 
                         std::vector<std::string> file_paths;
 
@@ -70,10 +68,10 @@ namespace Engine {
                         glm::mat4 yaw_mat;
                         glm::mat4 pitch_mat;
 
-                        void orientateShip();
-                        void changePitch();
-                        void changeYaw();
-                        void move();
+                        void orientateShip(InputDevices::MouseInput mouse_input);
+                        void changePitch(InputDevices::MouseInput mouse_input);
+                        void changeYaw(InputDevices::MouseInput mouse_input);
+                        void move(InputDevices::KeyInput key_input);
 
 
                     public:
@@ -82,10 +80,10 @@ namespace Engine {
                         ~Spaceship();
 
                         void    clean();
-                        void transform(glm::vec3 ship_pos = glm::vec3(0.f)) override;
+                        void transform(InputDevices::KeyInput key_input, InputDevices::MouseInput mouse_input, glm::vec3 ship_pos = glm::vec3(0.f)) override;
                         void sendToShader() override;
 
-                        void drawSpaceship();
+                        void render(RenderingEngine::Shader *shader);
                         float getRotX() const;
                         float getRotY() const;
                         glm::vec3       getOrientation() const;
@@ -94,7 +92,7 @@ namespace Engine {
                         void setSpeed(float speed);
                         void setMinimumSpeed();
                         void setMaximumSpeed();
-                        void loadModel();
+                        void buildModel(std::string const& path);
 
                         void updateSpeed(float const new_val);
                 };

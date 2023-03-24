@@ -50,31 +50,6 @@ CkJsonObject* Loader::loadJsonObject(std::string object_name)
 	}
 }
 
-assimp_data Loader::loadModel(std::string const& path)
-{
-	Assimp::Importer import;
-	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
-
-	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
-	{
-		std::string err_msg = "Loading Model ASSIMP : ERROR ";
-		err_msg.append(import.GetErrorString());
-		std::cout << err_msg << std::endl;
-		/*showError(nullptr, ErrorHandler(err_msg.c_str()), __FILENAME__, __FUNCTION__, __LINE__);*/
-	}
-	std::cout << ">> Loading Model ASSIMP : SUCCESS" << std::endl;
-
-	return assimp_data(
-		{
-			path.substr(0, path.find_last_of('/')),
-			scene->mRootNode,
-			scene
-		}
-	);
-
-
-}
-
 ///***********************************************************************************************************************************************************************/
 ///********************************************************************************** loadWithStbi ***********************************************************************/
 ///***********************************************************************************************************************************************************************/
@@ -117,59 +92,58 @@ assimp_data Loader::loadModel(std::string const& path)
 //    return true;
 //}
 //
-//unsigned int Loader::loadWithStbi(const char *path, const std::string &directory)
-//{
-//    std::string filename = std::string(path);
-//    filename = directory + '/' + filename;
-//
-//    // renderLogTextureLoaded(filename);
-//
-//    int width, height, nrComponents;
-//    unsigned int textureID = 0;
-//    unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
-//    if (data)
-//    {
-//        GLenum format;
-//        if (nrComponents == 1)
-//            format = GL_RED;
-//        else if (nrComponents == 3)
-//            format = GL_RGB;
-//        else if (nrComponents == 4)
-//            format = GL_RGBA;
-//
-//        glGenTextures(1, &textureID);
-//        assert(textureID != 0);
-//
-//        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, textureID);
-//
-//            glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-//            glGenerateMipmap(GL_TEXTURE_2D);
-//
-//            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-//            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-//            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-//            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//
-//            stbi_image_free(data);
-//
-//            std::cout << ">> Texture loading by path: " << path << " SUCCESS" << std::endl;
-//
-//        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, 0);
-//
-//    }
-//    else
-//    {
-//        std::string err_msg = "Texture failed to load for path : ";
-//        err_msg.append(path);
-//        showError(nullptr, ErrorHandler(err_msg.c_str()), __FILENAME__, __FUNCTION__, __LINE__);
-//        stbi_image_free(data);
-//    }
-//
-//    return textureID;
-//}
-//
+unsigned int Loader::loadWithStbi(const char *path, const std::string &directory)
+{
+    std::string filename = std::string(path);
+    filename = directory + '/' + filename;
+
+    int width, height, nrComponents;
+    unsigned int textureID = 0;
+    unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
+    if (data)
+    {
+        GLenum format;
+        if (nrComponents == 1)
+            format = GL_RED;
+        else if (nrComponents == 3)
+            format = GL_RGB;
+        else if (nrComponents == 4)
+            format = GL_RGBA;
+
+        glGenTextures(1, &textureID);
+        assert(textureID != 0);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureID);
+
+            glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+            glGenerateMipmap(GL_TEXTURE_2D);
+
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+            stbi_image_free(data);
+
+            std::cout << ">> Texture loading by path: " << path << " SUCCESS" << std::endl;
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+    }
+    else
+    {
+        std::string err_msg = "Texture failed to load for path : ";
+        err_msg.append(path);
+		std::cout << err_msg << std::endl;
+        //showError(nullptr, ErrorHandler(err_msg.c_str()), __FILENAME__, __FUNCTION__, __LINE__);
+        stbi_image_free(data);
+    }
+
+    return textureID;
+}
+
 /***********************************************************************************************************************************************************************/
 /****************************************************************************** loadWithSDLMixer ***********************************************************************/
 /***********************************************************************************************************************************************************************/

@@ -267,6 +267,20 @@ glm::vec3 State::getCamPos() const
     return cam_pos;
 }
 
+void State::setShipPos(glm::vec3 const new_val)
+{
+    ship_position = new_val;
+}
+
+glm::vec3 State::getShipPos() const
+{
+    return ship_position;
+}
+
+glm::vec3 State::getSunPos() const
+{
+    return glm::vec3(0.f) - ship_position;
+}
 
 //void State::setRenderNormal(bool const new_val)
 //{
@@ -330,22 +344,6 @@ glm::vec3 State::getCamPos() const
 //bool State::getChangeSkin() const
 //{
 //    return change_skin;
-//}
-//
-//void State::setShipPos(glm::vec3 const new_val)
-//{
-//    ship_position = new_val;
-//}
-//
-//glm::vec3 State::getShipPos() const
-//{
-//    return ship_position;
-//}
-//
-
-//glm::vec3 State::getSunPos() const
-//{
-//    return glm::vec3(0.f) - ship_position;
 //}
 //
 

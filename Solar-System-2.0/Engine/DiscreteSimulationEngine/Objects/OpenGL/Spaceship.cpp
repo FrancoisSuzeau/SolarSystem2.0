@@ -17,15 +17,8 @@ using namespace Engine::DiscreteSimulationEngine::Objects::OpenGL;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Spaceship::Spaceship(std::string const type) : super(type), m_yaw(0.0f), m_pitch(90.0f), m_speed(0.0f), speed_limit(0.05f), m_index_skin(0)
+Spaceship::Spaceship(std::string const type) : super(type), m_yaw(0.0f), m_pitch(90.0f), m_speed(0.0f), speed_limit(0.05f), m_index_skin(0), m_model(nullptr)
 {   
-
-    /*file_paths.push_back("assets/model/spaceship/untitled.obj");
-    file_paths.push_back("assets/model/donut/donut.obj");
-    file_paths.push_back("assets/model/spaceshuttle/spaceshuttle.obj");
-
-    m_spaceship_models = nullptr;
-
     m_scales.push_back(0.1f);
     m_scales.push_back(3.0f);
     m_scales.push_back(0.1f);
@@ -44,7 +37,7 @@ Spaceship::Spaceship(std::string const type) : super(type), m_yaw(0.0f), m_pitch
     m_sensibility[1] = 0.0f;
 
     y_dir = 0.0f;
-    x_dir = 0.0f;*/
+    x_dir = 0.0f;
 }
 
 Spaceship::~Spaceship()
@@ -55,20 +48,13 @@ Spaceship::~Spaceship()
 /***********************************************************************************************************************************************************************/
 /******************************************************************************* transform *************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Spaceship::transform(glm::vec3 ship_pos)
+void Spaceship::transform(InputDevices::KeyInput key_input, InputDevices::MouseInput mouse_input, glm::vec3 ship_pos)
 {
-    //if(input != nullptr)
-    //{
-    //    this->move(*input);
-    //    
-    //    super::m_model_mat = glm::mat4(1.0f);
-    //    
-    //    this->orientateShip(*input);
-    //    // this->translateObject(super::m_model_mat, super::m_position);
-    //    super::m_model_mat *= (yaw_mat * pitch_mat);
-    //    super::scaleObject(super::m_model_mat, glm::vec3(m_scales[m_index_skin]));
-    //    
-    //}
+    this->move(key_input);
+    super::m_model_mat = glm::mat4(1.0f);
+    this->orientateShip(mouse_input);
+    super::m_model_mat *= (yaw_mat * pitch_mat);
+    super::scaleObject(super::m_model_mat, glm::vec3(m_scales[m_index_skin]));
 }
 
 /***********************************************************************************************************************************************************************/
@@ -76,13 +62,13 @@ void Spaceship::transform(glm::vec3 ship_pos)
 /***********************************************************************************************************************************************************************/
 void Spaceship::clean()
 {
-    /*if(m_spaceship_models != nullptr)
+    if(m_model != nullptr)
     {
-        m_spaceship_models->clean();
-        delete m_spaceship_models;
-        m_spaceship_models = nullptr;
+        m_model->clean();
+        delete m_model;
+        m_model = nullptr;
 
-    }*/
+    }
 }
 
 /***********************************************************************************************************************************************************************/
@@ -90,35 +76,26 @@ void Spaceship::clean()
 /***********************************************************************************************************************************************************************/
 void Spaceship::sendToShader()
 {
-    /*if ((data_manager.getShader(super::m_type) != nullptr) && (data_manager.getPass() == COLOR_FBO))
-    {
-        glUseProgram(data_manager.getShader(super::m_type)->getProgramID());
-        data_manager.getShader(super::m_type)->setMat4("projection", data_manager.getProjMat());
-        data_manager.getShader(super::m_type)->setMat4("view", data_manager.getViewMat());
-        data_manager.getShader(super::m_type)->setMat4("model", super::getModelMat());
-        data_manager.getShader(super::m_type)->setVec3("viewPos", data_manager.getCamPos());
-        data_manager.getShader(super::m_type)->setVec3("sunPos", data_manager.getSunPos());
-        glUseProgram(0);
-    }*/
+    //DO NOTHING
 }
 
 /***********************************************************************************************************************************************************************/
 /******************************************************************************* drawSpaceship *************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Spaceship::drawSpaceship()
+void Spaceship::render(RenderingEngine::Shader *shader)
 {
-    /*if ((m_spaceship_models != nullptr) && ((data_manager.getShader(super::m_type) != nullptr)))
+    if (m_model != nullptr)
     {
-        m_spaceship_models->draw(data_manager);
-    }*/
+        m_model->render(shader);
+    }
 }
 
 /***********************************************************************************************************************************************************************/
 /*************************************************************************************** move **************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Spaceship::move()
+void Spaceship::move(InputDevices::KeyInput key_input)
 {
-    /*if (input.getKey(SDL_SCANCODE_W))
+    if (key_input.getKey(SDL_SCANCODE_W))
     {
         m_position += m_ship_orientation * m_speed;
         if (m_speed < speed_limit)
@@ -127,7 +104,7 @@ void Spaceship::move()
         }
         directions[0] = true;
     }
-    else if (!input.getKey(SDL_SCANCODE_W) && directions[0])
+    else if (!key_input.getKey(SDL_SCANCODE_W) && directions[0])
     {
         if (m_speed >= 1.0f)
         {
@@ -141,7 +118,7 @@ void Spaceship::move()
 
     }
 
-    if (input.getKey(SDL_SCANCODE_S))
+    if (key_input.getKey(SDL_SCANCODE_S))
     {
         m_position -= m_ship_orientation * m_speed;
         if (m_speed < speed_limit)
@@ -150,7 +127,7 @@ void Spaceship::move()
         }
         directions[1] = true;
     }
-    else if (!input.getKey(SDL_SCANCODE_S) && directions[1])
+    else if (!key_input.getKey(SDL_SCANCODE_S) && directions[1])
     {
         if (m_speed >= 1.0f)
         {
@@ -163,7 +140,7 @@ void Spaceship::move()
         }
     }
 
-    if (input.getKey(SDL_SCANCODE_A))
+    if (key_input.getKey(SDL_SCANCODE_A))
     {
         m_position += m_lateral_move * m_speed;
         if (m_speed < speed_limit)
@@ -173,7 +150,7 @@ void Spaceship::move()
 
         directions[2] = true;
     }
-    else if (!input.getKey(SDL_SCANCODE_A) && directions[2])
+    else if (!key_input.getKey(SDL_SCANCODE_A) && directions[2])
     {
         if (m_speed >= 1.0f)
         {
@@ -186,7 +163,7 @@ void Spaceship::move()
         }
     }
 
-    if (input.getKey(SDL_SCANCODE_D))
+    if (key_input.getKey(SDL_SCANCODE_D))
     {
         m_position -= m_lateral_move * m_speed;
         if (m_speed < speed_limit)
@@ -195,7 +172,7 @@ void Spaceship::move()
         }
         directions[3] = true;
     }
-    else if (!input.getKey(SDL_SCANCODE_D) && directions[3])
+    else if (!key_input.getKey(SDL_SCANCODE_D) && directions[3])
     {
         if (m_speed >= 1.0f)
         {
@@ -208,7 +185,7 @@ void Spaceship::move()
         }
     }
 
-    if (input.getKey(SDL_SCANCODE_LSHIFT))
+    if (key_input.getKey(SDL_SCANCODE_LSHIFT))
     {
         m_position += glm::normalize(glm::vec3(0.0f, 0.0f, 1.0f)) * m_speed;
         if (m_speed < speed_limit)
@@ -217,7 +194,7 @@ void Spaceship::move()
         }
         directions[4] = true;
     }
-    else if (!input.getKey(SDL_SCANCODE_LSHIFT) && directions[4])
+    else if (!key_input.getKey(SDL_SCANCODE_LSHIFT) && directions[4])
     {
         if (m_speed >= 1.0f)
         {
@@ -230,7 +207,7 @@ void Spaceship::move()
         }
     }
 
-    if (input.getKey(SDL_SCANCODE_LCTRL))
+    if (key_input.getKey(SDL_SCANCODE_LCTRL))
     {
         m_position -= glm::normalize(glm::vec3(0.0f, 0.0f, 1.0f)) * m_speed;
         if (m_speed < speed_limit)
@@ -239,7 +216,7 @@ void Spaceship::move()
         }
         directions[5] = true;
     }
-    else if (!input.getKey(SDL_SCANCODE_LCTRL) && directions[5])
+    else if (!key_input.getKey(SDL_SCANCODE_LCTRL) && directions[5])
     {
         if (m_speed >= 1.0f)
         {
@@ -250,19 +227,19 @@ void Spaceship::move()
         {
             directions[5] = false;
         }
-    }*/
+    }
 }
 
 /***********************************************************************************************************************************************************************/
 /******************************************************************************* orientateShip *************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Spaceship::orientateShip()
+void Spaceship::orientateShip(InputDevices::MouseInput mouse_input)
 {
-    /*this->changePitch(input);
+    this->changePitch(mouse_input);
     m_rotation_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     super::rotateObject(pitch_mat, m_pitch);
 
-    this->changeYaw(input);
+    this->changeYaw(mouse_input);
     m_rotation_vector = glm::vec3(0.0f, 0.0f, 1.0f);
     super::rotateObject(yaw_mat, m_yaw);
 
@@ -274,20 +251,20 @@ void Spaceship::orientateShip()
     m_ship_orientation = glm::normalize(dir);
 
     m_lateral_move = cross(glm::vec3(0.0f, 0.0f, 1.0f), m_ship_orientation);
-    m_lateral_move = normalize(m_lateral_move);*/
+    m_lateral_move = normalize(m_lateral_move);
 
 }
 
 /***********************************************************************************************************************************************************************/
 /*************************************************************************** changePitch ***************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Spaceship::changePitch()
+void Spaceship::changePitch(InputDevices::MouseInput mouse_input)
 {
-   /* pitch_mat = glm::mat4(1.0f);
+   pitch_mat = glm::mat4(1.0f);
 
-    if (input.getMouseButton(SDL_BUTTON_LEFT))
+    if (mouse_input.getMouseButton(SDL_BUTTON_LEFT))
     {
-        y_dir = input.getYRel();
+        y_dir = mouse_input.getYRel();
         m_pitch += y_dir * m_sensibility[0];
         if (m_sensibility[0] < 0.3)
         {
@@ -303,7 +280,7 @@ void Spaceship::changePitch()
             m_pitch = -0.1f;
         }
     }
-    else if (!input.getMouseButton(SDL_BUTTON_LEFT))
+    else if (!mouse_input.getMouseButton(SDL_BUTTON_LEFT))
     {
         if (m_sensibility[0] >= 0.01)
         {
@@ -320,19 +297,19 @@ void Spaceship::changePitch()
         {
             m_pitch = -0.1f;
         }
-    }*/
+    }
 }
 
 /***********************************************************************************************************************************************************************/
 /***************************************************************************** changeYaw ***************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Spaceship::changeYaw()
+void Spaceship::changeYaw(InputDevices::MouseInput mouse_input)
 {
-    /*yaw_mat = glm::mat4(1.0f);
+    yaw_mat = glm::mat4(1.0f);
 
-    if (input.getMouseButton(SDL_BUTTON_LEFT))
+    if (mouse_input.getMouseButton(SDL_BUTTON_LEFT))
     {
-        x_dir = input.getXRel();
+        x_dir = mouse_input.getXRel();
         m_yaw -= x_dir * m_sensibility[1];
 
         if (m_sensibility[1] < 0.3)
@@ -340,7 +317,7 @@ void Spaceship::changeYaw()
             m_sensibility[1] += 0.01;
         }
     }
-    else if (!input.getMouseButton(SDL_BUTTON_LEFT))
+    else if (!mouse_input.getMouseButton(SDL_BUTTON_LEFT))
     {
         if (m_sensibility[1] >= 0.01)
         {
@@ -348,14 +325,19 @@ void Spaceship::changeYaw()
         }
 
         m_yaw -= x_dir * m_sensibility[1];
-    }*/
+    }
 }
 
 /***********************************************************************************************************************************************************************/
 /******************************************************************************* loadModelShip *************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Spaceship::loadModel()
+void Spaceship::buildModel(std::string const& path)
 {
+    if (m_model == nullptr)
+    {
+        m_model = new Blender::Model(path);
+    }
+
     /*if(data_manager.getChangeSkin())
     {
         m_index_skin = data_manager.getIndexShip();
@@ -363,9 +345,9 @@ void Spaceship::loadModel()
 
         this->clean();
 
-        if(m_spaceship_models == nullptr)
+        if(m_model == nullptr)
         {
-            m_spaceship_models = new Model(file_paths[m_index_skin]);
+            m_model = new Model(file_paths[m_index_skin]);
             data_manager.setChangeSkin(false);
         }
     }*/

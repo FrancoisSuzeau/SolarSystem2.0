@@ -65,7 +65,8 @@ namespace Engine {
 
 			void changeCurrentTrack(DataManagementLayer::DataManager data_manager);
 			void correctIncrement(DataManagementLayer::DataManager data_manager);
-			void manageSkybox();
+			void manageSkyboxShader();
+			void manageSpaceshipShader();
 
 			void renderScene();
 
@@ -82,7 +83,7 @@ namespace Engine {
 			void manageGUI(DataManagementLayer::DataManager data_manager);
 			void manageAudioEngine(DataManagementLayer::DataManager data_manager);
 
-			void makeAllChanges();
+			void manageShaders();
 
 			void pushIntoFramebuffer(int type);
 			void renderFrameBuffer();

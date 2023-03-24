@@ -34,13 +34,6 @@ PURPOSE : header of the Loader class
 
 namespace DataManagementLayer {
 
-	typedef struct assimp_data {
-		std::string directory;
-		aiNode* node; 
-		const aiScene* scene;
-
-	} assimp_data ;
-
 	class Loader
 	{
 
@@ -59,13 +52,13 @@ namespace DataManagementLayer {
 
 		static CkJsonObject* loadJsonObject(std::string object_name);
 		static GLuint       loadTextureWithSDL(std::string path);
-		static assimp_data loadModel(std::string const& path);
 		static unsigned int loadSkyboxTextures(std::vector<std::string> faces);
 		static  Mix_Music* loadWithSDLMixer(std::string file_path);
+		static unsigned int loadWithStbi(const char* path, const std::string& directory);
 
 		/*
 		static bool loadWithStbi(std::string file_path, GLuint &id, int &w, int &h);
-		static unsigned int loadWithStbi(const char *path, const std::string &directory);
+		
 		
 
 		static void initializeMap();

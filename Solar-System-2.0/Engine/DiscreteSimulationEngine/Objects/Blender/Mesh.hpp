@@ -33,6 +33,8 @@ PURPOSE : header of the Mesh class
         #include <math.h>
         #include <vector>
 
+#include "../../../RenderingEngine/Shader.hpp"
+
         #define MAX_BONE_INFLUENCE 4
 
         
@@ -77,7 +79,7 @@ PURPOSE : header of the Mesh class
 
                             private:
 
-                                /*std::vector<Vertex>         m_vertices;
+                                std::vector<Vertex>         m_vertices;
                                 std::vector<GLuint>         m_indices;
                                 std::vector<Texturate>      m_textures;
 
@@ -85,7 +87,7 @@ PURPOSE : header of the Mesh class
                                 unsigned int m_vbo;
                                 unsigned int m_ebo;
 
-                                void setupMesh();*/
+                                void setupMesh();
 
                             public:
 
@@ -93,7 +95,7 @@ PURPOSE : header of the Mesh class
                                 Mesh();
                                 ~Mesh();
 
-                                /*void draw(Applications::DataManager& data_manager);
+                                void render(RenderingEngine::Shader *shader);
 
                                 std::vector<Vertex> getVertices() const;
                                 std::vector<unsigned int> getIndices() const;
@@ -101,7 +103,7 @@ PURPOSE : header of the Mesh class
 
                                 unsigned int getVAO() const;
 
-                                void        clean();*/
+                                void        clean();
 
                         };
 

@@ -274,8 +274,3 @@ std::string DataManager::setAndGetSpaceshipPath(std::string const prefered_ship)
         }
     }
 }
-
-assimp_data DataManager::getBlenderModel(std::string path)
-{
-    return Loader::loadModel(path);
-}

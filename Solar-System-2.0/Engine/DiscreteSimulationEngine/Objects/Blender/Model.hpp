@@ -38,6 +38,7 @@ PURPOSE : header of the Model class
         #include <vector>    
         
         #include "Mesh.hpp"
+#include "../../../../DataManagementLayer/Loader.hpp"
 
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
@@ -53,7 +54,7 @@ namespace Engine {
 
                     private:
 
-                        /*std::vector<Mesh>               m_meshes;
+                        std::vector<Mesh>               m_meshes;
                         std::vector<Texturate>          textures_loaded;
                         std::string                     m_directory;
                         bool                            m_gammaCorrection;
@@ -64,21 +65,21 @@ namespace Engine {
 
                         Mesh processMesh(aiMesh* mesh, const aiScene* scene);
 
-                        std::vector<Texturate> loadMaterialTexture(aiMaterial* mat, aiTextureType type, std::string const typeName);*/
+                        std::vector<Texturate> loadMaterialTexture(aiMaterial* mat, aiTextureType type, std::string const typeName);
 
 
                     public:
 
-                        Model(/*std::string const& path, bool gamma = false*/);
+                        Model(std::string const& path, bool gamma = false);
                         ~Model();
 
-                        /*void draw(Applications::DataManager& data_manager);
+                        void render(RenderingEngine::Shader *shader);
                         unsigned int getMeshVAO(int index) const;
                         size_t getSizeMeshesVector() const;
                         unsigned int getTextureLoadedID(int index) const;
                         size_t getMeshVectorIndiceSize(int index) const;
 
-                        void    clean();*/
+                        void    clean();
 
                 };
             

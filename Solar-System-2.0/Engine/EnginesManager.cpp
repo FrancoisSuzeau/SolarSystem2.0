@@ -132,6 +132,13 @@ void EnginesManager::cleanAllEngines()
 			it->second = nullptr;
 		}
 	}
+
+	if (m_ship != nullptr)
+	{
+		m_ship->clean();
+		delete m_ship;
+		m_ship = nullptr;
+	}
 }
 
 ///***********************************************************************************************************************************************************************/
@@ -264,9 +271,9 @@ void EnginesManager::addToEngine(float progress, std::string text, std::string t
 		{
 			m_ship = new DiscreteSimulationEngine::Objects::OpenGL::Spaceship("model");
 			assert(m_ship);
+			m_ship->buildModel(text);
 			m_camera.setShip(m_ship);
 		}
-		//data_manager.getBlenderModel(text);
 	}
 	if (type.compare("music") == 0)
 	{
@@ -278,7 +285,7 @@ void EnginesManager::addToEngine(float progress, std::string text, std::string t
 	m_GUI_manager.renderScreenLoad(progress, text);
 }
 
-void EnginesManager::manageSkybox()
+void EnginesManager::manageSkyboxShader()
 {
 	if (map_shader["skybox"] != nullptr)
 	{
@@ -291,38 +298,36 @@ void EnginesManager::manageSkybox()
 	}
 }
 
+void EnginesManager::manageSpaceshipShader()
+{
+	if ((map_shader[m_ship->getType()] != nullptr) && (m_state->getPass() == COLOR_FBO))
+	{
+		glUseProgram(map_shader[m_ship->getType()]->getProgramID());
+		map_shader[m_ship->getType()]->setMat4("projection", m_state->getProjMat());
+		map_shader[m_ship->getType()]->setMat4("view", m_state->getViewMat());
+		map_shader[m_ship->getType()]->setMat4(m_ship->getType(), m_ship->getModelMat());
+		map_shader[m_ship->getType()]->setVec3("viewPos", m_state->getCamPos());
+		map_shader[m_ship->getType()]->setVec3("sunPos", m_state->getSunPos());
+		glUseProgram(0);
+	}
+}
+
 /***********************************************************************************************************************************************************************/
 /******************************************************************************** makeAllChanges ***********************************************************************/
 /***********************************************************************************************************************************************************************/
-void EnginesManager::makeAllChanges()
+void EnginesManager::manageShaders()
 {
 	if (m_skybox != nullptr)
 	{
-		this->manageSkybox();
+		this->manageSkyboxShader();
 	}
 
-    /*if((ship != nullptr) && (m_input != nullptr))
-    {
-        if((!render_menu))
-        {
-            ship->transform(glm::vec3(0.f), m_input);
-            ship->sendToShader(m_data_manager);
-            m_data_manager.setShipPos(ship->getPosition());
-            m_data_manager.setShipOrientation(ship->getOrientation());
-        }
-        ship->loadModelShip(m_data_manager);
-    }
+	if (m_ship != nullptr)
+	{
+		this->manageSpaceshipShader();
+	}
 
-    if((camera != nullptr) && (m_input != nullptr))
-    {
-        camera->setDistFromShip(m_data_manager.getDistancteFromShip());
-        camera->move(m_input, render_menu);
-        m_data_manager.setViewMat(camera->getViewMatrix());
-        m_data_manager.setCamPos(camera->getPosition());
-    }
-
-    
-
+    /*
     if(m_solar_system != nullptr)
     {
         m_solar_system->makeChanges(m_data_manager);
@@ -379,16 +384,25 @@ void Engine::EnginesManager::changeView()
 	m_camera.move(m_state->getMouseInput(), m_state->getRenderMenu());
 	m_state->setViewMat(m_camera.getViewMatrix());
 	m_state->setCamPos(m_camera.getPosition());
-	//ship movement
+
+	if (m_ship != nullptr)
+	{
+		if ((!m_state->getRenderMenu()))
+		{
+			m_ship->transform(m_state->getKeyInput(), m_state->getMouseInput(), glm::vec3(0.f));
+			m_state->setShipPos(m_ship->getPosition());
+			/*m_state->setShipOrientation(ship->getOrientation()); */
+		}
+	}
 }
 
 void EnginesManager::renderScene()
 {
-	//
-//    if(!render_menu && (m_data_manager.getPass() == COLOR_FBO))
-//    {
-//        ship->drawSpaceship(m_data_manager);
-//    }
+	
+    if(!m_state->getRenderMenu() && (m_state->getPass() == COLOR_FBO) && (map_shader[m_ship->getType()] != nullptr))
+    {
+        m_ship->render(map_shader[m_ship->getType()]);
+    }
     if(m_skybox != nullptr)
     {
         m_skybox->render(map_shader["skybox"]->getProgramID());

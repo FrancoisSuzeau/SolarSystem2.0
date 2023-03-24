@@ -58,6 +58,8 @@ namespace Engine {
 		int             bloom_strenght;
 		float           distance_from_ship;
 		glm::vec3       cam_pos;
+		glm::vec3       ship_position;
+
 
 		/*
 		
@@ -75,7 +77,7 @@ namespace Engine {
 		bool            render_shadow;
 
 		
-		glm::vec3       ship_position;
+		;
 		
 		glm::vec3       ship_orientation;
 
@@ -127,6 +129,9 @@ namespace Engine {
 		float           getDistancteFromShip() const;
 		void            setCamPos(glm::vec3 const new_val);
 		glm::vec3       getCamPos() const;
+		void            setShipPos(glm::vec3 const new_val);
+		glm::vec3       getShipPos() const;
+		glm::vec3       getSunPos() const;
 
 		void            clean();
 
@@ -148,8 +153,7 @@ namespace Engine {
 		int             getIndexShip() const;
 		void            setChangeSkin(bool const new_val);
 		bool            getChangeSkin() const;
-		void            setShipPos(glm::vec3 const new_val);
-		glm::vec3       getShipPos() const;
+		
 		
 		glm::vec3       getSunPos() const;
 		
