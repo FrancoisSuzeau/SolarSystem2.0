@@ -19,7 +19,7 @@
         #include <exception>
         #include <cstring>
         #include <string>
-        #include <windows.h>
+        //#include <windows.h>
         #include <codecvt>
         #include <locale>
         #include <comdef.h>

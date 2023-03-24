@@ -26,9 +26,7 @@ PURPOSE : header of the Model class
 
         #include <assimp/Importer.hpp>
         #include <assimp/scene.h>
-        #include <assimp/postprocess.h>
-
-        
+        #include <assimp/postprocess.h>      
 
         #include <iostream>
         #include <fstream>
@@ -37,15 +35,9 @@ PURPOSE : header of the Model class
         #include <map>
         #include <string>
         #include <math.h>
-        #include <vector>
-        #include <Windows.h>
+        #include <vector>    
         
-        /*#include "../Application/DataManager.hpp"
-        #include "../ErrorHandler.hpp"*/
         #include "Mesh.hpp"
-        //#include "../Loader/Loader.hpp"
-
-       
 
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
@@ -77,7 +69,7 @@ namespace Engine {
 
                     public:
 
-                        Model(std::string const& path, bool gamma = false);
+                        Model(/*std::string const& path, bool gamma = false*/);
                         ~Model();
 
                         /*void draw(Applications::DataManager& data_manager);

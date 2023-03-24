@@ -10,7 +10,7 @@ NAMEFILE : Model.cpp
 PURPOSE : class Model
 */
 // #define STB_IMAGE_IMPLEMENTATION
-#include <stb/stb_image.h>
+//#include <stb/stb_image.h>
 
 #include "Model.hpp"
 using namespace Engine::DiscreteSimulationEngine::Objects::Blender;
@@ -18,7 +18,7 @@ using namespace Engine::DiscreteSimulationEngine::Objects::Blender;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Model::Model(std::string const &path, bool gamma) //: m_gammaCorrection(gamma)
+Model::Model(/*std::string const& path, bool gamma*/) //: m_gammaCorrection(gamma)
 {
     //loadModel(path);
 }

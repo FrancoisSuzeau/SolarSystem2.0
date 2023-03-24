@@ -27,7 +27,7 @@ PURPOSE : header of the Spaceship class
         #include <math.h>
         #include <vector>
         
-        //#include "../Blender/Model.hpp"
+        #include "../Blender/Model.hpp"
         #include "Object.hpp"
 
        

@@ -28,15 +28,10 @@ PURPOSE : header of the Mesh class
         #include <assimp/scene.h>
         #include <assimp/postprocess.h>
 
-
         #include <iostream>
         #include <string>
         #include <math.h>
         #include <vector>
-        #include <Windows.h>
-
-        /*#include "../Application/DataManager.hpp"
-        #include "../Objects/Object.hpp"*/
 
         #define MAX_BONE_INFLUENCE 4
 
