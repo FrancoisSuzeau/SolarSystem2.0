@@ -50,13 +50,16 @@ namespace Engine {
 		{
 		private:
 
+			std::map<std::string, int>* m_int_selection;
+			std::map<std::string, bool>* m_bool_selection;
+			std::map<std::string, float>* m_float_selection;
 
 		public:
-			HUD();
+			HUD(std::map<std::string, bool>* bool_selection, std::map<std::string, float>* float_selection, std::map<std::string, int>* int_selection);
 			~HUD();
 
 			void renderApplicationHUD();
-			void renderMusicHUD(int width, int height, std::map<std::string, int>& hud_music_selection, music_info infos);
+			void renderMusicHUD(int width, int height, music_info infos);
 		};
 	}
 }

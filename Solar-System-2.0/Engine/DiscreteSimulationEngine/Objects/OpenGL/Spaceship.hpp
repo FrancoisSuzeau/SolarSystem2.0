@@ -92,7 +92,7 @@ namespace Engine {
                         void setSpeed(float speed);
                         void setMinimumSpeed();
                         void setMaximumSpeed();
-                        void buildModel(std::string const& path);
+                        void buildModel(std::string const& path, int index);
 
                         void updateSpeed(float const new_val);
                 };

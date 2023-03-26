@@ -51,22 +51,24 @@ namespace Engine {
 				music_info m_music_infos;
 				
 
-				
-
 			public:
 				GUIManager();
 				~GUIManager();
 
-				std::map<std::string, bool> menu_selection_value;
-				std::map<std::string, int> hud_music_selection;
+				std::map<std::string, bool>* bool_selection;
+				std::map<std::string, int>* int_selection;
+				std::map<std::string, float>* float_selection;
 
-				void initGUIs(std::map < std::string, std::string> map_info, int i);
+				void sendToGUI(std::map < std::string, std::string> map_info);
+				void sendToGUI(imguiTexture_datas imgui_datas);
+				void initGUIs();
 				void clean();
 
 				void renderScreenLoad(float progress, std::string path);
 				void renderMenu(bool render_menu);
 				void renderHUD(bool render_overlay);
 				void changeMusicInfo(std::map < std::string, std::string> map_info);
+
 		};
 	}
 }

@@ -146,14 +146,29 @@ void EnginesManager::cleanAllEngines()
 ///***********************************************************************************************************************************************************************/
 void EnginesManager::manageGUI(DataManagementLayer::DataManager data_manager)
 {
+	this->changeCurrentTrack(data_manager);
+	this->correctIncrement("ship_index", data_manager.getNbSpaceships());
+	if (m_GUI_manager.bool_selection->at("change_ship"))
+	{
+		if (m_ship != nullptr)
+		{
+			std::string path = data_manager.setAndGetSpaceshipPath(m_GUI_manager.int_selection->at("ship_index"));
+
+			m_ship->clean();
+			m_ship->buildModel(path, m_GUI_manager.int_selection->at("ship_index"));
+			m_GUI_manager.int_selection->insert_or_assign("current_ship_index", m_GUI_manager.int_selection->at("ship_index"));
+		}
+		m_GUI_manager.bool_selection->insert_or_assign("change_ship", false);
+	}
+
 	if (m_state != nullptr)
 	{
 		m_GUI_manager.renderMenu(m_state->getRenderMenu());
 		m_GUI_manager.renderHUD(m_state->getRenderOverlay());
-		m_state->setTerminate(m_GUI_manager.menu_selection_value["quit"]);
+		m_state->setTerminate(m_GUI_manager.bool_selection->at("quit"));
+		m_state->setDistanceFromShip(m_GUI_manager.float_selection->at("distance_from_ship"));
+		
 	}
-
-	this->changeCurrentTrack(data_manager);
 
 }
 
@@ -164,37 +179,38 @@ void EnginesManager::changeCurrentTrack(DataManagementLayer::DataManager data_ma
 {
 	std::string music_path = "NONE";
 	std::string items[] = { "Epic Orchestra", "Citadel radio", "Retro Wave 86", "-Error Canal Transmission-" };
-	if (ancient_track != m_GUI_manager.hud_music_selection["current_track"])
+	if (ancient_track != m_GUI_manager.int_selection->at("current_track"))
 	{
-		int direction = (m_GUI_manager.hud_music_selection["current_track"] > ancient_track ? 1 : -1);
+		int direction = (m_GUI_manager.int_selection->at("current_track") > ancient_track ? 1 : -1);
 		while (music_path == "NONE")
 		{
-			this->correctIncrement(data_manager);
-			music_path = data_manager.setAndGetMusicPath(m_GUI_manager.hud_music_selection["current_track"], items[m_GUI_manager.hud_music_selection["current_radio"]]);
+			this->correctIncrement("current_track", data_manager.getNbMusics());
+			music_path = data_manager.setAndGetMusicPath(m_GUI_manager.int_selection->at("current_track"), items[m_GUI_manager.int_selection->at("current_radio")]);
 			if (music_path != "NONE")
 			{
 				break;
 			}
 			else
 			{
-				m_GUI_manager.hud_music_selection["current_track"] += direction;
+				int a = m_GUI_manager.int_selection->at("current_track") + direction;
+				m_GUI_manager.int_selection->insert_or_assign("current_track", a);
 			}
 		}
 		m_GUI_manager.changeMusicInfo(data_manager.getMusicInfo());
-		ancient_track = m_GUI_manager.hud_music_selection["current_track"];
+		ancient_track = m_GUI_manager.int_selection->at("current_track");
 		m_state->setChangeTrack(true);
 	}
 }
 
-void EnginesManager::correctIncrement(DataManagementLayer::DataManager data_manager)
+void EnginesManager::correctIncrement(std::string key, int max)
 {
-	if (m_GUI_manager.hud_music_selection["current_track"] == data_manager.getNbMusics())
+	if (m_GUI_manager.int_selection->at(key) == max)
 	{
-		m_GUI_manager.hud_music_selection["current_track"] = 0;
+		m_GUI_manager.int_selection->insert_or_assign(key, 0);
 	}
-	if (m_GUI_manager.hud_music_selection["current_track"] == -1)
+	if (m_GUI_manager.int_selection->at(key) == -1)
 	{
-		m_GUI_manager.hud_music_selection["current_track"] = data_manager.getNbMusics() - 1;
+		m_GUI_manager.int_selection->insert_or_assign(key, max - 1);
 	}
 }
 
@@ -203,30 +219,31 @@ void EnginesManager::correctIncrement(DataManagementLayer::DataManager data_mana
 /***********************************************************************************************************************************************************************/
 void EnginesManager::manageAudioEngine(DataManagementLayer::DataManager data_manager)
 {
-	if (m_music_engine.getVolume() != m_GUI_manager.hud_music_selection["volume"])
+	if (m_music_engine.getVolume() != m_GUI_manager.int_selection->at("volume"))
 	{
-		m_music_engine.changeVolume(m_GUI_manager.hud_music_selection["volume"]);
+		m_music_engine.changeVolume(m_GUI_manager.int_selection->at("volume"));
 	}
 
 	//the music is finish so the track has to be change so we increment the current track value, call the private methode to generate a new load form the json file
 	//and the if block under this one will be called
-	if (!m_music_engine.isMusicPlaying() && m_GUI_manager.hud_music_selection["pause"] == 0)
+	if (!m_music_engine.isMusicPlaying() && m_GUI_manager.bool_selection->at("pause") == false)
 	{
-		m_GUI_manager.hud_music_selection["current_track"]++;
+		int a = m_GUI_manager.int_selection->at("current_track") + 1;
+		m_GUI_manager.int_selection->insert_or_assign("current_track", a);
 		this->changeCurrentTrack(data_manager);
 	}
 
 	std::string items[] = { "Epic Orchestra", "Citadel radio", "Retro Wave 86", "-Error Canal Transmission-" };
 	
-	if (ancient_radio != items[m_GUI_manager.hud_music_selection["current_radio"]])
+	if (ancient_radio != items[m_GUI_manager.int_selection->at("current_radio")])
 	{
-		if (items[m_GUI_manager.hud_music_selection["current_radio"]] != "-Error Canal Transmission-")
+		if (items[m_GUI_manager.int_selection->at("current_radio")] != "-Error Canal Transmission-")
 		{
-			m_GUI_manager.hud_music_selection["current_track"] = 0;
+			m_GUI_manager.int_selection->insert_or_assign("current_track", 0);
 			this->changeCurrentTrack(data_manager);
 		}
 		
-		ancient_radio = items[m_GUI_manager.hud_music_selection["current_radio"]];
+		ancient_radio = items[m_GUI_manager.int_selection->at("current_radio")];
 	}
 
 	//a user want to change the music or the music
@@ -235,7 +252,7 @@ void EnginesManager::manageAudioEngine(DataManagementLayer::DataManager data_man
 		m_music_engine.updateTrack(data_manager.getMusic());
 		m_state->setChangeTrack(false);
 	}
-	m_music_engine.pause(m_GUI_manager.hud_music_selection["pause"] == 1);
+	m_music_engine.pause(m_GUI_manager.bool_selection->at("pause"));
 }
 
 /***********************************************************************************************************************************************************************/
@@ -243,6 +260,15 @@ void EnginesManager::manageAudioEngine(DataManagementLayer::DataManager data_man
 /***********************************************************************************************************************************************************************/
 void EnginesManager::addToEngine(float progress, std::string text, std::string type, DataManagementLayer::DataManager data_manager)
 {
+	if (type.compare("GUI") == 0)
+	{
+		m_GUI_manager.initGUIs();
+		std::vector<DataManagementLayer::imgui_datas> tmp = data_manager.getImGuiTexture();
+		for (std::vector<DataManagementLayer::imgui_datas>::iterator it = tmp.begin(); it != tmp.end(); it++)
+		{
+			m_GUI_manager.sendToGUI({it[0].img_width, it[0].img_height, it[0].text_id, it[0].name});
+		}
+	}
 	if (type.compare("skybox") == 0)
 	{
 		if (m_skybox == nullptr)
@@ -271,17 +297,20 @@ void EnginesManager::addToEngine(float progress, std::string text, std::string t
 		{
 			m_ship = new DiscreteSimulationEngine::Objects::OpenGL::Spaceship("model");
 			assert(m_ship);
-			m_ship->buildModel(text);
+			m_ship->buildModel(text, data_manager.getIfrom("spaceship"));
 			m_camera.setShip(m_ship);
+			m_GUI_manager.int_selection->insert_or_assign("ship_index", data_manager.getIfrom("spaceship"));
+			m_GUI_manager.int_selection->insert_or_assign("current_ship_index", data_manager.getIfrom("spaceship"));
+			m_GUI_manager.float_selection->insert_or_assign("distance_from_ship", m_state->getDistancteFromShip());
 		}
 	}
 	if (type.compare("music") == 0)
 	{
-		m_GUI_manager.initGUIs(data_manager.getMusicInfo(), data_manager.getIfrom("music"));
+		m_GUI_manager.sendToGUI(data_manager.getMusicInfo());
 		m_music_engine.updateTrack(data_manager.getMusic());
 		ancient_track = data_manager.getIfrom("music");
+		m_GUI_manager.int_selection->insert(std::make_pair("current_track", (ancient_track >= 0 ? ancient_track : 0)));
 	}
-	
 	m_GUI_manager.renderScreenLoad(progress, text);
 }
 

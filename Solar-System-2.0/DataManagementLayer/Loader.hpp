@@ -55,9 +55,10 @@ namespace DataManagementLayer {
 		static unsigned int loadSkyboxTextures(std::vector<std::string> faces);
 		static  Mix_Music* loadWithSDLMixer(std::string file_path);
 		static unsigned int loadWithStbi(const char* path, const std::string& directory);
+		static bool loadWithStbi(std::string file_path, GLuint& id, int& w, int& h);
 
 		/*
-		static bool loadWithStbi(std::string file_path, GLuint &id, int &w, int &h);
+		
 		
 		
 

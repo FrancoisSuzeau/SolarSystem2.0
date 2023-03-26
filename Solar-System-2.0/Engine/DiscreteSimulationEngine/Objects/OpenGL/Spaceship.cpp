@@ -331,26 +331,13 @@ void Spaceship::changeYaw(InputDevices::MouseInput mouse_input)
 /***********************************************************************************************************************************************************************/
 /******************************************************************************* loadModelShip *************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Spaceship::buildModel(std::string const& path)
+void Spaceship::buildModel(std::string const& path, int index)
 {
+    m_index_skin = index;
     if (m_model == nullptr)
     {
         m_model = new Blender::Model(path);
     }
-
-    /*if(data_manager.getChangeSkin())
-    {
-        m_index_skin = data_manager.getIndexShip();
-        std::cout << file_paths[m_index_skin];
-
-        this->clean();
-
-        if(m_model == nullptr)
-        {
-            m_model = new Model(file_paths[m_index_skin]);
-            data_manager.setChangeSkin(false);
-        }
-    }*/
 }
 
 /***********************************************************************************************************************************************************************/

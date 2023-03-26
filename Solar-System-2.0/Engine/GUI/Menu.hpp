@@ -27,7 +27,7 @@ PURPOSE : header of the Menu class
 
 #include <string>
 #include <map>
-
+#include <vector>
 
 /********************************************************************* class definition *********************************************************************/
 
@@ -35,18 +35,36 @@ namespace Engine {
 
 	namespace GUI {
 
+		typedef struct imguiTexture_datas {
+
+			int img_width;
+			int img_height;
+			GLuint text_id;
+			std::string name;
+
+		} imguiTexture_datas;
+
 		
 
 		class Menu
 		{
 			private:
 
+				void renderNavigationTab();
+				std::vector<float> min_distance;
+
+				std::map<std::string, bool>* m_bool_selection;
+				std::map<std::string, float>* m_float_selection;
+				std::map<std::string, int>* m_int_selection;
+
+				std::vector<imguiTexture_datas> textures_data;
+
 			public:
-				Menu();
+				Menu(std::map<std::string, bool>* bool_selection, std::map<std::string, float>* float_selection, std::map<std::string, int>* int_selection);
 				~Menu();
 
-				void render(int width, int height, std::map<std::string, bool> &menu_selection_value);
-				
+				void render(int width, int height);
+				void addImguiTextureData(imguiTexture_datas imgui_datas);
 		};
 	}
 }

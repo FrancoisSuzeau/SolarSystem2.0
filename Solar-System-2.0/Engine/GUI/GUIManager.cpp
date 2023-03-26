@@ -5,9 +5,9 @@ using namespace Engine::GUI;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-GUIManager::GUIManager() : m_menu(nullptr), m_hud(nullptr), m_music_infos()
+GUIManager::GUIManager() : m_menu(nullptr), m_hud(nullptr), m_music_infos(), bool_selection(nullptr), float_selection(nullptr), int_selection(nullptr)
 {
-
+	
 }
 
 GUIManager::~GUIManager()
@@ -18,30 +18,65 @@ GUIManager::~GUIManager()
 /***********************************************************************************************************************************************************************/
 /******************************************************************************** initGUIs *****************************************************************************/
 /***********************************************************************************************************************************************************************/
-void GUIManager::initGUIs(std::map < std::string, std::string> map_info, int i)
+void GUIManager::sendToGUI(std::map < std::string, std::string> map_info)
 {
+	
+	m_music_infos.title = map_info["title"];
+	m_music_infos.author = map_info["author"];
+	m_music_infos.studio = map_info["studio"];
+}
+
+void GUIManager::sendToGUI(imguiTexture_datas imgui_datas)
+{
+	if (m_menu != nullptr)
+	{
+		m_menu->addImguiTextureData(imgui_datas);
+	}
+}
+
+void GUIManager::initGUIs()
+{
+	if (bool_selection == nullptr)
+	{
+		bool_selection = new std::map<std::string, bool>;
+		assert(bool_selection);
+		bool_selection->insert(std::make_pair("quit", false));
+		bool_selection->insert(std::make_pair("save", false));
+		bool_selection->insert(std::make_pair("pause", false));
+		bool_selection->insert(std::make_pair("change_ship", false));
+	}
+
+
+	if (float_selection == nullptr)
+	{
+		float_selection = new std::map<std::string, float>;
+		assert(float_selection);
+		float_selection->insert(std::make_pair("distance_from_ship", 0.f));
+	}
+
+
+	if (int_selection == nullptr)
+	{
+		int_selection = new std::map<std::string, int>;
+		assert(int_selection);
+		int_selection->insert(std::make_pair("current_track", 0));
+		int_selection->insert(std::make_pair("volume", MIX_MAX_VOLUME / 2));
+		int_selection->insert(std::make_pair("current_radio", 0));
+		int_selection->insert(std::make_pair("ship_index", 0));
+		int_selection->insert(std::make_pair("current_ship_index", 0));
+	}
+
 	if (m_menu == nullptr)
 	{
-		m_menu = new Menu();
+		m_menu = new Menu(bool_selection, float_selection, int_selection);
 		assert(m_menu);
 	}
 
 	if (m_hud == nullptr)
 	{
-		m_hud = new HUD();
+		m_hud = new HUD(bool_selection, float_selection, int_selection);
 		assert(m_hud);
 	}
-
-	menu_selection_value.insert(std::make_pair("quit", false));
-
-	hud_music_selection.insert(std::make_pair("current_track", (i >= 0 ? i : 0)));
-	hud_music_selection.insert(std::make_pair("volume", MIX_MAX_VOLUME / 2));
-	hud_music_selection.insert(std::make_pair("pause", 0));
-	hud_music_selection.insert(std::make_pair("current_radio", 0));
-
-	m_music_infos.title = map_info["title"];
-	m_music_infos.author = map_info["author"];
-	m_music_infos.studio = map_info["studio"];
 }
 
 /***********************************************************************************************************************************************************************/
@@ -106,7 +141,7 @@ void GUIManager::renderMenu(bool render_menu)
 {
 	if (render_menu && m_menu != nullptr)
 	{
-		m_menu->render(Engine::State::m_width, Engine::State::m_height, menu_selection_value);
+		m_menu->render(Engine::State::m_width, Engine::State::m_height);
 	}
 }
 
@@ -118,7 +153,7 @@ void GUIManager::renderHUD(bool render_overlay)
 	if (render_overlay && m_hud != nullptr)
 	{
 		m_hud->renderApplicationHUD();
-		m_hud->renderMusicHUD(Engine::State::m_width, Engine::State::m_height, hud_music_selection, m_music_infos);
+		m_hud->renderMusicHUD(Engine::State::m_width, Engine::State::m_height, m_music_infos);
 	}
 }
 

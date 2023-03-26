@@ -32,6 +32,7 @@ PURPOSE : header of the EnginesManager class
 
 #include <assimp/scene.h>
 
+
 #define BEGIN   0
 #define END     1
 
@@ -64,7 +65,7 @@ namespace Engine {
 			DiscreteSimulationEngine::Objects::OpenGL::Spaceship* m_ship;
 
 			void changeCurrentTrack(DataManagementLayer::DataManager data_manager);
-			void correctIncrement(DataManagementLayer::DataManager data_manager);
+			void correctIncrement(std::string key, int max);
 			void manageSkyboxShader();
 			void manageSpaceshipShader();
 

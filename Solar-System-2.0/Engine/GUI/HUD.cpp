@@ -5,7 +5,8 @@ using namespace Engine::GUI;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-HUD::HUD()
+HUD::HUD(std::map<std::string, bool>* bool_selection, std::map<std::string, float>* float_selection, std::map<std::string, int>* int_selection) : m_bool_selection(bool_selection),
+m_float_selection(float_selection), m_int_selection(int_selection)
 {
 
 }
@@ -62,13 +63,10 @@ void HUD::renderApplicationHUD()
     ImGui::End();
 }
 
-void HUD::renderMusicHUD(int width, int height, std::map<std::string, int>& hud_music_selection, music_info infos)
+void HUD::renderMusicHUD(int width, int height, music_info infos)
 {
     ImGuiWindowFlags window_flags = 0;
     ImGuiStyle& style = ImGui::GetStyle();
-
-    //int vol = data_manager.getVolume();
-    //bool pause_music = data_manager.getPause();
 
     window_flags |= ImGuiWindowFlags_NoResize;
 
@@ -88,13 +86,13 @@ void HUD::renderMusicHUD(int width, int height, std::map<std::string, int>& hud_
     ImGui::SameLine();
 
     float spacing = ImGui::GetStyle().ItemInnerSpacing.x;
-    int test = 0;
     ImGui::PushButtonRepeat(true);
-    if (ImGui::ArrowButton("##left", ImGuiDir_Left)) { hud_music_selection["current_track"]--; }
+    int a = m_int_selection->at("current_track");
+    if (ImGui::ArrowButton("##left", ImGuiDir_Left)) { m_int_selection->insert_or_assign("current_track", a - 1); }
     ImGui::SameLine(0.0f, spacing);
     ImGui::Text(infos.title.c_str());
     ImGui::SameLine(0.0f, spacing);
-    if (ImGui::ArrowButton("##right", ImGuiDir_Right)) { hud_music_selection["current_track"]++; }
+    if (ImGui::ArrowButton("##right", ImGuiDir_Right)) { m_int_selection->insert_or_assign("current_track", a + 1); }
     ImGui::PopButtonRepeat();
 
     std::string tmp = "Author :    " + infos.author;
@@ -102,21 +100,18 @@ void HUD::renderMusicHUD(int width, int height, std::map<std::string, int>& hud_
 
     tmp = "Studio :    " + infos.studio;
     ImGui::Text(tmp.c_str());
+    a = m_int_selection->at("volume");
+    ImGui::SliderInt("Volume", &a, 0, 128);
+    m_int_selection->insert_or_assign("volume", a);
 
-    ImGui::SliderInt("Volume", &hud_music_selection["volume"], 0, 128);
-
-    bool pause = hud_music_selection["pause"] == 1;
+    bool pause = m_bool_selection->at("pause");
     ImGui::Checkbox("Mute music", &pause);
-    hud_music_selection["pause"] = pause ? 1 : 0;
+    m_bool_selection->insert_or_assign("pause", pause);
 
     const char* items[] = { "Epic Orchestra", "Citadel radio", "Retro Wave 86", "-Error Canal Transmission-" };
-    //static int item_current = 0;
-    //ImGui::Combo("Radio", &item_current, items, IM_ARRAYSIZE(items));
-    ImGui::Combo("Radio", &hud_music_selection["current_radio"], items, IM_ARRAYSIZE(items));
-
-    //ImGui::SameLine();
-    //std::string t_mp = "For now there only is one radio available until NASA engineers upgrade their Deep Space Network.";
-    //// RenderData::HelpMarker(t_mp);
+    a = m_int_selection->at("current_radio");
+    ImGui::Combo("Radio", &a, items, IM_ARRAYSIZE(items));
+    m_int_selection->insert_or_assign("current_radio", a);
 
     style.FrameRounding = save_frame;
     style.GrabRounding = save_grab;

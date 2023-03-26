@@ -239,15 +239,18 @@
         "spaceships":[
             {
                 "name":"Star Hunter - Class Eviscerator",
-                "blender_path":"Contents/model/spaceship/untitled.obj"
+                "blender_path":"Contents/model/spaceship/untitled.obj",
+                "imgui_image_path":"Contents/textures/imguiSpaceship.png"
             },
             {
                 "name":"Donut X37 - Class Yummi Yummi",
-                "blender_path":"Contents/model/donut/donut.obj"
+                "blender_path":"Contents/model/donut/donut.obj",
+                "imgui_image_path":"Contents/textures/imguiDonut.png"
             },
             {
                 "name":"Spaceshuttle Atlantis Fuel Tank Booster",
-                "blender_path":"Contents/model/spaceshuttle/spaceshuttle.obj"
+                "blender_path":"Contents/model/spaceshuttle/spaceshuttle.obj",
+                "imgui_image_path":"Contents/textures/imguiSpaceshuttle.png"
             }
 
         ]

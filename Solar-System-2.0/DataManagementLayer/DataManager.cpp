@@ -217,6 +217,26 @@ int DataManager::getIfrom(std::string jsonObject) const
     return -1;
 }
 
+std::vector<imgui_datas> DataManager::getImGuiTexture() const
+{
+    std::vector<imgui_datas> tmp;
+    tmp.reserve(nb_spaceships);
+    for (int i = 0; i < nb_spaceships; i++)
+    {
+        spaceships_data->put_I(i);
+        std::string path = spaceships_data->stringOf("spaceships[i].imgui_image_path");
+        int w = 0;
+        int h = 0;
+        GLuint tex_id = 0;
+        std::string name = spaceships_data->stringOf("spaceships[i].name");
+        bool success = Loader::loadWithStbi(path, tex_id, w, h);
+        assert(success);
+        tmp.push_back({ w, h, tex_id, name });
+    }
+
+    return tmp;
+}
+
 std::map<std::string, std::string> DataManager::getShaderPaths()
 {
     return std::map<std::string, std::string>(
@@ -273,4 +293,15 @@ std::string DataManager::setAndGetSpaceshipPath(std::string const prefered_ship)
             return spaceships_data->stringOf("spaceships[i].blender_path");
         }
     }
+}
+
+std::string DataManager::setAndGetSpaceshipPath(int i)
+{
+    if (i >= 0 && i < nb_spaceships)
+    {
+        spaceships_data->put_I(i);
+        return spaceships_data->stringOf("spaceships[i].blender_path");
+    }
+
+    return "NONE";
 }

@@ -50,6 +50,15 @@ namespace DataManagementLayer {
 
 	//} body_data;
 
+	typedef struct imgui_datas {
+
+		int img_width;
+		int img_height;
+		GLuint text_id;
+		std::string name;
+
+	} imgui_datas;
+
 	class DataManager
 	{
 
@@ -87,6 +96,7 @@ namespace DataManagementLayer {
 		std::map<std::string, std::string> getMusicInfo();
 
 		std::string setAndGetSpaceshipPath(std::string const prefered_ship);
+		std::string setAndGetSpaceshipPath(int i);
 
 		std::vector <std::string> getSkyboxPath();
 		unsigned int getSkyboxTexture(std::vector<std::string> skybox_paths) const;
@@ -96,6 +106,9 @@ namespace DataManagementLayer {
 		int getNbSpaceships() const;
 		int getNbMusics() const;
 		int getIfrom(std::string jsonObject) const;
+
+
+		std::vector<imgui_datas> getImGuiTexture() const;
 	};
 }
 

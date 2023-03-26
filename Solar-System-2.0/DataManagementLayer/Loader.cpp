@@ -50,48 +50,47 @@ CkJsonObject* Loader::loadJsonObject(std::string object_name)
 	}
 }
 
-///***********************************************************************************************************************************************************************/
-///********************************************************************************** loadWithStbi ***********************************************************************/
-///***********************************************************************************************************************************************************************/
-//bool Loader::loadWithStbi(std::string file_path, GLuint &id, int &w, int &h)
-//{
-//    // renderLogTextureLoaded(file_path);
-//    unsigned char* image_data = stbi_load(file_path.c_str(), &w, &h, NULL, 4);
-//    if (image_data == NULL)
-//        return false;
-//
-//    // Create a OpenGL texture identifier
-//    if(glIsTexture(id) == GL_TRUE)
-//    {
-//        glDeleteTextures(1, &id);
-//        id = 0;
-//    }
-//
-//    glGenTextures(1, &id);
-//    assert(id != 0);
-//
-//    glActiveTexture(GL_TEXTURE0);
-//    glBindTexture(GL_TEXTURE_2D, id);
-//
-//    // Setup filtering parameters for display
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // This is required on WebGL for non power-of-two textures
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); // Same
-//
-//    // Upload pixels into texture
-//#if defined(GL_UNPACK_ROW_LENGTH) && !defined(__EMSCRIPTEN__)
-//    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-//#endif
-//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
-//    stbi_image_free(image_data);
-//
-//    glActiveTexture(GL_TEXTURE0);
-//    glBindTexture(GL_TEXTURE_2D, 0);
-//
-//    return true;
-//}
-//
+/***********************************************************************************************************************************************************************/
+/********************************************************************************** loadWithStbi ***********************************************************************/
+/***********************************************************************************************************************************************************************/
+bool Loader::loadWithStbi(std::string file_path, GLuint &id, int &w, int &h)
+{
+    unsigned char* image_data = stbi_load(file_path.c_str(), &w, &h, NULL, 4);
+    if (image_data == NULL)
+        return false;
+
+    // Create a OpenGL texture identifier
+    if(glIsTexture(id) == GL_TRUE)
+    {
+        glDeleteTextures(1, &id);
+        id = 0;
+    }
+
+    glGenTextures(1, &id);
+    assert(id != 0);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, id);
+
+    // Setup filtering parameters for display
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // This is required on WebGL for non power-of-two textures
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); // Same
+
+    // Upload pixels into texture
+#if defined(GL_UNPACK_ROW_LENGTH) && !defined(__EMSCRIPTEN__)
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+#endif
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
+    stbi_image_free(image_data);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    return true;
+}
+
 unsigned int Loader::loadWithStbi(const char *path, const std::string &directory)
 {
     std::string filename = std::string(path);

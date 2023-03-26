@@ -100,6 +100,9 @@ void Application::loadAssets()
     int nb_shaders = m_data_manager.getNbShaders();
     int nb_musics = m_data_manager.getNbMusics();
 
+    this->sendToEngine(progress, "Building GUIs ...", "GUI");
+    progress++;
+
     std::vector<std::string> skybox_paths = m_data_manager.getSkyboxPath();
     for (std::vector<std::string>::iterator it = skybox_paths.begin(); it != skybox_paths.end(); it++)
     {
@@ -159,7 +162,7 @@ void Application::sendToEngine(float& progress, std::string text, std::string ty
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    m_engines_manager.addToEngine(progress / 88.f, text, type, m_data_manager);
+    m_engines_manager.addToEngine(progress / 89.f, text, type, m_data_manager);
 
     this->endFrame();
 }
