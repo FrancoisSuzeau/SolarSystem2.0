@@ -18,7 +18,7 @@ PURPOSE :   - creating OpenGL Context
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
 Application::Application(int width, int height, SDL_Window *window): m_state(nullptr), m_window(window), m_data_manager(), m_engines_manager(), progress(0.f)
-//m_setting(), m_overlay(), camera(nullptr)
+//m_setting(), m_overlay()
 {
     if (m_state == nullptr)
     {
@@ -52,14 +52,11 @@ void Application::cleanAll()
     m_data_manager.clean(SHADERSDATA);
     m_data_manager.clean(SPACESHIPSDATA);
     m_data_manager.clean(SKYBOXPATHS);
+    m_data_manager.clean(MUSICSDATA);
+    m_data_manager.clean(SUNDATA);
 
     m_engines_manager.cleanAllEngines();
     /*
-    if(camera != nullptr)
-    {
-        delete camera;
-        camera = nullptr;
-    }
 
     m_setting.clean();
     m_overlay.clean();
@@ -84,11 +81,9 @@ void Application::initEngines()
         }
 
         this->endFrame();
-        //SDL_Delay(1500);
         progress++;
     }
-    m_engines_manager.initDiscreteSimEngine();
-    //SDL_Delay(1500);
+    m_engines_manager.initDiscreteSimEngine(m_data_manager);
 }
 
 ///***********************************************************************************************************************************************************************/
@@ -118,6 +113,7 @@ void Application::loadAssets()
             if (path.size() != 0)
             {
                 this->sendToEngine(progress, path, "body_texture");
+                SDL_Delay(1000);
             }
             progress++;
         }

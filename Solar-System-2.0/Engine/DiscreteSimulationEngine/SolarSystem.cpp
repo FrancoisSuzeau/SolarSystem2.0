@@ -16,14 +16,19 @@ using namespace Engine::DiscreteSimulationEngine;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-SolarSystem::SolarSystem(std::string const system_name)
+SolarSystem::SolarSystem(std::string const system_name, DataManagementLayer::body_data sun_data, State* state) : m_sun(nullptr)
 {
-    /*m_sun = new Star(1.f, "assets/textures/CelestialBody/SunMap.jpg", "sun");
-    assert(m_sun);
-    m_sun->updateSize(glm::vec3(10.f));
+    m_system_name = system_name;
+    m_state = state;
+    if (m_sun == nullptr)
+    {
+        m_sun = new Objects::OpenGL::Star(sun_data);
+        assert(m_sun);
+        m_sun->updateSize(glm::vec3(10.f));
+    }
 
 
-    m_asteroid_field = new AsteroidField("INSTmodel");
+    /*m_asteroid_field = new AsteroidField("INSTmodel");
     assert(m_asteroid_field);*/
 
 }
@@ -38,12 +43,13 @@ SolarSystem::~SolarSystem()
 /***********************************************************************************************************************************************************************/
 void SolarSystem::clean()
 {
-    /*if(m_sun != nullptr)
+    if (m_sun != nullptr)
     {
         m_sun->clean();
         delete m_sun;
         m_sun = nullptr;
     }
+    /*
     if(m_star_renderer != nullptr)
     {
         m_star_renderer->clean();
@@ -99,7 +105,7 @@ void SolarSystem::clean()
 /***********************************************************************************************************************************************************************/
 /******************************************************************************* loadSystem ****************************************************************************/
 /***********************************************************************************************************************************************************************/
-void SolarSystem::loadSystem(int count)
+void SolarSystem::loadSystem(DataManagementLayer::body_data body_datas)
 {
     /*if(count == 0)
     {
@@ -158,44 +164,44 @@ void SolarSystem::loadSystem(int count)
     }*/
 }
 
-///***********************************************************************************************************************************************************************/
-///****************************************************************************** makeChanges ****************************************************************************/
-///***********************************************************************************************************************************************************************/
-//void SolarSystem::makeChanges(Applications::DataManager& data_manager)
-//{
-//    if (m_sun != nullptr)
-//    {
-//        m_sun->updatePosition(glm::vec3(0.f, 0.f, 0.f));
-//        m_sun->transform(-data_manager.getShipPos());
-//        m_sun->makeOtherChanges(data_manager);
-//    }
-//
-//    if (m_asteroid_field != nullptr)
-//    {
-//        m_asteroid_field->transform(-data_manager.getShipPos());
-//        m_asteroid_field->sendToShader(data_manager);
-//    }
-//
-//
-//    for (std::vector<Planete*>::iterator it = m_planetes.begin(); it != m_planetes.end(); ++it)
-//    {
-//        if (it[0] != nullptr)
-//        {
-//            it[0]->updatePosition(it[0]->getPosition());
-//            it[0]->transform(-data_manager.getShipPos());
-//            it[0]->makeOtherChanges(data_manager);
-//        }
-//    }
-//
-//    for (std::vector<SystemCreator*>::iterator it = m_planetary_systems.begin(); it != m_planetary_systems.end(); ++it)
-//    {
-//        if (it[0] != nullptr)
-//        {
-//            it[0]->makeChanges(data_manager);
-//        }
-//    }
-//}
-//
+/***********************************************************************************************************************************************************************/
+/****************************************************************************** makeChanges ****************************************************************************/
+/***********************************************************************************************************************************************************************/
+void SolarSystem::makeChanges()
+{
+    /*if (m_sun != nullptr)
+    {
+        m_sun->updatePosition(glm::vec3(0.f, 0.f, 0.f));
+        m_sun->transform(-data_manager.getShipPos());
+        m_sun->makeOtherChanges(data_manager);
+    }
+
+    if (m_asteroid_field != nullptr)
+    {
+        m_asteroid_field->transform(-data_manager.getShipPos());
+        m_asteroid_field->sendToShader(data_manager);
+    }
+
+
+    for (std::vector<Planete*>::iterator it = m_planetes.begin(); it != m_planetes.end(); ++it)
+    {
+        if (it[0] != nullptr)
+        {
+            it[0]->updatePosition(it[0]->getPosition());
+            it[0]->transform(-data_manager.getShipPos());
+            it[0]->makeOtherChanges(data_manager);
+        }
+    }
+
+    for (std::vector<SystemCreator*>::iterator it = m_planetary_systems.begin(); it != m_planetary_systems.end(); ++it)
+    {
+        if (it[0] != nullptr)
+        {
+            it[0]->makeChanges(data_manager);
+        }
+    }*/
+}
+
 //// /***********************************************************************************************************************************************************************/
 //// /*********************************************************************************** renderNameAndInfo ***************************************************************************/
 //// /***********************************************************************************************************************************************************************/
@@ -218,39 +224,39 @@ void SolarSystem::loadSystem(int count)
 //    }
 //}
 //
-//// /***********************************************************************************************************************************************************************/
-//// /*********************************************************************************** render ****************************************************************************/
-//// /***********************************************************************************************************************************************************************/
-//void SolarSystem::render(Applications::DataManager& data_manager)
-//{
-//    /************************************************* SUN RENDER ********************************************************/
-//    if ((m_sun != nullptr) && (m_star_renderer != nullptr) && (data_manager.getPass() == COLOR_FBO))
-//    {
-//        m_star_renderer->render(data_manager, m_sun);
-//    }
-//
-//    if ((m_asteroid_field != nullptr) && (data_manager.getPass() == COLOR_FBO))
-//    {
-//        m_asteroid_field->render(data_manager);
-//    }
-//
-//    for (std::vector<Planete*>::iterator it = m_planetes.begin(); it != m_planetes.end(); ++it)
-//    {
-//        if ((m_planete_renderer != nullptr) && (it[0] != nullptr))
-//        {
-//            m_planete_renderer->render(data_manager, it[0]);
-//        }
-//    }
-//
-//    for (std::vector<SystemCreator*>::iterator it = m_planetary_systems.begin(); it != m_planetary_systems.end(); ++it)
-//    {
-//        if (it[0] != nullptr)
-//        {
-//            it[0]->render(data_manager);
-//        }
-//    }
-//}
-//
+// /***********************************************************************************************************************************************************************/
+// /*********************************************************************************** render ****************************************************************************/
+// /***********************************************************************************************************************************************************************/
+void SolarSystem::render()
+{
+    /************************************************* SUN RENDER ********************************************************/
+    /*if ((m_sun != nullptr) && (m_star_renderer != nullptr) && (data_manager.getPass() == COLOR_FBO))
+    {
+        m_star_renderer->render(data_manager, m_sun);
+    }*/
+
+    /*if ((m_asteroid_field != nullptr) && (data_manager.getPass() == COLOR_FBO))
+    {
+        m_asteroid_field->render(data_manager);
+    }
+
+    for (std::vector<Planete*>::iterator it = m_planetes.begin(); it != m_planetes.end(); ++it)
+    {
+        if ((m_planete_renderer != nullptr) && (it[0] != nullptr))
+        {
+            m_planete_renderer->render(data_manager, it[0]);
+        }
+    }
+
+    for (std::vector<SystemCreator*>::iterator it = m_planetary_systems.begin(); it != m_planetary_systems.end(); ++it)
+    {
+        if (it[0] != nullptr)
+        {
+            it[0]->render(data_manager);
+        }
+    }*/
+}
+
 //// /************************************************************************************************************************************************************************/
 //// /******************************************************************************* renderRing *****************************************************************************/
 //// /************************************************************************************************************************************************************************/

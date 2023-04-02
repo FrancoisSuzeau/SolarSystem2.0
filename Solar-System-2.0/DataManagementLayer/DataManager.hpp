@@ -28,27 +28,32 @@ PURPOSE : header of the DataManager class
 #define SPACESHIPSDATA 3
 #define SKYBOXPATHS 4
 #define MUSICSDATA 5
+#define SUNDATA 6
 
 
 /********************************************************************* class definition *********************************************************************/
 
 namespace DataManagementLayer {
 
-	//typedef struct body_data {
+	typedef struct body_data {
 
-	//    float                           size;
-	//    std::string                     type;
-	//    int                             shininess;
-	//    float                           oppacity;
-	//    glm::vec3                       initial_pos;
-	//    std::string                     name;
-	//    float                           inclinaison_angle;
-	//    float                           light_strength;
-	//    // std::vector<std::string> nom_disp_path;
-	//    // std::string name;
-	//    // float   speed_rotation;
+		std::string                     name;
+		GLuint							texture_surface_id;
+		GLuint							texture_cloud_id;
+		GLuint							texture_night_id;
+		GLuint							texture_normal_id;
+		float                           size;
+		/*std::string						host_name;
+		
+		int                             shininess;
+		float                           oppacity;
+		glm::vec3                       current_position;
 
-	//} body_data;
+		float                           inclinaison_angle;
+		float                           light_strength;
+		float   						   speed_rotation;*/
+
+	} body_data;
 
 	typedef struct imgui_datas {
 
@@ -70,6 +75,7 @@ namespace DataManagementLayer {
 		CkJsonObject* shaders_data;
 		CkJsonObject* spaceships_data;
 		CkJsonObject* skybox_paths;
+		CkJsonObject* sun_data;
 		int nb_bodies;
 		int nb_shaders;
 		int nb_spaceships;
@@ -101,7 +107,7 @@ namespace DataManagementLayer {
 		std::vector <std::string> getSkyboxPath();
 		unsigned int getSkyboxTexture(std::vector<std::string> skybox_paths) const;
 
- 		int getNbBodies() const;
+		int getNbBodies() const;
 		int getNbShaders() const;
 		int getNbSpaceships() const;
 		int getNbMusics() const;
@@ -109,6 +115,8 @@ namespace DataManagementLayer {
 
 
 		std::vector<imgui_datas> getImGuiTexture() const;
+		body_data getCurrentBodyData() const;
+		body_data getSunData() const;
 	};
 }
 

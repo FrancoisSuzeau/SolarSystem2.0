@@ -50,15 +50,15 @@ namespace Engine {
                 }
 
 
-                System* FactoryMethod(std::string const system_name) override
+                System* FactoryMethod(std::string const system_name, State* state, DataManagementLayer::body_data sun_data) override
                 {
                     std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Solar System Creator :  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << std::endl;
-                    return new SolarSystem(system_name);
+                    return new SolarSystem(system_name, sun_data, state);
                 }
 
-                bool MakingSystem(std::string const system_name)
+                bool MakingSystem(std::string const system_name, DataManagementLayer::body_data sun_data, State* state)
                 {
-                    m_system = this->FactoryMethod(system_name);
+                    m_system = this->FactoryMethod(system_name, state, sun_data);
                     assert(m_system);
                     return true;
                 }

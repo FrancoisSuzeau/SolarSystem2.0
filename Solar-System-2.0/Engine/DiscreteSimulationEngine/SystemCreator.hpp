@@ -41,24 +41,34 @@ namespace Engine {
 
                 virtual ~SystemCreator() {};
 
-                virtual System* FactoryMethod(std::string const system_name) = 0;
+                virtual System* FactoryMethod(std::string const system_name, State* state, DataManagementLayer::body_data sun_data = DataManagementLayer::body_data()) = 0;
 
-                bool MakingSystem(std::string const system_name)
+                bool MakingSystem(std::string const system_name, DataManagementLayer::body_data sun_data, State* state)
                 {
-                    m_system = this->FactoryMethod(system_name);
+                    m_system = this->FactoryMethod(system_name, state, sun_data);
                     assert(m_system);
                     return true;
                 }
 
-                int loadSystem(int count = 0)
+                int loadSystem(DataManagementLayer::body_data body_datas)
                 {
-                    m_system->loadSystem(count);
+                    m_system->loadSystem(body_datas);
                     return 1;
                 }
 
                 void cleanSystem()
                 {
                     m_system->clean();
+                }
+
+                void render()
+                {
+                    m_system->render();
+                }
+
+                void makeChanges()
+                {
+                    m_system->makeChanges();
                 }
 
                 /*void renderNameAndInfo(Applications::DataManager& data_manager)
@@ -68,15 +78,7 @@ namespace Engine {
 
 
 
-                void render(Applications::DataManager& data_manager)
-                {
-                    m_system->render(data_manager);
-                }
-
-                void makeChanges(Applications::DataManager& data_manager)
-                {
-                    m_system->makeChanges(data_manager);
-                }
+                
 
 
 

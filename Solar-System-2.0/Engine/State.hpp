@@ -59,6 +59,7 @@ namespace Engine {
 		float           distance_from_ship;
 		glm::vec3       cam_pos;
 		glm::vec3       ship_position;
+		bool			new_body_is_load;
 
 
 		/*
@@ -132,6 +133,9 @@ namespace Engine {
 		void            setShipPos(glm::vec3 const new_val);
 		glm::vec3       getShipPos() const;
 		glm::vec3       getSunPos() const;
+
+		void setNewBody(bool const value);
+		bool getNewBody() const;
 
 		void            clean();
 

@@ -42,12 +42,12 @@ namespace Engine {
     public:
 
 
-        System* FactoryMethod(std::string const system_name) override
+        System* FactoryMethod(std::string const system_name, State* state, DataManagementLayer::body_data sun_data) override
         {
-            // puts("");
-            // puts("");
-            // std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> System Creator : " << data.name_sys << " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << std::endl;
-            return new PlanetarySystem(system_name);
+             puts("");
+             puts("");
+            std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> System Creator : " << system_name << " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+            return new PlanetarySystem(system_name, state);
         }
 
 

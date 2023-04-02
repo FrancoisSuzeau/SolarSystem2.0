@@ -29,7 +29,7 @@ PURPOSE : header of the Star class
 
         #include "Sphere.hpp"
         #include "FlareManager.hpp"
-        
+#include "../../../../DataManagementLayer/DataManager.hpp"
 
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
@@ -53,12 +53,13 @@ namespace Engine {
 
                     public:
 
-                        Star(float size, std::string surface_path, std::string const type);
+                        Star(DataManagementLayer::body_data data);
                         ~Star();
 
-                        /*void transform(glm::vec3 ship_pos = glm::vec3(0.f), Input* input = nullptr) override;
-                        void sendToShader(Applications::DataManager& data_manager) override;
+                        void transform(InputDevices::KeyInput key_input, InputDevices::MouseInput mouse_input, glm::vec3 ship_pos = glm::vec3(0.f)) override;
+                        void sendToShader() override;
                         void    clean();
+                        /*
                         void    makeOtherChanges(Applications::DataManager& data_manager);
 
                         void renderFlares(Applications::DataManager& data_manager);*/

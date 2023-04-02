@@ -76,7 +76,7 @@ namespace Engine {
 			~EnginesManager();
 
 			void initRenderEngine(State* state, std::string function, float progress);
-			void initDiscreteSimEngine();
+			void initDiscreteSimEngine(DataManagementLayer::DataManager data_manager);
 			void addToEngine(float progress, std::string text, std::string type, DataManagementLayer::DataManager data_manager);
 
 			void cleanAllEngines();

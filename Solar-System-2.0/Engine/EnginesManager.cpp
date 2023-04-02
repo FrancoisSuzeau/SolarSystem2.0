@@ -22,13 +22,14 @@ EnginesManager::~EnginesManager()
 /***********************************************************************************************************************************************************************/
 /************************************************************************* initDiscreteSimEngine ***********************************************************************/
 /***********************************************************************************************************************************************************************/
-void EnginesManager::initDiscreteSimEngine()
+void EnginesManager::initDiscreteSimEngine(DataManagementLayer::DataManager data_manager)
 {
 	if (m_solar_system == nullptr)
 	{
+		assert(m_state);
 		m_solar_system = new DiscreteSimulationEngine::SolarSystemCreator();
 		assert(m_solar_system);
-		bool success = m_solar_system->MakingSystem("Solar System");
+		bool success = m_solar_system->MakingSystem("Solar System", data_manager.getSunData(), m_state);
 		assert(success);
 	}
 }

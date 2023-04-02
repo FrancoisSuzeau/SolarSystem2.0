@@ -18,7 +18,7 @@ using namespace DataManagementLayer;
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
 DataManager::DataManager(): preference_data(nullptr), bodies_data(nullptr), nb_bodies(0), nb_shaders(0), shaders_data(nullptr), spaceships_data(nullptr), nb_spaceships(0),
-skybox_paths(nullptr), musics_data(nullptr), nb_musics(0)
+skybox_paths(nullptr), musics_data(nullptr), nb_musics(0), sun_data(nullptr)
 {
     if (preference_data == nullptr)
     {
@@ -49,6 +49,12 @@ skybox_paths(nullptr), musics_data(nullptr), nb_musics(0)
     {
         musics_data = Loader::loadJsonObject("musics_data");
         assert(musics_data);
+    }
+
+    if (sun_data == nullptr)
+    {
+        sun_data = Loader::loadJsonObject("sun_data");
+        assert(sun_data);
     }
 
     nb_spaceships = spaceships_data->SizeOfArray("spaceships");
@@ -110,6 +116,13 @@ void DataManager::clean(int const which_one)
             {
                 delete musics_data;
                 musics_data = nullptr;
+            }
+            break;
+        case SUNDATA:
+            if (sun_data != nullptr)
+            {
+                delete sun_data;
+                sun_data = nullptr;
             }
             break;
         default:
@@ -217,6 +230,20 @@ int DataManager::getIfrom(std::string jsonObject) const
     return -1;
 }
 
+body_data DataManagementLayer::DataManager::getCurrentBodyData() const
+{
+    return body_data(
+        {
+            bodies_data->stringOf("bodies[i].name"),
+            0,
+            0,
+            0,
+            0,
+            0.f
+        }
+    );
+}
+
 std::vector<imgui_datas> DataManager::getImGuiTexture() const
 {
     std::vector<imgui_datas> tmp;
@@ -235,6 +262,20 @@ std::vector<imgui_datas> DataManager::getImGuiTexture() const
     }
 
     return tmp;
+}
+
+body_data DataManager::getSunData() const
+{
+    return body_data(
+        {
+            "sun",
+            Loader::loadTextureWithSDL(sun_data->stringOf("texture")),
+            0,
+            0,
+            0,
+            std::stof(sun_data->stringOf("size"))
+        }
+    );
 }
 
 std::map<std::string, std::string> DataManager::getShaderPaths()

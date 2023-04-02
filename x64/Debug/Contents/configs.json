@@ -8,7 +8,10 @@
         "bloom":true,
         "distance_from_ship":"3.0"
     },
-    
+    "sun_data":{
+        "texture":"Contents/textures/CelestialBody/SunMap.jpg",
+        "size":"1.0"
+    },
     "bodies_data":
     {
         "bodies":[

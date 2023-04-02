@@ -16,55 +16,58 @@ PURPOSE : header of the virtual SolarSystem class
 
 /********************************************************************* includes *********************************************************************/
 
-        #include "System.hpp"
-        #include "PlanetarySystemCreator.hpp"
+#include "System.hpp"
+#include "PlanetarySystemCreator.hpp"
 
-       /* #include "../../Objects/TexturedObjects/Star/Star.hpp"
+/*#include "../../Objects/AsteroidField/AsteroidField.hpp"*/
 
-        #include "../../Objects/AsteroidField/AsteroidField.hpp"*/
+#include "Objects/OpenGL/Star.hpp"
 
-        #include <cassert>
-        
-        
-       
+#include <cassert>
+
+
+
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
 
-    namespace DiscreteSimulationEngine {
+	namespace DiscreteSimulationEngine {
 
-        class SolarSystem : public System
-        {
+		class SolarSystem : public System
+		{
 
-            private:
+		private:
 
-                /*Star* m_sun = nullptr;
+			Objects::OpenGL::Star* m_sun;
+			/*
 
-                std::vector<Planete*>           m_planetes;
-                AsteroidField* m_asteroid_field = nullptr;*/
-
-
-                std::vector<SystemCreator*>     m_planetary_systems;
+			std::vector<Planete*>           m_planetes;
+			AsteroidField* m_asteroid_field = nullptr;*/
 
 
-            public:
-
-                SolarSystem(std::string const system_name);
-                ~SolarSystem();
+			//std::vector<SystemCreator*>     m_planetary_systems;
 
 
-                void loadSystem(int count = 0) override;
-                void clean() override;
+		public:
 
-                /*void render(Applications::DataManager& data_manager) override;
-                void makeChanges(Applications::DataManager& data_manager) override;
-                void renderRing(Applications::DataManager& data_manager) override;
-                void renderAtmosphere(Applications::DataManager& data_manager) override;
-                void renderNameAndInfo(Applications::DataManager& data_manager) override;
-                void renderFlareSun(Applications::DataManager& data_manager) override;*/
+			SolarSystem(std::string const system_name, DataManagementLayer::body_data sun_data, State *state);
+			~SolarSystem();
 
-        };
 
-    }
+			void loadSystem(DataManagementLayer::body_data body_datas) override;
+			void render() override;
+			void makeChanges() override;
+			void clean() override;
+
+			/*;
+			;
+			void renderRing(Applications::DataManager& data_manager) override;
+			void renderAtmosphere(Applications::DataManager& data_manager) override;
+			void renderNameAndInfo(Applications::DataManager& data_manager) override;
+			void renderFlareSun(Applications::DataManager& data_manager) override;*/
+
+		};
+
+	}
 }
 
 

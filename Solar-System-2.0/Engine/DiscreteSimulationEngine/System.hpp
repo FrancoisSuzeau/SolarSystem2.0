@@ -16,50 +16,51 @@ PURPOSE : header of the virtual System class
 
 /********************************************************************* includes *********************************************************************/
 
-        #include <string>
-        #include <vector>
-        #include <iostream>
-        #include <cstdlib>
-        
-        #include <glm/glm.hpp>
-        #include <glm/gtx/transform.hpp>
-        #include <glm/gtc/type_ptr.hpp>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <cstdlib>
 
-        #include "../DataManager.hpp"
-       
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include "../../DataManagementLayer/DataManager.hpp"
+#include "../State.hpp"
+
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
 
-    namespace DiscreteSimulationEngine {
+	namespace DiscreteSimulationEngine {
 
-        class System
-        {
+		class System
+		{
 
-        protected:
+		protected:
 
-            std::string                      m_system_name;
+			std::string                      m_system_name;
+			State*						m_state;
 
-        public:
+		public:
 
 
-            virtual ~System() {};
-            virtual void loadSystem(int count = 0) = 0;
-            virtual void clean() = 0;
+			virtual ~System() {};
+			virtual void loadSystem(DataManagementLayer::body_data body_datas) = 0;
+			virtual void clean() = 0;
 
-            /*virtual void makeChanges(Applications::DataManager& data_manager) = 0;
-            virtual void render(Applications::DataManager& data_manager) = 0;
-            
-            virtual void renderNameAndInfo(Applications::DataManager& data_manager) = 0;
-            virtual void renderRing(Applications::DataManager& data_manager) = 0;
-            virtual void renderAtmosphere(Applications::DataManager& data_manager) = 0;
-            virtual void renderFlareSun(Applications::DataManager& data_manager) = 0;*/
+			virtual void makeChanges() = 0;
+			virtual void render() = 0;
 
-        };
+			/*virtual void renderNameAndInfo(Applications::DataManager& data_manager) = 0;
+			virtual void renderRing(Applications::DataManager& data_manager) = 0;
+			virtual void renderAtmosphere(Applications::DataManager& data_manager) = 0;
+			virtual void renderFlareSun(Applications::DataManager& data_manager) = 0;*/
 
-    }
+		};
+
+	}
 
 }
-        
+
 
 
 #endif

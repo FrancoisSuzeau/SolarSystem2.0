@@ -282,6 +282,16 @@ glm::vec3 State::getSunPos() const
     return glm::vec3(0.f) - ship_position;
 }
 
+void State::setNewBody(bool const value)
+{
+    new_body_is_load = value;
+}
+
+bool State::getNewBody() const
+{
+    return new_body_is_load;
+}
+
 //void State::setRenderNormal(bool const new_val)
 //{
 //    render_normal = new_val;
