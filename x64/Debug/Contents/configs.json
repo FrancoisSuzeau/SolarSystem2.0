@@ -6,7 +6,8 @@
         "spaceship_name":"Star Hunter - Class Eviscerator",
         "bloom_strenght":10,
         "bloom":true,
-        "distance_from_ship":"3.0"
+        "distance_from_ship":"3.0",
+        "highlight_sun":true
     },
     "sun_data":{
         "texture":"Contents/textures/CelestialBody/SunMap.jpg",

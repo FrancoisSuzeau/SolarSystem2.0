@@ -61,10 +61,15 @@ namespace Engine {
                     m_system->clean();
                 }
 
-                void render()
+                Objects::OpenGL::Object* getCelestialBody(std::string const body)
+                {
+                    return m_system->getCelestialBody(body);
+                }
+
+                /*void render()
                 {
                     m_system->render();
-                }
+                }*/
 
                 void makeChanges()
                 {

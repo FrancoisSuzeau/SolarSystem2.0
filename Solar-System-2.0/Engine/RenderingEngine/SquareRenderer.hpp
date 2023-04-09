@@ -42,6 +42,7 @@ namespace Engine {
                 int     m_bytes_texture_size;
 
                 void    load() override;
+                void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* square) override;
 
             public:
 
@@ -49,7 +50,7 @@ namespace Engine {
                 ~SquareRenderer();
 
 
-                //void render(Applications::DataManager &data_manager, Object *square) override;
+                void render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* sphere) override;
                 void clean() override;
         };
 

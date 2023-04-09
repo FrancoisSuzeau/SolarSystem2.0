@@ -43,14 +43,14 @@ namespace Engine {
 
             protected:
 
-                // std::string     m_name;
+                void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* planete) override;
 
             public:
 
-                PlaneteRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs);
+                PlaneteRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs, State* state);
                 ~PlaneteRenderer();
 
-                //void render(Applications::DataManager &data_manager, Object *planete) override;
+                void render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* sphere) override;
                 void clean() override;
         };
     }

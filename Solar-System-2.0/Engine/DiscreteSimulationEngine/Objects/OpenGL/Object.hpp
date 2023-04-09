@@ -26,8 +26,10 @@ PURPOSE : Interface Object
 
         #include <vector>
 #include "../../../InputDevices/InputDevices.hpp"
+#include "../../../RenderingEngine/Shader.hpp"
+//#include "../../../State.hpp"
 
-
+#include <map>
         
 
 /********************************************************************* class definition ***************************************************************/
@@ -43,6 +45,7 @@ namespace Engine {
                 {
                     protected:
 
+                        //const State* m_state = nullptr;
                         glm::vec3   m_position;
                         glm::mat4   m_model_mat;
                         glm::vec3   m_size;
@@ -65,8 +68,8 @@ namespace Engine {
                         Object(std::string const type);
                         ~Object();
 
-                        virtual void transform(InputDevices::KeyInput key_input, InputDevices::MouseInput mouse_input, glm::vec3 ship_pos = glm::vec3(0.f)) = 0;
-                        virtual void sendToShader() = 0;
+                        virtual void transform(glm::vec3 ship_pos = glm::vec3(0.f)) = 0;
+                        /*virtual void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map) = 0;*/
 
                         void updatePosition(glm::vec3 const new_val);
                         void rotateObject(glm::mat4& model, float angle);
@@ -82,6 +85,7 @@ namespace Engine {
                         glm::mat4 getModelMat();
                         float getColor() const;
                         std::string getType() const;
+                        glm::vec3 getColorVector() const;
 
                         GLuint getTextureID(int index) const;
                         GLuint getNormalTextureID() const;

@@ -60,7 +60,7 @@ namespace Engine {
 		glm::vec3       cam_pos;
 		glm::vec3       ship_position;
 		bool			new_body_is_load;
-
+		bool            hilight_sun;
 
 		/*
 		
@@ -82,7 +82,7 @@ namespace Engine {
 		
 		glm::vec3       ship_orientation;
 
-		bool            hilight_sun;*/
+		*/
 
 
 
@@ -108,7 +108,7 @@ namespace Engine {
 		void			setChangeTrack(bool const new_val);
 		bool			getChangeTrack() const;
 
-		glm::mat4       getViewMat();
+		glm::mat4       getViewMat() const;
 		void            setViewMat(glm::mat4 const new_val);
 		void            resetViewMat(glm::mat4 const new_mat);
 		glm::mat4       getProjMat() const;
@@ -136,6 +136,8 @@ namespace Engine {
 
 		void setNewBody(bool const value);
 		bool getNewBody() const;
+		void            setHilightSun(bool const new_val);
+		bool            getHilightSun() const;
 
 		void            clean();
 
@@ -165,8 +167,7 @@ namespace Engine {
 		void            setDepthMapTexture(unsigned int const new_val);
 		unsigned int    getDepthMapTexture() const;
 		
-		void            setHilightSun(bool const new_val);
-		bool            getHilightSun() const;
+		
 		void            setRenderShadow(bool const new_val);
 		bool            getRenderShadow() const;
 		static void            initDatas();

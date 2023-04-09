@@ -20,6 +20,7 @@ PURPOSE : header of the EnginesManager class
 #include "PhysicsEngine.hpp"
 #include "State.hpp"
 #include "GUI/GUIManager.hpp"
+#include "RenderingEngine/StarRenderer.hpp"
 #include "RenderingEngine/PlaneteRenderer.hpp"
 #include "RenderingEngine/RingRenderer.hpp"
 #include "DiscreteSimulationEngine/SolarSystemCreator.hpp"
@@ -56,6 +57,7 @@ namespace Engine {
 			RenderingEngine::Renderer* m_ring_renderer;
 			RenderingEngine::Renderer* m_sphere_renderer;
 			RenderingEngine::Renderer* m_square_renderer;
+			RenderingEngine::Renderer* m_star_renderer;
 
 			std::map<std::string, RenderingEngine::Shader*> map_shader;
 			DiscreteSimulationEngine::Skybox *m_skybox;

@@ -18,7 +18,7 @@ using namespace Engine::RenderingEngine;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-StarRenderer::StarRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs) : super(radius, longSegs, latSegs)
+StarRenderer::StarRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs, State* state) : super(radius, longSegs, latSegs, state)
 {
     super::name = "STAR RENDERER";
 }
@@ -40,20 +40,35 @@ void StarRenderer::clean()
 /***********************************************************************************************************************************************************************/
 /******************************************************************************** render ******************************************************************************/
 /***********************************************************************************************************************************************************************/
-//void StarRenderer::render(Applications::DataManager &data_manager, Object *star)
-//{
-//    GLuint t_id = star->getTextureID(0);
-//    if(glIsTexture(t_id) == GL_TRUE)
-//    {
-//        star->sendToShader(data_manager);
-//        
-//        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, t_id);
-//
-//        super::render(data_manager, star);
-//
-//        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, 0);
-//    }
-//    
-//}
+void StarRenderer::render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* star)
+{
+    GLuint t_id = star->getTextureID(0);
+    if(glIsTexture(t_id) == GL_TRUE)
+    {
+        //star->sendToShader(data_manager);
+        this->sendToShader(shader_map, star);
+        
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, t_id);
+
+        super::render(shader_map, star);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+    
+}
+
+void StarRenderer::sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* star)
+{
+    RenderingEngine::Shader* shader = shader_map.at(star->getType());
+    if (shader != nullptr && m_state->getPass() == COLOR_FBO)
+    {
+        glUseProgram(shader->getProgramID());
+        shader->setTexture("texture0", 0);
+        shader->setInt("highlight", m_state->getHilightSun());
+        glUseProgram(0);
+    }
+
+    super::sendToShader(shader_map, star);
+}

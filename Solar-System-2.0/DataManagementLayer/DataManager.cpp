@@ -140,6 +140,7 @@ void DataManager::setConfigs(Engine::State* state)
     state->setSpaceshipName(preference_data->stringOf("spaceship_name"));
     state->setBloomStrength(preference_data->IntOf("bloom_strenght"));
     state->setBloom(preference_data->BoolOf("bloom"));
+    state->setHilightSun(preference_data->BoolOf("highlight_sun"));
     state->setDistanceFromShip(std::stof(preference_data->stringOf("distance_from_ship")));
 }
 

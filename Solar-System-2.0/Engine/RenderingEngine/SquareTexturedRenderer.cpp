@@ -38,20 +38,20 @@ void SquareTexturedRenderer::clean()
 /***********************************************************************************************************************************************************************/
 /******************************************************************************** render ******************************************************************************/
 /***********************************************************************************************************************************************************************/
-//void SquareTexturedRenderer::render(Applications::DataManager &data_manager, Object *FlareTexture)
-//{
-//    GLuint t_id = FlareTexture->getTextureID(0);
-//    if(glIsTexture(t_id) == GL_TRUE)
-//    {
-//        FlareTexture->sendToShader(data_manager);
-//
-//        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, t_id);
-//
-//        super::render(data_manager, FlareTexture);
-//
-//        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, 0);
-//    }
-//
-//}
+void SquareTexturedRenderer::render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* sphere)
+{
+    /*GLuint t_id = FlareTexture->getTextureID(0);
+    if(glIsTexture(t_id) == GL_TRUE)
+    {
+        FlareTexture->sendToShader(data_manager);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, t_id);
+
+        super::render(data_manager, FlareTexture);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }*/
+
+}

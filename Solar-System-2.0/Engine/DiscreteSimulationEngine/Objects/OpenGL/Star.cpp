@@ -64,26 +64,27 @@ void Star::clean()
 /***********************************************************************************************************************************************************************/
 /****************************************************************************** transform ******************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Star::transform(InputDevices::KeyInput key_input, InputDevices::MouseInput mouse_input, glm::vec3 ship_pos)
+void Star::transform(glm::vec3 ship_pos)
 {
-    super::transform(key_input, mouse_input, ship_pos);
+    super::transform(ship_pos);
 }
 
 /***********************************************************************************************************************************************************************/
 /****************************************************************************** sendToShader ***************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Star::sendToShader()
-{
-    /*if ((data_manager.getShader(super::m_type) != nullptr) && (data_manager.getPass() == COLOR_FBO))
-    {
-        glUseProgram(data_manager.getShader(super::m_type)->getProgramID());
-        data_manager.getShader(super::m_type)->setTexture("texture0", 0);
-        data_manager.getShader(super::m_type)->setInt("highlight", data_manager.getHilightSun());
-        glUseProgram(0);
-    }
-
-    super::sendToShader(data_manager);*/
-}
+//void Star::sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map)
+//{
+//    RenderingEngine::Shader* shader= shader_map.at(super::m_type);
+//    if (shader != nullptr && m_state->getPass() == COLOR_FBO)
+//    {
+//        glUseProgram(shader->getProgramID());
+//        shader->setTexture("texture0", 0);
+//        shader->setInt("highlight", m_state->getHilightSun());
+//        glUseProgram(0);
+//    }
+//
+//    super::sendToShader(shader_map);
+//}
 
 ///***********************************************************************************************************************************************************************/
 ///************************************************************************** makeOtherChanges ***************************************************************************/

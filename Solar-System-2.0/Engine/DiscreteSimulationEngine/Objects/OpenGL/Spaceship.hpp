@@ -29,6 +29,7 @@ PURPOSE : header of the Spaceship class
         
         #include "../Blender/Model.hpp"
         #include "Object.hpp"
+#include "../../../State.hpp"
 
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
@@ -45,6 +46,8 @@ namespace Engine {
                     private:
 
                         typedef Object super;
+
+                        const State* m_state = nullptr;
 
                         Blender::Model* m_model;
 
@@ -76,12 +79,12 @@ namespace Engine {
 
                     public:
 
-                        Spaceship(std::string const type);
+                        Spaceship(std::string const type, State *state);
                         ~Spaceship();
 
                         void    clean();
-                        void transform(InputDevices::KeyInput key_input, InputDevices::MouseInput mouse_input, glm::vec3 ship_pos = glm::vec3(0.f)) override;
-                        void sendToShader() override;
+                        void transform(glm::vec3 ship_pos = glm::vec3(0.f)) override;
+                        void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map) ;
 
                         void render(RenderingEngine::Shader *shader);
                         float getRotX() const;

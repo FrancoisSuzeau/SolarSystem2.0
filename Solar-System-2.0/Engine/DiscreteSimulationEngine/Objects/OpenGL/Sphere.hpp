@@ -17,6 +17,7 @@ PURPOSE : header of the Sphere class
 /********************************************************************* includes *********************************************************************/
 
         #include "Object.hpp"
+#include <map>
 
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
@@ -39,8 +40,8 @@ namespace Engine {
                         Sphere(float size, std::string const type);
                         ~Sphere();
 
-                       void transform(InputDevices::KeyInput key_input, InputDevices::MouseInput mouse_input, glm::vec3 ship_pos = glm::vec3(0.f)) override;
-                        void sendToShader() override;
+                       void transform(glm::vec3 ship_pos = glm::vec3(0.f)) override;
+                        /*void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map) override;*/
                         void clean();
                 };
 

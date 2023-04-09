@@ -16,9 +16,9 @@ using namespace Engine::DiscreteSimulationEngine::Objects::OpenGL;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Object::Object(std::string const type) : m_rotation_vector(glm::vec3(0.f, 0.f, 1.f)), m_inclinaison_vector(glm::vec3(0.f, 1.f, 0.f))
+Object::Object(std::string const type) : m_rotation_vector(glm::vec3(0.f, 0.f, 1.f)), m_inclinaison_vector(glm::vec3(0.f, 1.f, 0.f)), m_type(type)
 {
-    m_type = type;
+
 }
 
 Object::~Object()
@@ -111,6 +111,11 @@ float Object::getColor() const
 std::string Object::getType() const
 {
     return m_type;
+}
+
+glm::vec3 Object::getColorVector() const
+{
+    return m_color_vector;
 }
 
 GLuint Object::getTextureID(int index) const

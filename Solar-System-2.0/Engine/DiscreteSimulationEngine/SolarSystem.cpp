@@ -27,7 +27,6 @@ SolarSystem::SolarSystem(std::string const system_name, DataManagementLayer::bod
         m_sun->updateSize(glm::vec3(10.f));
     }
 
-
     /*m_asteroid_field = new AsteroidField("INSTmodel");
     assert(m_asteroid_field);*/
 
@@ -164,17 +163,28 @@ void SolarSystem::loadSystem(DataManagementLayer::body_data body_datas)
     }*/
 }
 
+Objects::OpenGL::Object* SolarSystem::getCelestialBody(std::string const body)
+{
+    if (body.compare("sun") == 0)
+    {
+        return m_sun;
+    }
+
+    return nullptr;
+}
+
 /***********************************************************************************************************************************************************************/
 /****************************************************************************** makeChanges ****************************************************************************/
 /***********************************************************************************************************************************************************************/
 void SolarSystem::makeChanges()
 {
-    /*if (m_sun != nullptr)
+    if (m_sun != nullptr)
     {
         m_sun->updatePosition(glm::vec3(0.f, 0.f, 0.f));
-        m_sun->transform(-data_manager.getShipPos());
-        m_sun->makeOtherChanges(data_manager);
+        m_sun->transform(-m_state->getShipPos());
+        //m_sun->makeOtherChanges(data_manager);
     }
+    /*
 
     if (m_asteroid_field != nullptr)
     {
@@ -227,35 +237,35 @@ void SolarSystem::makeChanges()
 // /***********************************************************************************************************************************************************************/
 // /*********************************************************************************** render ****************************************************************************/
 // /***********************************************************************************************************************************************************************/
-void SolarSystem::render()
-{
-    /************************************************* SUN RENDER ********************************************************/
-    /*if ((m_sun != nullptr) && (m_star_renderer != nullptr) && (data_manager.getPass() == COLOR_FBO))
-    {
-        m_star_renderer->render(data_manager, m_sun);
-    }*/
-
-    /*if ((m_asteroid_field != nullptr) && (data_manager.getPass() == COLOR_FBO))
-    {
-        m_asteroid_field->render(data_manager);
-    }
-
-    for (std::vector<Planete*>::iterator it = m_planetes.begin(); it != m_planetes.end(); ++it)
-    {
-        if ((m_planete_renderer != nullptr) && (it[0] != nullptr))
-        {
-            m_planete_renderer->render(data_manager, it[0]);
-        }
-    }
-
-    for (std::vector<SystemCreator*>::iterator it = m_planetary_systems.begin(); it != m_planetary_systems.end(); ++it)
-    {
-        if (it[0] != nullptr)
-        {
-            it[0]->render(data_manager);
-        }
-    }*/
-}
+//void SolarSystem::render()
+//{
+//    /************************************************* SUN RENDER ********************************************************/
+//    if ((m_sun != nullptr) && (m_star_renderer != nullptr) && (data_manager.getPass() == COLOR_FBO))
+//    {
+//        m_star_renderer->render(data_manager, m_sun);
+//    }
+//
+//    if ((m_asteroid_field != nullptr) && (data_manager.getPass() == COLOR_FBO))
+//    {
+//        m_asteroid_field->render(data_manager);
+//    }
+//
+//    for (std::vector<Planete*>::iterator it = m_planetes.begin(); it != m_planetes.end(); ++it)
+//    {
+//        if ((m_planete_renderer != nullptr) && (it[0] != nullptr))
+//        {
+//            m_planete_renderer->render(data_manager, it[0]);
+//        }
+//    }
+//
+//    for (std::vector<SystemCreator*>::iterator it = m_planetary_systems.begin(); it != m_planetary_systems.end(); ++it)
+//    {
+//        if (it[0] != nullptr)
+//        {
+//            it[0]->render(data_manager);
+//        }
+//    }
+//}
 
 //// /************************************************************************************************************************************************************************/
 //// /******************************************************************************* renderRing *****************************************************************************/

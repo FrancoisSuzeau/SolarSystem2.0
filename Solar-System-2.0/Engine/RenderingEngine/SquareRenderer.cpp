@@ -162,32 +162,36 @@ void SquareRenderer::load()
 
 }
 
+void SquareRenderer::sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* square)
+{
+}
+
 /***********************************************************************************************************************************************************************/
 /********************************************************************************* render ******************************************************************************/
 /***********************************************************************************************************************************************************************/
-//void SquareRenderer::render(Applications::DataManager &data_manager, Object *square)
-//{
-//    if(data_manager.getShader(square->getType()) != nullptr)
-//    {
-//        if(data_manager.getPass() == DEPTH_FBO)
-//        {
-//            glUseProgram(data_manager.getShader("depth_map")->getProgramID());
-//        }
-//        if(data_manager.getPass() == COLOR_FBO)
-//        {
-//            glUseProgram(data_manager.getShader(square->getType())->getProgramID());
-//        }
-//
-//                //lock vao
-//                glBindVertexArray(super::m_vaoID);
-//
-//                //display the form
-//                glDrawArrays(GL_TRIANGLES, 0, 6);
-//
-//                //unlock vao
-//                glBindVertexArray(0);
-//
-//            glUseProgram(0);
-//    }
-//    
-//}
+void SquareRenderer::render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* sphere)
+{
+    //if(data_manager.getShader(square->getType()) != nullptr)
+    //{
+    //    if(data_manager.getPass() == DEPTH_FBO)
+    //    {
+    //        glUseProgram(data_manager.getShader("depth_map")->getProgramID());
+    //    }
+    //    if(data_manager.getPass() == COLOR_FBO)
+    //    {
+    //        glUseProgram(data_manager.getShader(square->getType())->getProgramID());
+    //    }
+
+    //            //lock vao
+    //            glBindVertexArray(super::m_vaoID);
+
+    //            //display the form
+    //            glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    //            //unlock vao
+    //            glBindVertexArray(0);
+
+    //        glUseProgram(0);
+    //}
+    
+}

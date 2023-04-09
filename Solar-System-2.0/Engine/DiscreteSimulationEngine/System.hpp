@@ -26,6 +26,8 @@ PURPOSE : header of the virtual System class
 #include <glm/gtc/type_ptr.hpp>
 #include "../../DataManagementLayer/DataManager.hpp"
 #include "../State.hpp"
+#include "Objects/OpenGL/Object.hpp"
+
 
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
@@ -48,7 +50,9 @@ namespace Engine {
 			virtual void clean() = 0;
 
 			virtual void makeChanges() = 0;
-			virtual void render() = 0;
+			//virtual void render() = 0;
+
+			virtual Objects::OpenGL::Object* getCelestialBody(std::string const body) = 0;
 
 			/*virtual void renderNameAndInfo(Applications::DataManager& data_manager) = 0;
 			virtual void renderRing(Applications::DataManager& data_manager) = 0;

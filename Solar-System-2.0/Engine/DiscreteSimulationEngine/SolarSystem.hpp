@@ -54,7 +54,8 @@ namespace Engine {
 
 
 			void loadSystem(DataManagementLayer::body_data body_datas) override;
-			void render() override;
+			Objects::OpenGL::Object* getCelestialBody(std::string const body) override;
+			//void render() override;
 			void makeChanges() override;
 			void clean() override;
 

@@ -46,7 +46,7 @@ namespace Engine {
                 SquareTexturedRenderer();
                 ~SquareTexturedRenderer();
 
-                //void render(Applications::DataManager &data_manager, Object *FlareTexture) override;
+                void render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* sphere) override;
                 void clean() override;
 
             };

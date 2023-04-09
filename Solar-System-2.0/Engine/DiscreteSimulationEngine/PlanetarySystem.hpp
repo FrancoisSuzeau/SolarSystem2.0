@@ -50,7 +50,8 @@ namespace Engine {
                 void clean() override;
 
                 
-                void render() override;
+                //void render() override;
+                Objects::OpenGL::Object* getCelestialBody(std::string const body) override;
                 void makeChanges() override;
                 
                 /*void renderNameAndInfo(Applications::DataManager& data_manager) override;

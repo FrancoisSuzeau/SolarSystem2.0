@@ -15,23 +15,7 @@ PURPOSE : header of the Planete class
 
 
 /********************************************************************* includes *********************************************************************/
-namespace Engine {
 
-    namespace DiscreteSimulationEngine {
-
-        namespace Objects {
-
-            namespace OpenGL {
-
-
-
-            }
-
-        }
-
-    }
-
-}
         #include "Sphere.hpp"
         #include "Ring.hpp"
 

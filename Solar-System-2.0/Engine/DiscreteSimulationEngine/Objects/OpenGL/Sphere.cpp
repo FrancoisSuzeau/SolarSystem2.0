@@ -50,7 +50,7 @@ void Sphere::clean()
 /***********************************************************************************************************************************************************************/
 /****************************************************************************** transform ******************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Sphere::transform(InputDevices::KeyInput key_input, InputDevices::MouseInput mouse_input, glm::vec3 ship_pos)
+void Sphere::transform(glm::vec3 ship_pos)
 {
     super::m_model_mat = glm::mat4(1.0);
 
@@ -61,33 +61,25 @@ void Sphere::transform(InputDevices::KeyInput key_input, InputDevices::MouseInpu
 /***********************************************************************************************************************************************************************/
 /****************************************************************************** sendToShader ***************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Sphere::sendToShader()
-{
-    //switch (data_manager.getPass())
-    //{
-    //    // case DEPTH_FBO:
-    //    //     if(data_manager.getShader("depth_map") != nullptr)
-    //    //     {
-    //    //         glUseProgram(data_manager.getShader("depth_map")->getProgramID());
-    //    //             data_manager.getShader("depth_map")->setMat4("model", super::getModelMat());
-    //    //         glUseProgram(0);
-    //    //     }
-    //    //     break;
-    //    case COLOR_FBO:
-    //        if(data_manager.getShader(super::m_type) != nullptr)
-    //        {
-    //            glUseProgram(data_manager.getShader(super::m_type)->getProgramID());
-    //                data_manager.getShader(super::m_type)->setMat4("view", data_manager.getViewMat());
-    //                data_manager.getShader(super::m_type)->setMat4("projection", data_manager.getProjMat());
-    //                data_manager.getShader(super::m_type)->setMat4("model", super::getModelMat());
-    //                data_manager.getShader(super::m_type)->setVec3("atmoColor", super::m_color_vector);
-    //                data_manager.getShader(super::m_type)->setVec3("viewPos", data_manager.getCamPos());
-    //                data_manager.getShader(super::m_type)->setVec3("sunPos", data_manager.getSunPos());
-    //                // data_manager.getShader(super::super::m_type)->setInt("hdr", data_manager.getHDR());
-    //            glUseProgram(0);
-    //        }
-    //        break;
-    //    default:
-    //        break;
-    //}
-}
+//void Sphere::sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map)
+//{
+//    RenderingEngine::Shader* shader = shader_map.at(super::m_type);
+//    switch (m_state->getPass())
+//    {
+//        case COLOR_FBO:
+//            if(shader != nullptr)
+//            {
+//                glUseProgram(shader->getProgramID());
+//                    shader->setMat4("view", m_state->getViewMat());
+//                    shader->setMat4("projection", m_state->getProjMat());
+//                    shader->setMat4("model", super::getModelMat());
+//                    shader->setVec3("atmoColor", super::m_color_vector);
+//                    shader->setVec3("viewPos", m_state->getCamPos());
+//                    shader->setVec3("sunPos", m_state->getSunPos());
+//                glUseProgram(0);
+//            }
+//            break;
+//        default:
+//            break;
+//    }
+//}

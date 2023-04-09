@@ -22,7 +22,7 @@ int State::m_height;
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
 State::State(int width, int height, double angle) : m_terminate(false), m_key_input(nullptr), m_mouse_input(nullptr), m_fps(60), m_render_menu(false),
-key_pressed(false), m_render_overlay(true), far_plane(1000.f), near_plane(0.1f), bloom(true), bloom_strenght(10), distance_from_ship(0.f)
+key_pressed(false), m_render_overlay(false), far_plane(1000.f), near_plane(0.1f), bloom(false), bloom_strenght(10), distance_from_ship(0.f), hilight_sun(false)
 //, render_normal(true), asteroid_count(100), ,
 //render_overlay(true), render_name(true), render_info(false),, index_ship(0), change_skin(true), //for loading the skin at program launch
 // hilight_sun(true), render_shadow(true)
@@ -177,7 +177,7 @@ void State::setViewMat(glm::mat4 const new_val)
 {
     view_mat = new_val;
 }
-glm::mat4 State::getViewMat()
+glm::mat4 State::getViewMat() const
 {
     return view_mat;
 }
@@ -292,6 +292,16 @@ bool State::getNewBody() const
     return new_body_is_load;
 }
 
+void State::setHilightSun(bool const new_val)
+{
+    hilight_sun = new_val;
+}
+
+bool State::getHilightSun() const
+{
+    return hilight_sun;
+}
+
 //void State::setRenderNormal(bool const new_val)
 //{
 //    render_normal = new_val;
@@ -386,15 +396,7 @@ bool State::getNewBody() const
 //}
 //
 
-//void State::setHilightSun(bool const new_val)
-//{
-//    hilight_sun = new_val;
-//}
-//
-//bool State::getHilightSun() const
-//{
-//    return hilight_sun;
-//}
+
 //
 //void State::setRenderShadow(bool const new_val)
 //{

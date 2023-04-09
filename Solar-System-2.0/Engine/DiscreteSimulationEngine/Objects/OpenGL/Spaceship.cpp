@@ -17,7 +17,7 @@ using namespace Engine::DiscreteSimulationEngine::Objects::OpenGL;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Spaceship::Spaceship(std::string const type) : super(type), m_yaw(0.0f), m_pitch(90.0f), m_speed(0.0f), speed_limit(0.05f), m_index_skin(0), m_model(nullptr)
+Spaceship::Spaceship(std::string const type, State* state) : super(type), m_yaw(0.0f), m_pitch(90.0f), m_speed(0.0f), speed_limit(0.05f), m_index_skin(0), m_model(nullptr), m_state(state)
 {   
     m_scales.push_back(0.1f);
     m_scales.push_back(3.0f);
@@ -48,11 +48,11 @@ Spaceship::~Spaceship()
 /***********************************************************************************************************************************************************************/
 /******************************************************************************* transform *************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Spaceship::transform(InputDevices::KeyInput key_input, InputDevices::MouseInput mouse_input, glm::vec3 ship_pos)
+void Spaceship::transform(glm::vec3 ship_pos)
 {
-    this->move(key_input);
+    this->move(m_state->getKeyInput());
     super::m_model_mat = glm::mat4(1.0f);
-    this->orientateShip(mouse_input);
+    this->orientateShip(m_state->getMouseInput());
     super::m_model_mat *= (yaw_mat * pitch_mat);
     super::scaleObject(super::m_model_mat, glm::vec3(m_scales[m_index_skin]));
 }
@@ -74,7 +74,7 @@ void Spaceship::clean()
 /***********************************************************************************************************************************************************************/
 /****************************************************************************** sendToShader ***************************************************************************/
 /***********************************************************************************************************************************************************************/
-void Spaceship::sendToShader()
+void Spaceship::sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map)
 {
     //DO NOTHING
 }

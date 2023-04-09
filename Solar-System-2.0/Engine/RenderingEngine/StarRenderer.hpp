@@ -16,38 +16,40 @@ PURPOSE : header of the StarRenderer class
 
 /********************************************************************* includes *********************************************************************/
 
-        #include "SphereRenderer.hpp"
-        //#include "../../../Objects/TexturedObjects/Star/Star.hpp"
+#include "SphereRenderer.hpp"
+#include "../DiscreteSimulationEngine/Objects/OpenGL/Star.hpp"
 
-        
+
+
 
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
 
-    namespace RenderingEngine {
+	namespace RenderingEngine {
 
-        class StarRenderer : public SphereRenderer
-        {
-            private:
+		class StarRenderer : public SphereRenderer
+		{
+		private:
 
-                typedef SphereRenderer super;
+			typedef SphereRenderer super;
 
-            protected:
+		protected:
+			void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* star) override;
 
+		public:
 
-            public:
+			StarRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs, State* state);
+			~StarRenderer();
 
-                StarRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs);
-                ~StarRenderer();
+			void render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* star) override;
+			;
+			void clean() override;
+		};
 
-                //void render(Applications::DataManager &data_manager, Object *star) override;
-                void clean() override;
-        };
-
-    }
+	}
 
 }
-        
+
 
 
 #endif

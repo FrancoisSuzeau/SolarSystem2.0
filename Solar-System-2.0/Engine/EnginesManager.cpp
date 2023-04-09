@@ -9,7 +9,7 @@ using namespace Engine;
 /***********************************************************************************************************************************************************************/
 EnginesManager::EnginesManager() : m_GUI_manager(), m_state(nullptr), m_framebuffer(), m_planete_renderer(nullptr), m_ring_renderer(nullptr), m_sphere_renderer(nullptr),
 m_square_renderer(nullptr), m_solar_system(nullptr), m_skybox(nullptr), m_music_engine(), ancient_track(0), ancient_radio("Epic Orchestra")
-,m_camera(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f)), m_ship(nullptr)
+,m_camera(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f)), m_ship(nullptr), m_star_renderer(nullptr)
 {
 
 }
@@ -55,7 +55,7 @@ void EnginesManager::initRenderEngine(State* state, std::string function, float 
 		m_GUI_manager.renderScreenLoad(progress, "Summoning the renderers ...");
 		if (m_planete_renderer == nullptr)
 		{
-			m_planete_renderer = new RenderingEngine::PlaneteRenderer(1.f, 70.f, 70.f);
+			m_planete_renderer = new RenderingEngine::PlaneteRenderer(1.f, 70.f, 70.f, m_state);
 			assert(m_planete_renderer);
 		}
 		if (m_ring_renderer == nullptr)
@@ -65,13 +65,18 @@ void EnginesManager::initRenderEngine(State* state, std::string function, float 
 		}
 		if (m_sphere_renderer == nullptr)
 		{
-			m_sphere_renderer = new RenderingEngine::SphereRenderer(1.f, 70.f, 70.f);
+			m_sphere_renderer = new RenderingEngine::SphereRenderer(1.f, 70.f, 70.f, m_state);
 			assert(m_sphere_renderer);
 		}
 		if (m_square_renderer == nullptr)
 		{
 			m_square_renderer = new RenderingEngine::SquareRenderer(1.f);
 			assert(m_square_renderer);
+		}
+		if (m_star_renderer == nullptr)
+		{
+			m_star_renderer = new RenderingEngine::StarRenderer(1.f, 70.f, 70.f, m_state);
+			assert(m_star_renderer);
 		}
 	}
 
@@ -116,6 +121,12 @@ void EnginesManager::cleanAllEngines()
 		m_square_renderer->clean();
 		delete m_square_renderer;
 		m_square_renderer = nullptr;
+	}
+	if (m_star_renderer != nullptr)
+	{
+		m_star_renderer->clean();
+		delete m_star_renderer;
+		m_star_renderer = nullptr;
 	}
 
 	if (m_solar_system != nullptr)
@@ -296,7 +307,7 @@ void EnginesManager::addToEngine(float progress, std::string text, std::string t
 	{
 		if (m_ship == nullptr)
 		{
-			m_ship = new DiscreteSimulationEngine::Objects::OpenGL::Spaceship("model");
+			m_ship = new DiscreteSimulationEngine::Objects::OpenGL::Spaceship("model", m_state);
 			assert(m_ship);
 			m_ship->buildModel(text, data_manager.getIfrom("spaceship"));
 			m_camera.setShip(m_ship);
@@ -317,7 +328,7 @@ void EnginesManager::addToEngine(float progress, std::string text, std::string t
 
 void EnginesManager::manageSkyboxShader()
 {
-	if (map_shader["skybox"] != nullptr)
+	if (map_shader["skybox"] != nullptr && m_state->getPass() == COLOR_FBO)
 	{
 		glUseProgram(map_shader["skybox"]->getProgramID());
 			glm::mat4 view = glm::mat4(glm::mat3(m_state->getViewMat()));
@@ -356,12 +367,9 @@ void EnginesManager::manageShaders()
 	{
 		this->manageSpaceshipShader();
 	}
-
+	
     /*
-    if(m_solar_system != nullptr)
-    {
-        m_solar_system->makeChanges(m_data_manager);
-    }
+    
 
     std::vector<glm::mat4> shadowTransforms = m_data_manager.getLightSpaceMatrix();
     glUseProgram(m_data_manager.getShader("depth_map")->getProgramID());
@@ -419,10 +427,15 @@ void Engine::EnginesManager::changeView()
 	{
 		if ((!m_state->getRenderMenu()))
 		{
-			m_ship->transform(m_state->getKeyInput(), m_state->getMouseInput(), glm::vec3(0.f));
+			m_ship->transform(glm::vec3(0.f));
 			m_state->setShipPos(m_ship->getPosition());
 			/*m_state->setShipOrientation(ship->getOrientation()); */
 		}
+	}
+
+	if (m_solar_system != nullptr)
+	{
+		m_solar_system->makeChanges();
 	}
 }
 
@@ -437,11 +450,17 @@ void EnginesManager::renderScene()
     {
         m_skybox->render(map_shader["skybox"]->getProgramID());
     }
-//
-//    if(m_solar_system != nullptr)
-//    {
-//        m_solar_system->render(m_data_manager);
-//        m_solar_system->renderRing(m_data_manager);
-//        m_solar_system->renderAtmosphere(m_data_manager);
-//    }
+
+    if(m_solar_system != nullptr)
+    {
+		DiscreteSimulationEngine::Objects::OpenGL::Object* body = m_solar_system->getCelestialBody("sun");
+		if ((body != nullptr) && (m_star_renderer != nullptr) && (m_state->getPass() == COLOR_FBO))
+		{
+			m_star_renderer->render(map_shader, body);
+		}
+        /*
+		* m_solar_system->render(m_data_manager);
+        m_solar_system->renderRing(m_data_manager);
+        m_solar_system->renderAtmosphere(m_data_manager);*/
+    }
 }

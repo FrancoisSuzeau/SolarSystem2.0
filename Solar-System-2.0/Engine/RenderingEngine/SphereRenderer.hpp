@@ -17,8 +17,7 @@ PURPOSE : header of the SphereRenderer class
 /********************************************************************* includes *********************************************************************/
 
         #include "Renderer.hpp"
-        //#include "../../Objects/BasicObjects/Sphere.hpp"
-
+#include "../DiscreteSimulationEngine/Objects/OpenGL/Sphere.hpp"
         
 
 /********************************************************************* class definition *********************************************************************/
@@ -52,15 +51,16 @@ namespace Engine {
                 int                             m_bytes_texture_size;
 
                 void                            load() override;
-
+                void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* shpere) override;
 
             public:
 
-                SphereRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs);
+                SphereRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs, State* state);
                 ~SphereRenderer();
 
 
-                //void render(Applications::DataManager &data_manager, Object *sphere) override;
+                void render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* sphere) override;
+                
                 void clean() override;
         };
 

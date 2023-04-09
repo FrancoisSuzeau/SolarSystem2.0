@@ -17,9 +17,10 @@ using namespace Engine::RenderingEngine;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-SphereRenderer::SphereRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs) : 
+SphereRenderer::SphereRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs, State* state) : 
 m_ibo(0), m_element_count(0), m_radius(radius)
 {
+    m_state = state;
     super::m_vboID = 0;
     super::name = "SPHERE RENDERER";
     /************************************************* calculate vertex position ********************************************************/
@@ -224,29 +225,53 @@ void SphereRenderer::load()
 /***********************************************************************************************************************************************************************/
 /******************************************************************************** render ******************************************************************************/
 /***********************************************************************************************************************************************************************/
-//void SphereRenderer::render(Applications::DataManager &data_manager, Object *sphere)
-//{
-//    if(data_manager.getShader(sphere->getType()) != nullptr)
-//    {
-//        if(data_manager.getPass() == DEPTH_FBO)
-//        {
-//            glUseProgram(data_manager.getShader("depth_map")->getProgramID());
-//        }
-//        else
-//        {
-//            glUseProgram(data_manager.getShader(sphere->getType())->getProgramID());
-//        }
-//        /************************************************* bind VBO and IBO ********************************************************/
-//        glBindBuffer(GL_ARRAY_BUFFER,         super::m_vboID);
-//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-//        //===================================================================================================================================
-//        glDrawElements(GL_TRIANGLES, m_element_count, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
-//        /************************************************* unbind VBO and IBO ********************************************************/
-//        glBindBuffer(GL_ARRAY_BUFFER,         0);
-//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-//        //===================================================================================================================================
-//
-//        glUseProgram(0);
-//    }
-//    
-//}
+void SphereRenderer::render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* sphere)
+{
+    Shader* shader = shader_map.at(sphere->getType());
+    if(shader != nullptr)
+    {
+       if(m_state->getPass() == DEPTH_FBO)
+       {
+           glUseProgram(shader_map.at("depth_map")->getProgramID());
+       }
+       else
+       {
+           glUseProgram(shader->getProgramID());
+       }
+       /************************************************* bind VBO and IBO ********************************************************/
+       glBindBuffer(GL_ARRAY_BUFFER,         super::m_vboID);
+       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
+       //===================================================================================================================================
+       glDrawElements(GL_TRIANGLES, m_element_count, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
+       /************************************************* unbind VBO and IBO ********************************************************/
+       glBindBuffer(GL_ARRAY_BUFFER,         0);
+       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+       //===================================================================================================================================
+
+       glUseProgram(0);
+    }
+    
+}
+
+void SphereRenderer::sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* object)
+{
+    RenderingEngine::Shader* shader = shader_map.at(object->getType());
+    switch (m_state->getPass())
+    {
+    case COLOR_FBO:
+        if (shader != nullptr)
+        {
+            glUseProgram(shader->getProgramID());
+            shader->setMat4("view", m_state->getViewMat());
+            shader->setMat4("projection", m_state->getProjMat());
+            shader->setMat4("model", object->getModelMat());
+            shader->setVec3("atmoColor", object->getColorVector());
+            shader->setVec3("viewPos", m_state->getCamPos());
+            shader->setVec3("sunPos", m_state->getSunPos());
+            glUseProgram(0);
+        }
+        break;
+    default:
+        break;
+    }
+}

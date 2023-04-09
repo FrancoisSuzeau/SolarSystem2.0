@@ -44,14 +44,14 @@ namespace Engine {
 
             protected:
 
-                // std::string     m_name;
+                void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* ring) override;
 
             public:
 
                 RingRenderer();
                 ~RingRenderer();
 
-                //void render(DataManagementLayer::DataManager &data_manager, Object *ring) override;
+                void render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* sphere) override;
                 void clean() override;
             };
     }
