@@ -61,10 +61,13 @@ namespace Engine {
 		glm::vec3       ship_position;
 		bool			new_body_is_load;
 		bool            hilight_sun;
+		bool            render_normal;
+		bool            render_shadow;
+		unsigned int    depth_map;
 
 		/*
 		
-		bool            render_normal;
+		
 		int             asteroid_count;
 		bool            render_overlay;
 		bool            render_name;
@@ -73,7 +76,7 @@ namespace Engine {
 		int             index_ship;
 		bool            change_skin;
 		
-		unsigned int    depth_map;
+		
 		
 		bool            render_shadow;
 
@@ -139,14 +142,21 @@ namespace Engine {
 		void            setHilightSun(bool const new_val);
 		bool            getHilightSun() const;
 
+		void            setRenderNormal(bool const new_val);
+		bool            getRenderNormal() const;
+		void            setRenderShadow(bool const new_val);
+		bool            getRenderShadow() const;
+
+		void            setDepthMapTexture(unsigned int const new_val);
+		unsigned int    getDepthMapTexture() const;
+
 		void            clean();
 
 		/*static std::vector<body_data>          m_bodys_data;
 		
 		
 		
-		void            setRenderNormal(bool const new_val);
-		bool            getRenderNormal() const;
+		
 		void            setAsteroidCount(int const new_val);
 		int             getAsteroidCount() const;
 
@@ -168,8 +178,7 @@ namespace Engine {
 		unsigned int    getDepthMapTexture() const;
 		
 		
-		void            setRenderShadow(bool const new_val);
-		bool            getRenderShadow() const;
+		
 		static void            initDatas();
 		static body_data       getBodyData(int index);
 

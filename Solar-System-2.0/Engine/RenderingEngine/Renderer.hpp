@@ -38,8 +38,8 @@ namespace Engine {
 
 		protected:
 
-			GLuint  m_vaoID;
-			GLuint  m_vboID;
+			GLuint  m_vaoID = 0; 
+			GLuint  m_vboID = 0;
 			const State* m_state = nullptr;
 
 			std::string name = "";

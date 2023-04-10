@@ -71,7 +71,7 @@ void HUD::renderMusicHUD(int width, int height, music_info infos)
     window_flags |= ImGuiWindowFlags_NoResize;
 
     ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.04f, 0.04f, 0.04f, 1.0f));
-    ImGui::SetNextWindowPos(ImVec2(width - 380, height - 170));
+    ImGui::SetNextWindowPos(ImVec2((float)width - 380.f, (float)height - 170.f));
     ImGui::SetNextWindowSize(ImVec2(380, 170));
 
     float save_frame = style.FrameRounding;

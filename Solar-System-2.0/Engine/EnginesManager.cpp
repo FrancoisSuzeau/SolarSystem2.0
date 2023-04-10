@@ -55,7 +55,7 @@ void EnginesManager::initRenderEngine(State* state, std::string function, float 
 		m_GUI_manager.renderScreenLoad(progress, "Summoning the renderers ...");
 		if (m_planete_renderer == nullptr)
 		{
-			m_planete_renderer = new RenderingEngine::PlaneteRenderer(1.f, 70.f, 70.f, m_state);
+			m_planete_renderer = new RenderingEngine::PlaneteRenderer(1.f, 70, 70, m_state);
 			assert(m_planete_renderer);
 		}
 		if (m_ring_renderer == nullptr)
@@ -65,7 +65,7 @@ void EnginesManager::initRenderEngine(State* state, std::string function, float 
 		}
 		if (m_sphere_renderer == nullptr)
 		{
-			m_sphere_renderer = new RenderingEngine::SphereRenderer(1.f, 70.f, 70.f, m_state);
+			m_sphere_renderer = new RenderingEngine::SphereRenderer(1.f, 70, 70, m_state);
 			assert(m_sphere_renderer);
 		}
 		if (m_square_renderer == nullptr)
@@ -75,7 +75,7 @@ void EnginesManager::initRenderEngine(State* state, std::string function, float 
 		}
 		if (m_star_renderer == nullptr)
 		{
-			m_star_renderer = new RenderingEngine::StarRenderer(1.f, 70.f, 70.f, m_state);
+			m_star_renderer = new RenderingEngine::StarRenderer(1.f, 70, 70, m_state);
 			assert(m_star_renderer);
 		}
 	}

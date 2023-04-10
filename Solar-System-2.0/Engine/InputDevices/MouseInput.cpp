@@ -57,8 +57,8 @@ void MouseInput::updateEvents(SDL_Event event)
         m_x = event.motion.x;
         m_y = event.motion.y;
 
-        m_rel_x = event.motion.xrel;
-        m_rel_y = event.motion.yrel;
+        m_rel_x = (float)event.motion.xrel;
+        m_rel_y = (float)event.motion.yrel;
         break;
 
         //scrolling
@@ -118,12 +118,12 @@ int MouseInput::getY() const
     return m_y;
 }
 
-int MouseInput::getXRel() const
+float MouseInput::getXRel() const
 {
     return m_rel_x;
 }
 
-int MouseInput::getYRel() const
+float MouseInput::getYRel() const
 {
     return m_rel_y;
 }
@@ -132,7 +132,7 @@ int MouseInput::getScroll()
 {
     if(m_scroll != 0)
     {
-        float tmp = m_scroll;
+        int tmp = m_scroll;
         m_scroll = 0;
         return tmp;
     }

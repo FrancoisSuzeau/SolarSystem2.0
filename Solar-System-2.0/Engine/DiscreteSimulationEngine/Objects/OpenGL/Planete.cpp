@@ -18,7 +18,7 @@ using namespace Engine::DiscreteSimulationEngine::Objects::OpenGL;
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
 Planete::Planete(/*Applications::body_data datas*/) : //super(datas.size, datas.type),
-super(1.f, "Planete")
+super(1.f, "Planete"), m_oppacity(.0f), light_strength(.0f)
 //m_oppacity(datas.oppacity), m_name(datas.name), light_strength(datas.light_strength)
 {
     /*std::string normals_path = "assets/textures/normalMap/" + m_name + "_normalMap.png";
@@ -111,6 +111,16 @@ Planete::~Planete()
 
 }
 
+float Planete::getLightStrength() 
+{
+    return light_strength;
+}
+
+float Planete::getOppacity() 
+{
+    return m_oppacity;
+}
+
 /***********************************************************************************************************************************************************************/
 /****************************************************************************** clean ******************************************************************************/
 /***********************************************************************************************************************************************************************/
@@ -148,48 +158,7 @@ Planete::~Planete()
 //    }
 //    super::rotateObject(super::m_model_mat, super::m_rotation_angle);
 //}
-//
-///***********************************************************************************************************************************************************************/
-///****************************************************************************** sendToShader ***************************************************************************/
-///***********************************************************************************************************************************************************************/
-//void Planete::sendToShader(Applications::DataManager& data_manager)
-//{
-//    if ((data_manager.getShader("depth_map") != nullptr) && (data_manager.getPass() == DEPTH_FBO))
-//    {
-//        glUseProgram(data_manager.getShader("depth_map")->getProgramID());
-//        data_manager.getShader("depth_map")->setMat4("model", super::getModelMat());
-//        glUseProgram(0);
-//    }
-//    if ((data_manager.getShader(super::m_type) != nullptr) && (data_manager.getPass() == COLOR_FBO))
-//    {
-//        glUseProgram(data_manager.getShader(super::m_type)->getProgramID());
-//        data_manager.getShader(super::m_type)->setVec3("viewPos", data_manager.getCamPos());
-//        data_manager.getShader(super::m_type)->setVec3("sunPos", data_manager.getSunPos());
-//        data_manager.getShader(super::m_type)->setTexture("material.surface", 0);
-//        data_manager.getShader(super::m_type)->setTexture("material.depthMap", 1);
-//        data_manager.getShader(super::m_type)->setTexture("material.normalMap", 2);
-//        data_manager.getShader(super::m_type)->setInt("material.shininess", m_shininess);
-//        data_manager.getShader(super::m_type)->setInt("render_normal", data_manager.getRenderNormal());
-//        data_manager.getShader(super::m_type)->setInt("shadows", data_manager.getRenderShadow());
-//        data_manager.getShader(super::m_type)->setFloat("far_plane", data_manager.getFar());
-//        data_manager.getShader(super::m_type)->setFloat("material.light_strength", this->light_strength);
-//
-//        if ((super::m_type == "double_textured_planete") || (super::m_type == "earth"))
-//        {
-//            data_manager.getShader(super::m_type)->setTexture("material.cloud", 3);
-//            data_manager.getShader(super::m_type)->setFloat("oppacity", m_oppacity);
-//        }
-//
-//        if (super::m_type == "earth")
-//        {
-//            data_manager.getShader(super::m_type)->setTexture("material.night", 4);
-//        }
-//
-//        glUseProgram(0);
-//    }
-//    super::sendToShader(data_manager);
-//}
-//
+
 ///***********************************************************************************************************************************************************************/
 ///****************************************************************************** makeOtherChanges *************************************************************************/
 ///***********************************************************************************************************************************************************************/

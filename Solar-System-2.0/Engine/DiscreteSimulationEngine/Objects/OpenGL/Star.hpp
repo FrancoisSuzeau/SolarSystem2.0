@@ -57,12 +57,15 @@ namespace Engine {
                         ~Star();
 
                         void transform(glm::vec3 ship_pos = glm::vec3(0.f)) override;
-                        //void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map) override;
+
                         void    clean();
                         /*
                         void    makeOtherChanges(Applications::DataManager& data_manager);
 
                         void renderFlares(Applications::DataManager& data_manager);*/
+
+                        float getLightStrength() override;
+                        float getOppacity() override;
 
                 };
 

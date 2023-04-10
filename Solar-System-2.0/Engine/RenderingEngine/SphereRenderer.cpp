@@ -36,21 +36,21 @@ m_ibo(0), m_element_count(0), m_radius(radius)
     m_bytes_normals_size = (longVerts * latVerts * 3) * sizeof(GLfloat);
     m_bytes_texture_size = (longVerts * latVerts * 2) * sizeof(GLfloat);
 
-    for (unsigned int i(0); i < longVerts; i++)
+    for (double i(0.0); i < longVerts; i++)
     {
-        const float iDivLong  = i / (float)longSegs;
-        const float theta     = i == 0 || i == longSegs ? 0.0 : iDivLong * 2.0 * M_PI;
+        const double iDivLong  = i / longSegs;
+        const double theta     = i == 0.0 || i == longSegs ? 0.0 : iDivLong * 2.0 * M_PI;
 
-        for (unsigned int j = 0; j < latVerts; j++)
+        for (float j = 0.f; j < latVerts; j++)
         {
 
-            const float jDivLat = j / (float)latSegs;
-            const float phi     = jDivLat * M_PI;
+            const double jDivLat = j / latSegs;
+            const double phi     = jDivLat * M_PI;
 
             // Normal
-            GLfloat n1 = cos(theta) * sin(phi);
-            GLfloat n2 = cos(phi);
-            GLfloat n3 = sin(theta) * sin(phi);
+            GLfloat n1 = (GLfloat)cos(theta) * (GLfloat)sin(phi);
+            GLfloat n2 = (GLfloat)cos(phi);
+            GLfloat n3 = (GLfloat)sin(theta) * (GLfloat)sin(phi);
             normals.push_back(n1);
             normals.push_back(n2);
             normals.push_back(n3);
@@ -61,8 +61,9 @@ m_ibo(0), m_element_count(0), m_radius(radius)
             vertices.push_back(n3 * radius);
 
             // Texture coordinates
-            textures_coord.push_back(iDivLong);
-            textures_coord.push_back(jDivLat);
+            textures_coord.push_back((const float)iDivLong);
+            
+            textures_coord.push_back((const float)jDivLat);
         }
     }
     

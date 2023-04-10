@@ -16,7 +16,9 @@ using namespace Engine::DiscreteSimulationEngine::Objects::OpenGL;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Object::Object(std::string const type) : m_rotation_vector(glm::vec3(0.f, 0.f, 1.f)), m_inclinaison_vector(glm::vec3(0.f, 1.f, 0.f)), m_type(type)
+Object::Object(std::string const type) : m_rotation_vector(glm::vec3(0.f, 0.f, 1.f)), m_inclinaison_vector(glm::vec3(0.f, 1.f, 0.f)), m_type(type),
+m_color(.0f), m_color_vector(glm::vec3(.0f)), m_inclinaison_angle(.0f), m_model_mat(glm::mat4(1.f)), m_position(glm::vec3(.0f)), m_rotation_angle(.0f), m_size(.0f),
+m_speed_rotation(.0f)
 {
 
 }
@@ -126,4 +128,9 @@ GLuint Object::getTextureID(int index) const
 GLuint Object::getNormalTextureID() const
 {
     return normal_texture_id;
+}
+
+int Object::getShininess() const
+{
+    return m_shininess;
 }

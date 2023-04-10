@@ -120,14 +120,14 @@ void GUIManager::renderScreenLoad(float progress, std::string path)
 	ImGui::Text("Solar System");
 	ImGui::End();
 
-	ImGui::SetNextWindowPos(ImVec2((Engine::State::m_width / 2 - 300), (Engine::State::m_height / 2 - 25.f) + 300));
+	ImGui::SetNextWindowPos(ImVec2((((float)Engine::State::m_width / 2.f) - 300.f), (((float)Engine::State::m_height / 2.f) - 25.f) + 300.f));
 	ImGui::SetNextWindowSize(ImVec2(600, 50.f));
 
 	ImGui::Begin("Progress Bar", NULL, window_flags);
 	ImGui::ProgressBar(progress, ImVec2(-1.f, -1.f));
 	ImGui::End();
 
-	ImGui::SetNextWindowPos(ImVec2(Engine::State::m_width / 2 - 250.f, (Engine::State::m_height / 2) + 350));
+	ImGui::SetNextWindowPos(ImVec2(((float)Engine::State::m_width / 2.f) - 250.f, ((float)(Engine::State::m_height / 2.f)) + 350.f));
 	ImGui::SetNextWindowSize(ImVec2(500, 200.f));
 	ImGui::Begin("Log", NULL, window_flags);
 	ImGui::Text(path.c_str());

@@ -98,6 +98,9 @@ namespace Engine {
                         void buildModel(std::string const& path, int index);
 
                         void updateSpeed(float const new_val);
+
+                        float getLightStrength() override;
+                        float getOppacity() override;
                 };
 
             }

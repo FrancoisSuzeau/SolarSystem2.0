@@ -16,47 +16,47 @@ PURPOSE : header of the PlaneteRenderer class
 
 /********************************************************************* includes *********************************************************************/
 
-        #include "SphereRenderer.hpp"
-        //#include "Planete.hpp"
-        
+#include "SphereRenderer.hpp"
+#include "../DiscreteSimulationEngine/Objects/OpenGL/Planete.hpp"
 
-        #include <string>
-        #include <vector>
-        #include <iostream>
-        #include <cassert>
 
-        #include <GL/glew.h>
-        #include <glm/glm.hpp>
-        #include <glm/gtx/transform.hpp>
-        #include <glm/gtc/type_ptr.hpp>
-        
+#include <string>
+#include <vector>
+#include <iostream>
+#include <cassert>
+
+#include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 /********************************************************************* class definition *********************************************************************/
 
 namespace Engine {
 
-    namespace RenderingEngine {
+	namespace RenderingEngine {
 
-        class PlaneteRenderer : public SphereRenderer
-        {
-            private:
-                typedef SphereRenderer super;
+		class PlaneteRenderer : public SphereRenderer
+		{
+		private:
+			typedef SphereRenderer super;
 
-            protected:
+		protected:
 
-                void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* planete) override;
+			void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* planete) override;
 
-            public:
+		public:
 
-                PlaneteRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs, State* state);
-                ~PlaneteRenderer();
+			PlaneteRenderer(const float radius, const unsigned int longSegs, const unsigned int latSegs, State* state);
+			~PlaneteRenderer();
 
-                void render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* sphere) override;
-                void clean() override;
-        };
-    }
+			void render(std::map<std::string, RenderingEngine::Shader*> shader_map, DiscreteSimulationEngine::Objects::OpenGL::Object* planete) override;
+			void clean() override;
+		};
+	}
 }
 
-        
+
 
 
 #endif

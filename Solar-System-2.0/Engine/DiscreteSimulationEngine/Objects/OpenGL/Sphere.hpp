@@ -41,8 +41,11 @@ namespace Engine {
                         ~Sphere();
 
                        void transform(glm::vec3 ship_pos = glm::vec3(0.f)) override;
-                        /*void sendToShader(std::map<std::string, RenderingEngine::Shader*> shader_map) override;*/
+
                         void clean();
+
+                        float getLightStrength() override;
+                        float getOppacity() override;
                 };
 
             }

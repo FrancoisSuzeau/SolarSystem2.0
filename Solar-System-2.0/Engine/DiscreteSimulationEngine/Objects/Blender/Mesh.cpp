@@ -159,7 +159,8 @@ void Mesh::render(RenderingEngine::Shader *shader)
         glBindTexture(GL_TEXTURE_2D, m_textures[i].id);
     }
 
-    glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
+    GLsizei nb_indices = (GLsizei) m_indices.size();
+    glDrawElements(GL_TRIANGLES, nb_indices, GL_UNSIGNED_INT, 0);
 
     glBindVertexArray(0);
 

@@ -54,8 +54,8 @@ PURPOSE : header of the MouseInput class
                     bool        m_mouse_button[8];
                     int         m_x;
                     int         m_y;
-                    int         m_rel_x;
-                    int         m_rel_y;
+                    float         m_rel_x;
+                    float         m_rel_y;
                     int         m_scroll;
 
 
@@ -74,8 +74,8 @@ PURPOSE : header of the MouseInput class
                     int getX() const;
                     int getY() const;
 
-                    int getXRel() const;
-                    int getYRel() const;
+                    float getXRel() const;
+                    float getYRel() const;
 
                     int   getScroll();
 

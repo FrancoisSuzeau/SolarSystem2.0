@@ -335,6 +335,8 @@ std::string DataManager::setAndGetSpaceshipPath(std::string const prefered_ship)
             return spaceships_data->stringOf("spaceships[i].blender_path");
         }
     }
+
+    return "NONE";
 }
 
 std::string DataManager::setAndGetSpaceshipPath(int i)

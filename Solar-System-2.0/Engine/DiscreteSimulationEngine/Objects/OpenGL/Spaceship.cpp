@@ -17,7 +17,8 @@ using namespace Engine::DiscreteSimulationEngine::Objects::OpenGL;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Spaceship::Spaceship(std::string const type, State* state) : super(type), m_yaw(0.0f), m_pitch(90.0f), m_speed(0.0f), speed_limit(0.05f), m_index_skin(0), m_model(nullptr), m_state(state)
+Spaceship::Spaceship(std::string const type, State* state) : super(type), m_yaw(0.0f), m_pitch(90.0f), m_speed(0.0f), speed_limit(0.05f), m_index_skin(0), m_model(nullptr), m_state(state),
+m_lateral_move(glm::vec3(.0f)), m_ship_orientation(glm::vec3(.0f)), pitch_mat(glm::mat4(1.f)), yaw_mat(glm::mat4(1.f))
 {   
     m_scales.push_back(0.1f);
     m_scales.push_back(3.0f);
@@ -268,7 +269,7 @@ void Spaceship::changePitch(InputDevices::MouseInput mouse_input)
         m_pitch += y_dir * m_sensibility[0];
         if (m_sensibility[0] < 0.3)
         {
-            m_sensibility[0] += 0.01;
+            m_sensibility[0] += 0.01f;
         }
 
         if (m_pitch > 179.0f)
@@ -284,7 +285,7 @@ void Spaceship::changePitch(InputDevices::MouseInput mouse_input)
     {
         if (m_sensibility[0] >= 0.01)
         {
-            m_sensibility[0] -= 0.01;
+            m_sensibility[0] -= 0.01f;
         }
 
         m_pitch += y_dir * m_sensibility[0];
@@ -314,14 +315,14 @@ void Spaceship::changeYaw(InputDevices::MouseInput mouse_input)
 
         if (m_sensibility[1] < 0.3)
         {
-            m_sensibility[1] += 0.01;
+            m_sensibility[1] += 0.01f;
         }
     }
     else if (!mouse_input.getMouseButton(SDL_BUTTON_LEFT))
     {
         if (m_sensibility[1] >= 0.01)
         {
-            m_sensibility[1] -= 0.01;
+            m_sensibility[1] -= 0.01f;
         }
 
         m_yaw -= x_dir * m_sensibility[1];
@@ -403,4 +404,14 @@ void Spaceship::updateSpeed(float const new_val)
     {
         speed_limit = new_val;
     }
+}
+
+float Spaceship::getLightStrength()
+{
+    return 0.0f;
+}
+
+float Spaceship::getOppacity()
+{
+    return 0.0f;
 }
