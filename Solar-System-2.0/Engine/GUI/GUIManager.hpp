@@ -61,7 +61,7 @@ namespace Engine {
 
 				void sendToGUI(std::map < std::string, std::string> map_info);
 				void sendToGUI(imguiTexture_datas imgui_datas);
-				void initGUIs();
+				void initGUIs(State const state);
 				void clean();
 
 				void renderScreenLoad(float progress, std::string path);

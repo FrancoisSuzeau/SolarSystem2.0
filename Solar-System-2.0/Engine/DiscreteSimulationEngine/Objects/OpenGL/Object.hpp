@@ -16,90 +16,90 @@ PURPOSE : Interface Object
 
 /********************************************************************* includes *********************************************************************/
 
-        #include <iostream>
+#include <iostream>
 
-        #include <GL/glew.h>
+#include <GL/glew.h>
 
-        #include <glm/glm.hpp>
-        #include <glm/gtx/transform.hpp>
-        #include <glm/gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
-        #include <vector>
+#include <vector>
 #include "../../../InputDevices/InputDevices.hpp"
 #include "../../../RenderingEngine/Shader.hpp"
 
 #include <map>
-        
+
 
 /********************************************************************* class definition ***************************************************************/
 namespace Engine {
 
-    namespace DiscreteSimulationEngine {
+	namespace DiscreteSimulationEngine {
 
-        namespace Objects {
+		namespace Objects {
 
-            namespace OpenGL {
+			namespace OpenGL {
 
-                class Object
-                {
-                    protected:
+				class Object
+				{
+				protected:
 
-                        glm::vec3   m_position;
-                        glm::mat4   m_model_mat;
-                        glm::vec3   m_size;
-                        glm::vec3   m_inclinaison_vector;
-                        glm::vec3   m_rotation_vector;
-                        float           m_color;
-                        glm::vec3       m_color_vector;
-                        float           m_inclinaison_angle;
-                        float           m_speed_rotation;
-                        float           m_rotation_angle;
-                        std::string     m_type;
+					glm::vec3   m_position;
+					glm::mat4   m_model_mat;
+					glm::vec3   m_size;
+					glm::vec3   m_inclinaison_vector;
+					glm::vec3   m_rotation_vector;
+					float           m_color;
+					glm::vec3       m_color_vector;
+					float           m_inclinaison_angle;
+					float           m_speed_rotation;
+					float           m_rotation_angle;
+					std::string     m_type;
 
-                        int             m_shininess = 0;
+					int             m_shininess = 0;
 
-                        std::vector<GLuint>          surface_tex_ids;
-                        GLuint                          normal_texture_id = 0;
+					std::vector<GLuint>          surface_tex_ids;
+					GLuint                          normal_texture_id = 0;
 
-                    public:
+				public:
 
-                        Object(std::string const type);
-                        ~Object();
+					Object(std::string const type);
+					~Object();
 
-                        virtual void transform(glm::vec3 ship_pos = glm::vec3(0.f)) = 0;
-                        virtual float getLightStrength()  = 0;
-                        virtual float getOppacity()  = 0;
+					virtual void transform(glm::vec3 ship_pos = glm::vec3(0.f)) = 0;
+					virtual float getLightStrength() = 0;
+					virtual float getOppacity() = 0;
 
-                        void updatePosition(glm::vec3 const new_val);
-                        void rotateObject(glm::mat4& model, float angle);
-                        void inclineObject(glm::mat4& model, float angle);
-                        void translateObject(glm::mat4& model, glm::vec3 pos);
-                        void scaleObject(glm::mat4& model, glm::vec3 size);
-                        void updateColor(float const color);
-                        void updateColor(glm::vec3 const new_color);
-                        void updateSize(glm::vec3 const new_size);
+					void updatePosition(glm::vec3 const new_val);
+					void rotateObject(glm::mat4& model, float angle);
+					void inclineObject(glm::mat4& model, float angle);
+					void translateObject(glm::mat4& model, glm::vec3 pos);
+					void scaleObject(glm::mat4& model, glm::vec3 size);
+					void updateColor(float const color);
+					void updateColor(glm::vec3 const new_color);
+					void updateSize(glm::vec3 const new_size);
 
-                        glm::vec3 getSize() const;
-                        glm::vec3 getPosition() const;
-                        glm::mat4 getModelMat();
-                        float getColor() const;
-                        std::string getType() const;
-                        glm::vec3 getColorVector() const;
+					glm::vec3 getSize() const;
+					glm::vec3 getPosition() const;
+					glm::mat4 getModelMat();
+					float getColor() const;
+					std::string getType() const;
+					glm::vec3 getColorVector() const;
 
-                        GLuint getTextureID(int index) const;
-                        GLuint getNormalTextureID() const;
-                        int getShininess() const;
+					GLuint getTextureID(int index) const;
+					GLuint getNormalTextureID() const;
+					int getShininess() const;
 
-                        void clean();
+					void clean();
 
-                };
+				};
 
-            }
+			}
 
-        }
+		}
 
-    }
+	}
 
 }
-        
+
 #endif

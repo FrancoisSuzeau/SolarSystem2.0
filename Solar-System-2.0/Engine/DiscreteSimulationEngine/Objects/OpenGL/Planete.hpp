@@ -28,7 +28,7 @@ PURPOSE : header of the Planete class
         #include <glm/glm.hpp>
         #include <glm/gtx/transform.hpp>
         #include <glm/gtc/type_ptr.hpp>
-
+#include "../../../../DataManagementLayer/DataManager.hpp"
 
 /********************************************************************* class definition *********************************************************************/
 namespace Engine {
@@ -55,16 +55,16 @@ namespace Engine {
 
                 public:
 
-                    Planete(/*Applications::body_data datas*/);
+                    Planete(DataManagementLayer::body_data data);
                     ~Planete();
 
-                    /*void transform(glm::vec3 ship_pos = glm::vec3(0.f), Input* input = nullptr) override;
-                    */
-
+                    void transform(glm::vec3 ship_pos = glm::vec3(0.f)) override;
+                    void    clean();
+                    
                     /*Ring* getRing() const;
                     Sphere* getAmosphere() const;
                     void    makeOtherChanges(Applications::DataManager& data_manager);
-                    void    clean();
+                    
                     void renderName(Applications::DataManager& data_manager);
                     void loadDiffuseTexture();
                     void loadNormalTexture();*/

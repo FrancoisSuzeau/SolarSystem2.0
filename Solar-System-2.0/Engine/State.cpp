@@ -14,7 +14,7 @@ PURPOSE :   - Manage data transfert between all module of the application progra
 #include "State.hpp"
 using namespace Engine;
 
-//std::vector<body_data> State::m_bodys_data;
+
 int State::m_width;
 int State::m_height;
 
@@ -23,10 +23,7 @@ int State::m_height;
 /***********************************************************************************************************************************************************************/
 State::State(int width, int height, double angle) : m_terminate(false), m_key_input(nullptr), m_mouse_input(nullptr), m_fps(60), m_render_menu(false),
 key_pressed(false), m_render_overlay(false), far_plane(1000.f), near_plane(0.1f), bloom(false), bloom_strenght(10), distance_from_ship(0.f), hilight_sun(false), render_shadow(true),
-render_normal(true), depth_map(0)
-//,  asteroid_count(100),
-//render_overlay(true), render_name(true), render_info(false), index_ship(0), change_skin(true), //for loading the skin at program launch
-// , 
+render_normal(true), depth_map(0), asteroid_count(2000), render_name(true), render_info(false), render_music_hud(true), render_nav(true)
 {
     proj_mat = glm::perspective(glm::radians(angle), (double)width / height, (double)near_plane, (double)far_plane);
     view_mat = glm::mat4(1.0f);
@@ -333,60 +330,57 @@ unsigned int State::getDepthMapTexture() const
     return depth_map;
 }
 
-//void State::setAsteroidCount(int const new_val)
-//{
-//    asteroid_count = new_val;
-//}
-//
-//int State::getAsteroidCount() const
-//{
-//    return asteroid_count;
-//}
-//
+void State::setAsteroidCount(int const new_val)
+{
+    asteroid_count = new_val;
+}
 
-//
-//void State::setRenderName(bool const new_val)
-//{
-//    render_name = new_val;
-//}
-//
-//bool State::getRenderName() const
-//{
-//    return render_name;
-//}
-//
-//void State::setRenderInfo(bool const new_val)
-//{
-//    render_info = new_val;
-//}
-//
-//bool State::getRenderInfo() const
-//{
-//    return render_info;
-//}
-//
+int State::getAsteroidCount() const
+{
+    return asteroid_count;
+}
 
-//
-//void State::setIndexShip(int const new_val)
-//{
-//    index_ship = new_val;
-//}
-//
-//int State::getIndexShip() const
-//{
-//    return index_ship;
-//}
-//
-//void State::setChangeSkin(bool const new_val)
-//{
-//    change_skin = new_val;
-//}
-//
-//bool State::getChangeSkin() const
-//{
-//    return change_skin;
-//}
-//
+void State::setRenderName(bool const new_val)
+{
+    render_name = new_val;
+}
+
+bool State::getRenderName() const
+{
+    return render_name;
+}
+
+void State::setRenderInfo(bool const new_val)
+{
+    render_info = new_val;
+}
+
+bool State::getRenderInfo() const
+{
+    return render_info;
+}
+
+void State::setRenderNav(bool const new_val)
+{
+    render_nav = new_val;
+}
+
+bool State::getRenderNav() const
+{
+    return render_nav;
+}
+
+void State::setRenderMusic(bool const new_val)
+{
+    render_music_hud = new_val;
+}
+
+bool State::getRenderMusic() const
+{
+    return render_music_hud;
+}
+
+
 
 //std::vector<glm::mat4> State::getLightSpaceMatrix()
 //{
@@ -405,48 +399,7 @@ unsigned int State::getDepthMapTexture() const
 //    return shadowTransforms;
 //
 //}
-//
 
-//
-
-
-//
-
-//
-//void State::initDatas()
-//{
-//    Loader::initializeMap();
-//   
-//    m_bodys_data.push_back({3.f, "simple_textured_planete", 32, 0.f, glm::vec3(30.f, -30.f, 0.f), "Mercury", 0.035f, 0.9f});
-//
-//    m_bodys_data.push_back({3.f, "double_textured_planete", 32, 0.15f, glm::vec3(70.f, 0.f, 0.f), "Venus", 177.36f, 0.4f});
-//
-//    m_bodys_data.push_back({1.f, "simple_textured_planete", 32, 0.f, glm::vec3(-90.f, 0.f, 0.f), "Moon", 6.687f, 0.7f});
-//    m_bodys_data.push_back({3.f, "earth", 128, 0.5f, glm::vec3(-100.f, 0.f, 0.f), "Earth", 23.436f, 1.f});
-//
-//    m_bodys_data.push_back({3.f, "double_textured_planete", 128, 0.3f, glm::vec3(0.f, 130.f, 0.f), "Mars", 25.19f, 1.f});
-//
-//    m_bodys_data.push_back({5.f, "simple_textured_planete", 16, 0.f, glm::vec3(230.f, 100.f, 0.f), "Jupiter", 3.12f, 0.4f});
-//    m_bodys_data.push_back({1.f, "simple_textured_planete", 32, 0.f, glm::vec3(230.f, 110.f, 0.f), "Io", 0.f, 0.7f});
-//    m_bodys_data.push_back({1.f, "simple_textured_planete", 32, 0.f, glm::vec3(220.f, 100.f, 0.f), "Europa", 0.f, 0.7f});
-//    m_bodys_data.push_back({1.f, "simple_textured_planete", 32, 0.f, glm::vec3(230.f, 90.f, 0.f), "Callisto", 0.f, 0.9f});
-//    m_bodys_data.push_back({1.f, "simple_textured_planete", 32, 0.f, glm::vec3(230.f, 80.f, 0.f), "Ganymede", 0.f, 1.f});
-//
-//    m_bodys_data.push_back({5.f, "simple_textured_planete", 16, 0.f, glm::vec3(-250.f, -120.f, 0.f), "Saturn", 26.73f, 0.4f});
-//    m_bodys_data.push_back({1.f, "simple_textured_planete", 32, 0.f, glm::vec3(-230.f, -110.f, 0.f), "Mimas", 0.f, 0.8f});
-//    m_bodys_data.push_back({1.f, "simple_textured_planete", 32, 0.f, glm::vec3(-250.f, -105.f, 0.f), "Enceladus", 0.f, 0.7f});
-//    m_bodys_data.push_back({1.f, "double_textured_planete", 32, 1.2f, glm::vec3(-250.f, -140.f, 0.f), "Titan", 0.f, 0.6f});
-//    
-//    m_bodys_data.push_back({5.f, "simple_textured_planete", 16, 0.f, glm::vec3(-300.f, 200.f, 0.f), "Uranus", 97.8f, 0.4f});
-//
-//    m_bodys_data.push_back({5.f, "simple_textured_planete", 16, 0.f, glm::vec3(0.f, -350.f, 0.f), "Neptune", 28.32f, 0.8f});
-//}
-//
-//body_data State::getBodyData(int index)
-//{
-//    return m_bodys_data[index];
-//}
-//
 //glm::vec2 State::convertToScreenSpace(glm::vec3 const body_pos)
 //{
 //    glm::mat4 model_matrix = glm::translate(glm::mat4(1.0f), body_pos);

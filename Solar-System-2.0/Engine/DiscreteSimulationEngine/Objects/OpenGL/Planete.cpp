@@ -17,27 +17,21 @@ using namespace Engine::DiscreteSimulationEngine::Objects::OpenGL;
 /***********************************************************************************************************************************************************************/
 /*********************************************************************** Constructor and Destructor ********************************************************************/
 /***********************************************************************************************************************************************************************/
-Planete::Planete(/*Applications::body_data datas*/) : //super(datas.size, datas.type),
-super(1.f, "Planete"), m_oppacity(.0f), light_strength(.0f)
-//m_oppacity(datas.oppacity), m_name(datas.name), light_strength(datas.light_strength)
+Planete::Planete(DataManagementLayer::body_data data) : super(data.size, "Planete"), m_oppacity(data.oppacity), light_strength(data.light_strength), m_name(data.name)
 {
-    /*std::string normals_path = "assets/textures/normalMap/" + m_name + "_normalMap.png";
-    super::normal_texture_id = Loader::loadTextureWithSDL(normals_path);
-    assert(normal_texture_id != 0);
-
-    int i = 0;
-    for(std::vector<std::string>::iterator it = Loader::textures_path[datas.name].begin(); it != Loader::textures_path[datas.name].end(); ++it)
-    {
-        super::surface_tex_ids.push_back(Loader::loadTextureWithSDL(it[0]));
-        assert(super::surface_tex_ids[i] != 0);
-        i++;
-    }
-
+    super::m_shininess = data.shininess;
     super::m_rotation_angle = 0.f;
     super::m_speed_rotation = 0.1f;
-    super::m_shininess = datas.shininess;
-    super::m_position = datas.initial_pos;
-    super::m_inclinaison_angle = datas.inclinaison_angle;
+    super::m_position = data.current_position;
+    super::m_inclinaison_angle = data.inclinaison_angle;
+    super::normal_texture_id = data.texture_normal_id;
+    super::surface_tex_ids.push_back(data.texture_surface_id);
+    super::surface_tex_ids.push_back(data.texture_cloud_id);
+    super::surface_tex_ids.push_back(data.texture_night_id);
+
+    /*
+
+    
 
     if(m_name == "Venus")
     {
@@ -124,40 +118,40 @@ float Planete::getOppacity()
 /***********************************************************************************************************************************************************************/
 /****************************************************************************** clean ******************************************************************************/
 /***********************************************************************************************************************************************************************/
-//void Planete::clean()
-//{
-//    if(m_ring != nullptr)
-//    {
-//        m_ring->clean();
-//        delete m_ring;
-//        m_ring = nullptr;
-//    }
-//    if(m_atmosphere != nullptr)
-//    {
-//        m_atmosphere->clean();
-//        delete m_atmosphere;
-//        m_atmosphere = nullptr;
-//    }
-//
-//    super::clean();
-//}
-//
-///***********************************************************************************************************************************************************************/
-///****************************************************************************** transform ******************************************************************************/
-///***********************************************************************************************************************************************************************/
-//void Planete::transform(glm::vec3 ship_pos, Input *input)
-//{
-//    super::transform(ship_pos, input);
-//
-//    super::inclineObject(super::m_model_mat, super::m_inclinaison_angle);
-//
-//    super::m_rotation_angle += super::m_speed_rotation;
-//    if(super::m_rotation_angle >= 360)
-//    {
-//        super::m_rotation_angle -= 360;
-//    }
-//    super::rotateObject(super::m_model_mat, super::m_rotation_angle);
-//}
+void Planete::clean()
+{
+    /*if(m_ring != nullptr)
+    {
+        m_ring->clean();
+        delete m_ring;
+        m_ring = nullptr;
+    }
+    if(m_atmosphere != nullptr)
+    {
+        m_atmosphere->clean();
+        delete m_atmosphere;
+        m_atmosphere = nullptr;
+    }*/
+
+    super::clean();
+}
+
+/***********************************************************************************************************************************************************************/
+/****************************************************************************** transform ******************************************************************************/
+/***********************************************************************************************************************************************************************/
+void Planete::transform(glm::vec3 ship_pos)
+{
+    super::transform(ship_pos);
+
+    super::inclineObject(super::m_model_mat, super::m_inclinaison_angle);
+
+    super::m_rotation_angle += super::m_speed_rotation;
+    if(super::m_rotation_angle >= 360)
+    {
+        super::m_rotation_angle -= 360;
+    }
+    super::rotateObject(super::m_model_mat, super::m_rotation_angle);
+}
 
 ///***********************************************************************************************************************************************************************/
 ///****************************************************************************** makeOtherChanges *************************************************************************/

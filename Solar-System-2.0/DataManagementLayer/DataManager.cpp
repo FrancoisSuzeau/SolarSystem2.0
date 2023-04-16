@@ -142,6 +142,12 @@ void DataManager::setConfigs(Engine::State* state)
     state->setBloom(preference_data->BoolOf("bloom"));
     state->setHilightSun(preference_data->BoolOf("highlight_sun"));
     state->setDistanceFromShip(std::stof(preference_data->stringOf("distance_from_ship")));
+    state->setRenderNormal(preference_data->BoolOf("render_normal"));
+    state->setRenderShadow(preference_data->BoolOf("render_shadow"));
+    state->setAsteroidCount(preference_data->IntOf("asteroid_count"));
+    state->setRenderName(preference_data->BoolOf("render_name"));
+    state->setRenderInfo(preference_data->BoolOf("render_info"));
+
 }
 
 std::string DataManager::getTexturePath(int i, std::string texture_type)
@@ -233,6 +239,9 @@ int DataManager::getIfrom(std::string jsonObject) const
 
 body_data DataManagementLayer::DataManager::getCurrentBodyData() const
 {
+    float x = std::stof(bodies_data->stringOf("bodies[i].x"));
+    float y = std::stof(bodies_data->stringOf("bodies[i].y"));
+    float z = std::stof(bodies_data->stringOf("bodies[i].z"));
     return body_data(
         {
             bodies_data->stringOf("bodies[i].name"),
@@ -240,7 +249,14 @@ body_data DataManagementLayer::DataManager::getCurrentBodyData() const
             0,
             0,
             0,
-            0.f
+            std::stof(bodies_data->stringOf("bodies[i].size")),
+            bodies_data->stringOf("bodies[i].host_name"),
+            bodies_data->IntOf("bodies[i].shininess"),
+            std::stof(bodies_data->stringOf("bodies[i].oppacity")),
+            glm::vec3(x, y, z),
+            std::stof(bodies_data->stringOf("bodies[i].inclinaison_angle")),
+            std::stof(bodies_data->stringOf("bodies[i].light_strength")),
+            std::stof(bodies_data->stringOf("bodies[i].speed_rotation"))
         }
     );
 }

@@ -51,6 +51,9 @@ namespace Engine {
 			private:
 
 				void renderNavigationTab();
+				void renderPerformanceTab();
+				void renderHUDTab();
+				void HelpMarker(std::string sentence);
 				std::vector<float> min_distance;
 
 				std::map<std::string, bool>* m_bool_selection;

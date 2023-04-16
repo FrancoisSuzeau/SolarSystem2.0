@@ -177,9 +177,22 @@ void EnginesManager::manageGUI(DataManagementLayer::DataManager data_manager)
 	{
 		m_GUI_manager.renderMenu(m_state->getRenderMenu());
 		m_GUI_manager.renderHUD(m_state->getRenderOverlay());
-		m_state->setTerminate(m_GUI_manager.bool_selection->at("quit"));
-		m_state->setDistanceFromShip(m_GUI_manager.float_selection->at("distance_from_ship"));
-		
+		if (m_GUI_manager.bool_selection->at("changes"))
+		{
+			m_state->setTerminate(m_GUI_manager.bool_selection->at("quit"));
+			m_state->setDistanceFromShip(m_GUI_manager.float_selection->at("distance_from_ship"));
+			m_state->setHilightSun(m_GUI_manager.bool_selection->at("highligh_sun"));
+			m_state->setBloom(m_GUI_manager.bool_selection->at("bloom"));
+			m_state->setBloomStrength(m_GUI_manager.int_selection->at("bloom_str"));
+			m_state->setRenderShadow(m_GUI_manager.bool_selection->at("render_shadow"));
+			m_state->setRenderNormal(m_GUI_manager.bool_selection->at("render_normal"));
+			m_state->setAsteroidCount(m_GUI_manager.int_selection->at("asteroid_count"));
+			m_state->setFps(m_GUI_manager.int_selection->at("fps"));
+			m_state->setRenderName(m_GUI_manager.bool_selection->at("render_name"));
+			m_state->setRenderOverlay(m_GUI_manager.bool_selection->at("render_overlay"));
+			m_state->setRenderInfo(m_GUI_manager.bool_selection->at("render_info"));
+			m_GUI_manager.bool_selection->insert_or_assign("changes", false);
+		}
 	}
 
 }
@@ -274,7 +287,7 @@ void EnginesManager::addToEngine(float progress, std::string text, std::string t
 {
 	if (type.compare("GUI") == 0)
 	{
-		m_GUI_manager.initGUIs();
+		m_GUI_manager.initGUIs(*m_state);
 		std::vector<DataManagementLayer::imgui_datas> tmp = data_manager.getImGuiTexture();
 		for (std::vector<DataManagementLayer::imgui_datas>::iterator it = tmp.begin(); it != tmp.end(); it++)
 		{

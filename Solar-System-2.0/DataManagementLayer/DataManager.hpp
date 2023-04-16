@@ -43,7 +43,7 @@ namespace DataManagementLayer {
 		GLuint							texture_night_id;
 		GLuint							texture_normal_id;
 		float                           size;
-		/*std::string						host_name;
+		std::string						host_name;
 		
 		int                             shininess;
 		float                           oppacity;
@@ -51,7 +51,7 @@ namespace DataManagementLayer {
 
 		float                           inclinaison_angle;
 		float                           light_strength;
-		float   						   speed_rotation;*/
+		float   						speed_rotation;
 
 	} body_data;
 

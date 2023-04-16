@@ -64,25 +64,14 @@ namespace Engine {
 		bool            render_normal;
 		bool            render_shadow;
 		unsigned int    depth_map;
-
-		/*
-		
-		
 		int             asteroid_count;
-		bool            render_overlay;
 		bool            render_name;
 		bool            render_info;
-		
-		int             index_ship;
-		bool            change_skin;
-		
-		
-		
-		bool            render_shadow;
+		bool			render_nav;
+		bool			render_music_hud;
 
-		
-		;
-		
+		/*
+
 		glm::vec3       ship_orientation;
 
 		*/
@@ -151,12 +140,6 @@ namespace Engine {
 		unsigned int    getDepthMapTexture() const;
 
 		void            clean();
-
-		/*static std::vector<body_data>          m_bodys_data;
-		
-		
-		
-		
 		void            setAsteroidCount(int const new_val);
 		int             getAsteroidCount() const;
 
@@ -164,23 +147,17 @@ namespace Engine {
 		bool            getRenderName() const;
 		void            setRenderInfo(bool const new_val);
 		bool            getRenderInfo() const;
+		void            setRenderNav(bool const new_val);
+		bool            getRenderNav() const;
+		void            setRenderMusic(bool const new_val);
+		bool            getRenderMusic() const;
+
+		/*
 		
-		void            setIndexShip(int const new_val);
-		int             getIndexShip() const;
-		void            setChangeSkin(bool const new_val);
-		bool            getChangeSkin() const;
-		
-		
-		glm::vec3       getSunPos() const;
+
 		
 		std::vector<glm::mat4>       getLightSpaceMatrix();
-		void            setDepthMapTexture(unsigned int const new_val);
-		unsigned int    getDepthMapTexture() const;
-		
-		
-		
-		static void            initDatas();
-		static body_data       getBodyData(int index);
+
 
 
 		glm::vec2 convertToScreenSpace(glm::vec3 const body_pos);

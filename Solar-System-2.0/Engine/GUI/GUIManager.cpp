@@ -34,7 +34,7 @@ void GUIManager::sendToGUI(imguiTexture_datas imgui_datas)
 	}
 }
 
-void GUIManager::initGUIs()
+void GUIManager::initGUIs(State const state)
 {
 	if (bool_selection == nullptr)
 	{
@@ -44,6 +44,14 @@ void GUIManager::initGUIs()
 		bool_selection->insert(std::make_pair("save", false));
 		bool_selection->insert(std::make_pair("pause", false));
 		bool_selection->insert(std::make_pair("change_ship", false));
+		bool_selection->insert(std::make_pair("highligh_sun", state.getHilightSun()));
+		bool_selection->insert(std::make_pair("bloom", state.getBloom()));
+		bool_selection->insert(std::make_pair("render_shadow", state.getRenderShadow()));
+		bool_selection->insert(std::make_pair("render_normal", state.getRenderNormal()));
+		bool_selection->insert(std::make_pair("changes", false));
+		bool_selection->insert(std::make_pair("render_name", state.getRenderName()));
+		bool_selection->insert(std::make_pair("render_overlay", state.getRenderOverlay()));
+		bool_selection->insert(std::make_pair("render_info", state.getRenderInfo()));
 	}
 
 
@@ -51,7 +59,7 @@ void GUIManager::initGUIs()
 	{
 		float_selection = new std::map<std::string, float>;
 		assert(float_selection);
-		float_selection->insert(std::make_pair("distance_from_ship", 0.f));
+		float_selection->insert(std::make_pair("distance_from_ship", state.getDistancteFromShip()));
 	}
 
 
@@ -64,6 +72,9 @@ void GUIManager::initGUIs()
 		int_selection->insert(std::make_pair("current_radio", 0));
 		int_selection->insert(std::make_pair("ship_index", 0));
 		int_selection->insert(std::make_pair("current_ship_index", 0));
+		int_selection->insert(std::make_pair("bloom_str", state.getBloomStrength()));
+		int_selection->insert(std::make_pair("asteroid_count", state.getAsteroidCount()));
+		int_selection->insert(std::make_pair("fps", state.getFps()));
 	}
 
 	if (m_menu == nullptr)

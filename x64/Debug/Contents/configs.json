@@ -7,7 +7,12 @@
         "bloom_strenght":10,
         "bloom":true,
         "distance_from_ship":"3.0",
-        "highlight_sun":true
+        "highlight_sun":true,
+        "render_normal":true,
+        "render_shadow":true,
+        "asteroid_count":2000,
+        "render_name":true,
+        "render_info":true
     },
     "sun_data":{
         "texture":"Contents/textures/CelestialBody/SunMap.jpg",
@@ -22,7 +27,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/MercuryMap.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":32,
+                "size":"3.0",
+                "oppacity":"0.0",
+                "x":"30.0",
+                "y":"-30.0",
+                "z":"0.0",
+                "inclinaison_angle":"0.035",
+                "light_strength":"0.9",
+                "speed_rotation":"0.1"
             },
             {
                 "name":"Venus",
@@ -30,7 +44,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/VenusMap.jpg",
                 "texture_cloud_path":"Contents/textures/CelestialBody/VenusCloud.jpg",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":32,
+                "size":"3.0",
+                "oppacity":"0.15",
+                "x":"0.0",
+                "y":"0.0",
+                "z":"0.0",
+                "inclinaison_angle":"117.36",
+                "light_strength":"0.4",
+                "speed_rotation":"0.1"
             },
             {
                 "name":"Earth",
@@ -38,7 +61,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/EarthDayMap.jpg",
                 "texture_cloud_path":"Contents/textures/CelestialBody/CloudMap.jpg",
                 "texture_night_path":"Contents/textures/CelestialBody/EarthNightMap.jpg",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":128,
+                "size":"3.0",
+                "oppacity":"0.0",
+                "x":"-100.0",
+                "y":"0.0",
+                "z":"0.0",
+                "inclinaison_angle":"23.19",
+                "light_strength":"1.0",
+                "speed_rotation":"0.1"
             },
             {
                 "name":"Moon",
@@ -46,7 +78,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/MoonMap.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":32,
+                "size":"1.0",
+                "oppacity":"0.0",
+                "x":"-90.0",
+                "y":"0.0",
+                "z":"0.0",
+                "inclinaison_angle":"6.687",
+                "light_strength":"0.7",
+                "speed_rotation":"0.0"
             },
             {
                 "name":"Mars",
@@ -54,7 +95,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/MarsMap.jpg",
                 "texture_cloud_path":"Contents/textures/CelestialBody/MarsCloud.png",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":128,
+                "size":"3.0",
+                "oppacity":"0.3",
+                "x":"0.0",
+                "y":"130.0",
+                "z":"0.0",
+                "inclinaison_angle":"25.19",
+                "light_strength":"1.0",
+                "speed_rotation":"0.1"
             },
             {
                 "name":"Jupiter",
@@ -62,7 +112,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/JupiterCloud.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":16,
+                "size":"5.0",
+                "oppacity":"0.0",
+                "x":"230.0",
+                "y":"100.0",
+                "z":"0.0",
+                "inclinaison_angle":"3.12",
+                "light_strength":"0.4",
+                "speed_rotation":"0.1"
             },
             {
                 "name":"Io",
@@ -70,7 +129,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/IoMap.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":32,
+                "size":"1.0",
+                "oppacity":"0.0",
+                "x":"230.0",
+                "y":"110.0",
+                "z":"0.0",
+                "inclinaison_angle":"0.0",
+                "light_strength":"0.7",
+                "speed_rotation":"0.0"
             },
             {
                 "name":"Europa",
@@ -78,7 +146,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/EuropaMap.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":32,
+                "size":"1.0",
+                "oppacity":"0.0",
+                "x":"220.0",
+                "y":"100.0",
+                "z":"0.0",
+                "inclinaison_angle":"0.0",
+                "light_strength":"0.7",
+                "speed_rotation":"0.0"
             },
             {
                 "name":"Callisto",
@@ -86,7 +163,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/CallistoMap.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":32,
+                "size":"1.0",
+                "oppacity":"0.0",
+                "x":"230.0",
+                "y":"90.0",
+                "z":"0.0",
+                "inclinaison_angle":"0.0",
+                "light_strength":"0.9",
+                "speed_rotation":"0.0"
             },
             {
                 "name":"Ganymede",
@@ -94,7 +180,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/GanymedeMap.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":32,
+                "size":"1.0",
+                "oppacity":"0.0",
+                "x":"230.0",
+                "y":"80.0",
+                "z":"0.0",
+                "inclinaison_angle":"0.0",
+                "light_strength":"1.0",
+                "speed_rotation":"0.0"
             },
             {
                 "name":"Saturn",
@@ -102,7 +197,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/SaturnCloud.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":16,
+                "size":"5.0",
+                "oppacity":"0.0",
+                "x":"-250.0",
+                "y":"-120.0",
+                "z":"0.0",
+                "inclinaison_angle":"26.73",
+                "light_strength":"0.4",
+                "speed_rotation":"0.1"
             },
             {
                 "name":"Mimas",
@@ -110,7 +214,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/MimasMap.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":32,
+                "size":"1.0",
+                "oppacity":"0.0",
+                "x":"-230.0",
+                "y":"-110.0",
+                "z":"0.0",
+                "inclinaison_angle":"0.0",
+                "light_strength":"0.8",
+                "speed_rotation":"0.0"
             },
             {
                 "name":"Enceladus",
@@ -118,7 +231,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/EnceladusMap.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":32,
+                "size":"1.0",
+                "oppacity":"0.0",
+                "x":"-250.0",
+                "y":"-105.0",
+                "z":"0.0",
+                "inclinaison_angle":"0.0",
+                "light_strength":"0.7",
+                "speed_rotation":"0.0"
             },
             {
                 "name":"Titan",
@@ -126,7 +248,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/TitanMap.jpg",
                 "texture_cloud_path":"Contents/textures/CelestialBody/TitanCloud.jpg",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":32,
+                "size":"1.0",
+                "oppacity":"1.2",
+                "x":"-250.0",
+                "y":"-140.0",
+                "z":"0.0",
+                "inclinaison_angle":"0.0",
+                "light_strength":"0.6",
+                "speed_rotation":"0.0"
             },
             {
                 "name":"Uranus",
@@ -134,7 +265,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/UranusMap.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":16,
+                "size":"5.0",
+                "oppacity":"0.0",
+                "x":"-300.0",
+                "y":"200.0",
+                "z":"0.0",
+                "inclinaison_angle":"97.8",
+                "light_strength":"0.4",
+                "speed_rotation":"0.1"
             },
             {
                 "name":"Neptune",
@@ -142,7 +282,16 @@
                 "texture_surface_path":"Contents/textures/CelestialBody/NeptuneMap.jpg",
                 "texture_cloud_path":"",
                 "texture_night_path":"",
-                "texture_normal_path":""
+                "texture_normal_path":"",
+                "shininess":16,
+                "size":"5.0",
+                "oppacity":"0.0",
+                "x":"0.0",
+                "y":"-350.0",
+                "z":"0.0",
+                "inclinaison_angle":"28.32",
+                "light_strength":"0.8",
+                "speed_rotation":"0.1"
             }
         ] 
     },

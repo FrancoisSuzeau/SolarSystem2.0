@@ -37,9 +37,9 @@ namespace Engine {
                         typedef Square super;
 
                     
-                        /*int             texture_w;
+                        int             texture_w;
                         int             texture_h;
-                        float           m_brightness;*/
+                        float           m_brightness;
                    
 
                     public:
@@ -49,8 +49,9 @@ namespace Engine {
 
                         float getLightStrength() override;
                         float getOppacity() override;
+                        //void transform(glm::vec3 ship_pos = glm::vec3(0.f)) override;
 
-                        /*void transform(glm::vec3 ship_pos = glm::vec3(0.f), Input* input = nullptr) override;
+                        /*
 
                         void clean();
 
