@@ -226,6 +226,8 @@ void Menu::render(int width, int height)
     ImVec2 frame_padding_save = style.FramePadding;
 
     window_flags |= ImGuiWindowFlags_NoResize;
+    window_flags |= ImGuiWindowFlags_AlwaysAutoResize;
+    window_flags |= ImGuiWindowFlags_NoScrollbar;
     ImGui::SetNextWindowPos(ImVec2(((float)width / 2.f) - 200.f, ((float)height / 2.f) - 200.f));
     ImGui::SetNextWindowSize(ImVec2(400, 400));
 
